@@ -9,6 +9,9 @@ async function getDbCreds() {
   const region = process.env.AWS_REGION;
   const secretId = process.env.DB_SECRET_ID;
 
+  console.log("AWS_REGION =", region);
+  console.log("DB_SECRET_ID =", secretId);
+
   const sm = new SecretsManagerClient({ region });
   const resp = await sm.send(new GetSecretValueCommand({ SecretId: secretId }));
   const secret = JSON.parse(resp.SecretString);
