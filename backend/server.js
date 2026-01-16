@@ -85,7 +85,7 @@ app.get("/db-health", async (req, res) => {
 /* ********************API ENDPOINTS**************************** */
 app.get("/api/services", async (request, response) => {
   const pool = await getPool(); 
-  const req = await pool.query("SELECT id, name, duration_minutes, price_cents FROM services WHERE is_active= true ORDER BY id;")
+  const req = await pool.query("SELECT id, name, duration_minutes, price_cents FROM services WHERE is_active=true ORDER BY id;")
   response.json(req.rows)
 })
 
