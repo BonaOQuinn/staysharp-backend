@@ -8,6 +8,10 @@ const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
 
 // Cache so we don't hit Secrets Manager and recreate Pool on every request
 let cachedPool = null;
@@ -92,10 +96,7 @@ app.get("/api/barbers", async (request, response) => {
 })
 
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
+
 
 
 
