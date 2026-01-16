@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS locations (
 CREATE TABLE IF NOT EXISTS barbers (
     id SERIAL PRIMARY KEY, 
     name TEXT NOT NULL, 
-    location_id INT NOT NULL REFERENCES locations(id)
+    location_id INT NOT NULL REFERENCES locations(id),
     is_active BOOLEAN NOT NULL DEFAULT TRUE 
 );
 
@@ -31,10 +31,10 @@ CREATE TABLE IF NOT EXISTS barbers (
 --dow: 0=Sun...6=Sat
 CREATE TABLE IF NOT EXISTS working_hours (
     id SERIAL PRIMARY KEY, 
-    barber_id INT NOT NULL REFERENCES barbers(id) ON DELETE CASCADE
-    dow INT NOT NULL CHECK (dow BETWEEN 0 AND 6)
+    barber_id INT NOT NULL REFERENCES barbers(id) ON DELETE CASCADE,
+    dow INT NOT NULL CHECK (dow BETWEEN 0 AND 6),
     start_time TIME NOT NULL, 
-    end_time TIME NOT NULL
+    end_time TIME NOT NULL,
     CHECK (start_time < end_time), 
     UNIQUE (barber_id, dow)
 ); 
