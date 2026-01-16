@@ -7,14 +7,6 @@ CREATE TABLE IF NOT EXISTS services (
     is_active BOOLEAN NOT NULL DEFAULT TRUE 
 );
 
---barbers(staff)
-CREATE TABLE IF NOT EXISTS barbers (
-    id SERIAL PRIMARY KEY, 
-    name TEXT NOT NULL, 
-    location_id INT NOT NULL REFERENCES locations(id)
-    is_active BOOLEAN NOT NULL DEFAULT TRUE 
-);
-
 CREATE TABLE IF NOT EXISTS locations (
     id SERIAL PRIMARY KEY, 
     name TEXT NOT NULL, 
@@ -25,6 +17,15 @@ CREATE TABLE IF NOT EXISTS locations (
     phone TEXT, 
     is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
+
+--barbers(staff)
+CREATE TABLE IF NOT EXISTS barbers (
+    id SERIAL PRIMARY KEY, 
+    name TEXT NOT NULL, 
+    location_id INT NOT NULL REFERENCES locations(id)
+    is_active BOOLEAN NOT NULL DEFAULT TRUE 
+);
+
 
 --weekly working hours per barber
 --dow: 0=Sun...6=Sat
