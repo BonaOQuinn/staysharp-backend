@@ -1,0 +1,40 @@
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    nav {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a {
+        font-size: 0.85em;
+    }
+
+    .logo {
+        font-size: 2.5em;
+    }
+
+    .tagline {
+        font-size: 1.2em;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .section-title {
+        font-size: 2em;
+    }
+
+    .services {
+        padding: 80px 20px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}

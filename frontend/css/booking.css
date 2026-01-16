@@ -1,0 +1,284 @@
+/* Booking Page Specific Styles */
+.booking-container {
+    position: relative;
+    min-height: 100vh;
+    padding: 120px 50px 50px;
+    z-index: 1;
+}
+
+.booking-title {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 60px;
+    background: linear-gradient(45deg, #1e3a5f, #2d5a8f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.booking-content {
+    display: flex;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: flex-start;
+}
+
+/* Calendar Styles */
+.calendar-section {
+    flex: 1;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
+    border: 1px solid rgba(30, 58, 95, 0.2);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.calendar-header h3 {
+    font-size: 1.8em;
+    background: linear-gradient(45deg, #1e3a5f, #2d5a8f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.calendar-nav {
+    display: flex;
+    gap: 20px;
+}
+
+.calendar-nav button {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2em;
+    color: #1e3a5f;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.calendar-nav button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.weekday {
+    text-align: center;
+    font-size: 0.9em;
+    color: #1e3a5f;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(30, 58, 95, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    color: #4a4a4a;
+    background: white;
+}
+
+.calendar-day:hover {
+    border-color: #FFD700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    transform: scale(1.05);
+}
+
+.calendar-day.selected {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #1e3a5f;
+    border-color: #FFD700;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.calendar-day.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.calendar-day.other-month {
+    opacity: 0.4;
+    color: #999;
+}
+
+/* Time Selection Styles */
+.time-section {
+    width: 350px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
+    border: 1px solid rgba(30, 58, 95, 0.2);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.time-section.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: all;
+}
+
+.time-header {
+    margin-bottom: 25px;
+}
+
+.time-header h3 {
+    font-size: 1.5em;
+    background: linear-gradient(45deg, #1e3a5f, #2d5a8f);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.selected-date {
+    color: #5a5a5a;
+    font-size: 0.95em;
+}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.time-slots::-webkit-scrollbar {
+    width: 6px;
+}
+
+.time-slots::-webkit-scrollbar-track {
+    background: rgba(30, 58, 95, 0.1);
+    border-radius: 10px;
+}
+
+.time-slots::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    border-radius: 10px;
+}
+
+.time-slot {
+    padding: 15px 10px;
+    background: white;
+    border: 2px solid rgba(30, 58, 95, 0.2);
+    border-radius: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+    color: #4a4a4a;
+}
+
+.time-slot:hover {
+    border-color: #FFD700;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    transform: scale(1.05);
+}
+
+.time-slot.selected {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    color: #1e3a5f;
+    border-color: #FFD700;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+}
+
+.confirm-button {
+    width: 100%;
+    padding: 18px;
+    margin-top: 25px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #1e3a5f;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    font-weight: bold;
+    font-family: 'Righteous', cursive;
+}
+
+.confirm-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+}
+
+.confirm-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .booking-content {
+        flex-direction: column;
+    }
+
+    .time-section {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .booking-container {
+        padding: 100px 20px 30px;
+    }
+
+    .booking-title {
+        font-size: 2em;
+    }
+
+    .calendar-section {
+        padding: 25px;
+    }
+
+    .time-section {
+        padding: 25px;
+    }
+
+    .time-slots {
+        grid-template-columns: 1fr;
+    }
+}

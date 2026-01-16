@@ -1,0 +1,160 @@
+/* Animated Background - 3D Scissors Display */
+.grid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+/* Large 3D Scissors as Background */
+.scissors {
+    position: absolute;
+    width: 70%;
+    height: auto;
+    max-width: 1400px;
+    filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.6));
+    opacity: 0.4;
+    transform: rotateX(10deg) rotateZ(-25deg) scale(1.2);
+    animation: scissorsFloat 8s ease-in-out infinite;
+    z-index: 0;
+}
+
+/* Gold accent lines around scissors */
+.accent-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(30, 58, 95, 0.2),
+            rgba(30, 58, 95, 0.4),
+            rgba(30, 58, 95, 0.6),
+            rgba(30, 58, 95, 0.4),
+            rgba(30, 58, 95, 0.2),
+            transparent);
+    box-shadow: 0 0 20px rgba(30, 58, 95, 0.3);
+    animation: lineGlow 3s ease-in-out infinite;
+}
+
+.accent-line:nth-child(2) {
+    top: 20%;
+    width: 80%;
+    left: 10%;
+}
+
+.accent-line:nth-child(3) {
+    bottom: 20%;
+    width: 70%;
+    left: 15%;
+    animation-delay: 1.5s;
+}
+
+/* Gold Trail Lines - Glowing curved light streaks */
+.trail-line {
+    position: absolute;
+    width: 3px;
+    height: 200px;
+    background: linear-gradient(180deg,
+            transparent,
+            rgba(255, 215, 0, 0.3),
+            rgba(255, 215, 0, 1),
+            rgba(255, 165, 0, 1),
+            rgba(255, 215, 0, 1),
+            rgba(255, 215, 0, 0.3),
+            transparent);
+    transform: rotate(-45deg);
+    animation: trailFade 2.5s ease-out forwards;
+    box-shadow:
+        0 0 10px rgba(255, 215, 0, 0.8),
+        0 0 20px rgba(255, 215, 0, 0.6),
+        0 0 30px rgba(255, 165, 0, 0.4),
+        0 0 40px rgba(255, 165, 0, 0.2);
+    border-radius: 50%;
+    filter: blur(0.5px);
+}
+
+/* Multiple parallel trail lines for depth */
+.trail-line::before,
+.trail-line::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg,
+            transparent,
+            rgba(255, 215, 0, 0.2),
+            rgba(255, 215, 0, 0.7),
+            rgba(255, 165, 0, 0.9),
+            rgba(255, 215, 0, 0.7),
+            rgba(255, 215, 0, 0.2),
+            transparent);
+    box-shadow:
+        0 0 8px rgba(255, 215, 0, 0.6),
+        0 0 15px rgba(255, 215, 0, 0.4);
+    border-radius: 50%;
+}
+
+.trail-line::before {
+    left: -5px;
+}
+
+.trail-line::after {
+    right: -5px;
+}
+
+/* Floating Elements */
+.floating-element {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite, colorShift 4s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.floating-element:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.floating-element:nth-child(2) {
+    top: 60%;
+    right: 10%;
+    animation-delay: 2s;
+    border-color: rgba(255, 165, 0, 0.3);
+}
+
+.floating-element:nth-child(3) {
+    bottom: 20%;
+    left: 15%;
+    animation-delay: 4s;
+    border-color: rgba(255, 215, 0, 0.25);
+}
+
+.hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    color: #1e3a5f;
+    opacity: 0.3;
+    animation: float-hearts 6s ease-in infinite;
+}
