@@ -339,6 +339,99 @@ app.get("/api/debug", async (req, res) => {
 });
 
 
+// Add this to server.js - TEMPORARY endpoint to reset database
+app.post("/api/admin/reset-db", async (req, res) => {
+  try {
+    const pool = await getPool();
+    const client = await pool.connect();
+    
+    try {
+      await client.query("BEGIN");
+      
+      // Clear all data
+      await client.query("DELETE FROM appointments");
+      await client.query("DELETE FROM working_hours");
+      await client.query("DELETE FROM barbers");
+      await client.query("DELETE FROM services");
+      await client.query("DELETE FROM locations");
+      
+      // Reset sequences
+      await client.query("TRUNCATE locations, services, barbers, working_hours, appointments RESTART IDENTITY CASCADE");
+      
+      // Insert locations
+      await client.query(`
+        INSERT INTO locations (name, address1, city, state, zip, phone, is_active)
+        VALUES
+        ('StaySharp - La Mesa', '5288 Baltimore Drive', 'La Mesa', 'CA', '91942', NULL, true), 
+        ('StaySharp - Spring Valley', '9903 Campo Road', 'Spring Valley', 'CA', '91977', NULL, true)
+      `);
+      
+      // Insert services
+      await client.query(`
+        INSERT INTO services (name, duration_minutes, price_cents, is_active)
+        VALUES ('Haircut', 30, 3000, true), 
+               ('Beard Trim', 15, 1500, true)
+      `);
+      
+      // Insert barbers
+      await client.query(`
+        INSERT INTO barbers (name, location_id, is_active)
+        VALUES ('Barber 1', 1, true), 
+               ('Barber 2', 1, true)
+      `);
+      
+      // Insert working hours
+      await client.query(`
+        INSERT INTO working_hours (barber_id, dow, start_time, end_time)
+        VALUES
+        (1, 1, '09:00', '17:00'),
+        (1, 2, '09:00', '17:00'), 
+        (1, 3, '09:00', '17:00'), 
+        (1, 4, '09:00', '17:00'), 
+        (1, 5, '09:00', '17:00'),
+        (2, 1, '09:00', '17:00'),
+        (2, 2, '09:00', '17:00'), 
+        (2, 3, '09:00', '17:00'), 
+        (2, 4, '09:00', '17:00'), 
+        (2, 5, '09:00', '17:00')
+      `);
+      
+      await client.query("COMMIT");
+      
+      // Verify
+      const services = await client.query("SELECT COUNT(*) FROM services");
+      const barbers = await client.query("SELECT COUNT(*) FROM barbers");
+      const locations = await client.query("SELECT COUNT(*) FROM locations");
+      const hours = await client.query("SELECT COUNT(*) FROM working_hours");
+      
+      res.json({
+        success: true,
+        message: "Database reset successfully",
+        counts: {
+          services: parseInt(services.rows[0].count),
+          barbers: parseInt(barbers.rows[0].count),
+          locations: parseInt(locations.rows[0].count),
+          working_hours: parseInt(hours.rows[0].count)
+        }
+      });
+      
+    } catch (err) {
+      await client.query("ROLLBACK");
+      throw err;
+    } finally {
+      client.release();
+    }
+    
+  } catch (err) {
+    res.status(500).json({ 
+      success: false, 
+      error: err.message,
+      stack: err.stack 
+    });
+  }
+});
+
+
 
 
 
