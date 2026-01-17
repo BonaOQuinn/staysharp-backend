@@ -298,6 +298,48 @@ app.get("/api/admin/appointments", async (req, res) => {
 
 
 
+// Add this temporary debug endpoint to your server.js to diagnose the issue
+app.get("/api/debug", async (req, res) => {
+  try {
+    const pool = await getPool();
+    
+    // Check all services
+    const services = await pool.query("SELECT * FROM services");
+    
+    // Check all barbers
+    const barbers = await pool.query("SELECT * FROM barbers");
+    
+    // Check all locations
+    const locations = await pool.query("SELECT * FROM locations");
+    
+    // Check working hours
+    const hours = await pool.query("SELECT * FROM working_hours");
+    
+    // Test the specific query that's failing
+    const serviceId = 1;
+    const testService = await pool.query(
+      "SELECT duration_minutes FROM services WHERE id=$1 AND is_active=true",
+      [serviceId]
+    );
+    
+    res.json({
+      services: services.rows,
+      barbers: barbers.rows,
+      locations: locations.rows,
+      working_hours: hours.rows,
+      testServiceQuery: {
+        serviceId: serviceId,
+        rowCount: testService.rowCount,
+        result: testService.rows
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message, stack: err.stack });
+  }
+});
+
+
+
 
 
 
