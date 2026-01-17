@@ -1,3 +1,16 @@
+-- Clear existing data (in correct order due to foreign keys)
+DELETE FROM appointments;
+DELETE FROM working_hours;
+DELETE FROM barbers;
+DELETE FROM services;
+DELETE FROM locations;
+
+-- Reset sequences
+ALTER SEQUENCE locations_id_seq RESTART WITH 1;
+ALTER SEQUENCE services_id_seq RESTART WITH 1;
+ALTER SEQUENCE barbers_id_seq RESTART WITH 1;
+ALTER SEQUENCE working_hours_id_seq RESTART WITH 1;
+
 -- Initial data for demo
 INSERT INTO locations (id, name, address1, city, state, zip, phone, is_active)
 VALUES
