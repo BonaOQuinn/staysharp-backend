@@ -199,7 +199,8 @@ app.get('/api/availability', async (request, response) => {
     res.json({ slots });
 
   } catch (error) {
-    return response.status(500).send("Internal Server Error");
+    console.error("Error in /api/availability:", error);
+    return response.status(500).send({ error: error.message });
   }
 }); 
 
