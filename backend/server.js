@@ -131,7 +131,7 @@ app.get('/api/locations', async (request, response) => {
 - return an object that has an array of location and 
 available time slots[30 min increments for now]
 */
-app.get('api/availability', async (request, response) => {
+app.get('/api/availability', async (request, response) => {
   try {
     const locationId = request.query.locationId;
     const barberId = request.query.barberId;
