@@ -89,11 +89,29 @@ app.get("/api/services", async (request, response) => {
   response.json(req.rows)
 })
 
+/* endpoint to get barber by location */
 app.get("/api/barbers", async (request, response) => {
+  const pool = await getPool();
+  const locationId = request.query.locationId
+
+  if (!locationId) return response.status(400).send("Missing location ID")
+  
+  //define SQL query with (?) 
+  try {
+    const query = 'SELECT name, is_active FROM barbers WHERE location_id = ?'
+    const [rows, fields] = await pool.execute(query, [locationId])
+    response.json(rows)
+  } catch (error) {
+    return response.status(500).send(error);
+  }
+}); 
+
+app.get('/api/locations', async (request, response) => {
   const pool = await getPool(); 
-  const req = await pool.query("SELECT id, name FROM barbers WHERE is_active=true ORDER BY id"); 
-  response.json(req.rows)
+  const request = pool.query('SELECT name, address1, city, is_active FROM location WHERE is_active=true')
+  response.json(request.rows)
 })
+
 
 
 
