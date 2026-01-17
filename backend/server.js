@@ -145,7 +145,7 @@ app.get('/api/availability', async (request, response) => {
 
     // 1) validate barber belongs to location 
     const barberok = await pool.query(
-      "SELECT 1 FROM barber WHERE id=$1 AND location_id=$2 AND is_active=true",
+      "SELECT 1 FROM barbers WHERE id=$1 AND location_id=$2 AND is_active=true",
       [barberId, locationId]
     );
     if (barberok.rowCount === 0) return response.status(404).json({ error: "Barber not found for location" });
