@@ -131,43 +131,44 @@ app.get('/api/locations', async (request, response) => {
 - return an object that has an array of location and 
 available time slots[30 min increments for now]
 */
-app.get('/api/availability', async (request, response) => {
+app.get("/api/availability", async (req, res) => {
   try {
-    const locationId = request.query.locationId;
-    const barberId = request.query.barberId;
-    const serviceId = request.query.serviceId;
-    const availDate = request.query.date; // expected format: 'YYYY-MM-DD'
-    
-    if (!locationId || !barberId || !serviceId || !availDate) return response.status(400).json({ error: "Missing locationId, barberId, serviceId, or date" });
+    const locationId = Number(req.query.locationId);
+    const barberId = Number(req.query.barberId);
+    const serviceId = Number(req.query.serviceId);
+    const date = String(req.query.date || "");
 
+    if (!locationId || !barberId || !serviceId || !date) {
+      return res.status(400).json({ error: "Missing locationId, barberId, serviceId, or date" });
+    }
 
     const pool = await getPool();
 
-    // 1) validate barber belongs to location 
-    const barberok = await pool.query(
+    // 1) validate barber belongs to location
+    const barberOk = await pool.query(
       "SELECT 1 FROM barbers WHERE id=$1 AND location_id=$2 AND is_active=true",
       [barberId, locationId]
     );
-    if (barberok.rowCount === 0) return response.status(404).json({ error: "Barber not found for location" });
+    if (barberOk.rowCount === 0) return res.status(404).json({ error: "Barber not found for location" });
 
-    // 2) service duration 
+    // 2) service duration
     const svc = await pool.query(
-    "SELECT duration_minutes FROM services WHERE id=$1 AND is_active=true",
+      "SELECT duration_minutes FROM services WHERE id=$1 AND is_active=true",
       [serviceId]
-    ); 
-    if (svc.rowCount === 0) return response.status(404).json({ error: "Service not found" });
+    );
+    if (svc.rowCount === 0) return res.status(404).json({ error: "Service not found" });
     const durationMin = svc.rows[0].duration_minutes;
 
     // 3) working hours for that dow
-    const dow = toDow(date); 
+    const dow = toDow(date);
     const wh = await pool.query(
       "SELECT start_time, end_time FROM working_hours WHERE barber_id=$1 AND dow=$2",
       [barberId, dow]
-    ); 
-    if (wh.rowCount === 0) return res.json({ slots: [] }); 
+    );
+    if (wh.rowCount === 0) return res.json({ slots: [] });
 
-    const startTime = String(wh.rows[0].start_time).slice(0, 5); 
-    const endTime = String(wh.rows[0].endTime).slice(0, 5); 
+    const startTime = String(wh.rows[0].start_time).slice(0, 5); // "09:00"
+    const endTime = String(wh.rows[0].end_time).slice(0, 5);
 
     // 4) existing booked appts that day
     const dayStart = new Date(date + "T00:00:00Z").toISOString();
@@ -197,12 +198,11 @@ app.get('/api/availability', async (request, response) => {
     }
 
     res.json({ slots });
-
-  } catch (error) {
-    console.error("Error in /api/availability:", error);
-    return response.status(500).send({ error: error.message });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-}); 
+});
+
 
 
 app.post("/api/appointments", async (req, res) => {
