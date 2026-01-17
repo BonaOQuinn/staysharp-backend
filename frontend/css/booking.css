@@ -9,15 +9,20 @@
     overflow: hidden;
 }
 
+.pinyon-script-regular {
+    font-family: "Pinyon Script", cursive;
+    font-weight: 560;
+    font-style: normal;
+}
+
 .booking-title {
     text-align: center;
-    font-size: 2em;
+    font-size: 5em;
     margin-bottom: 20px;
     background: linear-gradient(45deg, #1e3a5f, #2d5a8f);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-transform: uppercase;
     letter-spacing: 3px;
 }
 
