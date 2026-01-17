@@ -98,9 +98,10 @@ app.get("/api/barbers", async (request, response) => {
   
   //define SQL query with (?) 
   try {
-    const query = 'SELECT name, is_active FROM barbers WHERE location_id = ?'
-    const [rows, fields] = await pool.execute(query, [locationId])
-    response.json(rows)
+    const query = await pool.query('SELECT name, is_active FROM barbers WHERE location_id = $1',
+      [locationId]
+    );
+    response.json(query.rows)
   } catch (error) {
     return response.status(500).send(error);
   }
@@ -108,7 +109,7 @@ app.get("/api/barbers", async (request, response) => {
 
 app.get('/api/locations', async (request, response) => {
   const pool = await getPool(); 
-  const request = await pool.query('SELECT name, address1, city, is_active FROM location WHERE is_active=true')
+  const result = await pool.query('SELECT name, address1, city, is_active FROM locations WHERE is_active=true')
   response.json(request.rows)
 })
 
