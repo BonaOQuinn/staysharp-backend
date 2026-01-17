@@ -113,7 +113,6 @@ app.get('/api/locations', async (request, response) => {
   response.json(request.rows)
 })
 
-app.
 
 
 
