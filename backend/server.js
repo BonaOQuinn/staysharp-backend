@@ -62,6 +62,17 @@ async function getPool() {
   return cachedPool;
 }
 
+//helpers
+function toDow(dateStr) {
+  // Use UTC to avoid timezone edge weirdness for YYYY-MM-DD
+  const d = new Date(dateStr + "T00:00:00Z");
+  return d.getUTCDay(); // 0=Sun..6=Sat
+}
+
+function overlaps(aStart, aEnd, bStart, bEnd) {
+  return aStart < bEnd && aEnd > bStart;
+}
+
 // Basic app health
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
@@ -92,7 +103,7 @@ app.get("/api/services", async (request, response) => {
 /* endpoint to get barber by location */
 app.get("/api/barbers", async (request, response) => {
   const pool = await getPool();
-  const locationId = request.query.LocationId
+  const locationId = request.query.locationId
 
   if (!locationId) return response.status(400).send("Missing location ID")
    
@@ -110,9 +121,179 @@ app.get("/api/barbers", async (request, response) => {
 app.get('/api/locations', async (request, response) => {
   const pool = await getPool(); 
   const result = await pool.query('SELECT name, address1, city, is_active FROM locations WHERE is_active=true')
-  response.json(request.rows)
+  response.json(result.rows)
 })
 
+
+/* PSUEDO: 
+- get location from location table
+- get start-time / end-time for specified barber
+- return an object that has an array of location and 
+available time slots[30 min increments for now]
+*/
+app.get('api/availability', async (request, response) => {
+  try {
+    const locationId = request.query.locationId;
+    const barberId = request.query.barberId;
+    const serviceId = request.query.serviceId;
+    const availDate = request.query.date; // expected format: 'YYYY-MM-DD'
+    
+    if (!locationId || !barberId || !serviceId || !availDate) return response.status(400).json({ error: "Missing locationId, barberId, serviceId, or date" });
+
+
+    const pool = await getPool();
+
+    // 1) validate barber belongs to location 
+    const barberok = await pool.query(
+      "SELECT 1 FROM barber WHERE id=$1 AND location_id=$2 AND is_active=true",
+      [barberId, locationId]
+    );
+    if (barberok.rowCount === 0) return response.status(404).json({ error: "Barber not found for location" });
+
+    // 2) service duration 
+    const svc = await pool.query(
+    "SELECT duration_minutes FROM services WHERE id=$1 AND is_active=true",
+      [serviceId]
+    ); 
+    if (svc.rowCount === 0) return response.status(404).json({ error: "Service not found" });
+    const durationMin = svc.rows[0].duration_minutes;
+
+    // 3) working hours for that dow
+    const dow = toDow(date); 
+    const wh = await pool.query(
+      "SELECT start_time, end_time FROM working_hours WHERE barber_id=$1 AND dow=$2",
+      [barberId, dow]
+    ); 
+    if (wh.rowCount === 0) return res.json({ slots: [] }); 
+
+    const startTime = String(wh.rows[0].start_time).slice(0, 5); 
+    const endTime = String(wh.rows[0].endTime).slice(0, 5); 
+
+    // 4) existing booked appts that day
+    const dayStart = new Date(date + "T00:00:00Z").toISOString();
+    const dayEnd = new Date(date + "T23:59:59Z").toISOString();
+
+    const appts = await pool.query(
+      `SELECT start_ts, end_ts
+       FROM appointments
+       WHERE barber_id=$1 AND location_id=$2 AND status='booked'
+         AND start_ts >= $3::timestamptz AND start_ts <= $4::timestamptz
+       ORDER BY start_ts`,
+      [barberId, locationId, dayStart, dayEnd]
+    );
+
+    // 5) generate slots every 15 minutes
+    const intervalMin = 15;
+    const workStart = new Date(date + `T${startTime}:00Z`);
+    const workEnd = new Date(date + `T${endTime}:00Z`);
+
+    const slots = [];
+    for (let t = new Date(workStart); t.getTime() + durationMin * 60000 <= workEnd.getTime(); t = new Date(t.getTime() + intervalMin * 60000)) {
+      const slotStart = new Date(t);
+      const slotEnd = new Date(t.getTime() + durationMin * 60000);
+
+      const isTaken = appts.rows.some(a => overlaps(new Date(a.start_ts), new Date(a.end_ts), slotStart, slotEnd));
+      if (!isTaken) slots.push(slotStart.toISOString());
+    }
+
+    res.json({ slots });
+
+  } catch (error) {
+    return response.status(500).send("Internal Server Error");
+  }
+}); 
+
+
+app.post("/api/appointments", async (req, res) => {
+  const { locationId, barberId, serviceId, startTs, customerName } = req.body;
+
+  if (!locationId || !barberId || !serviceId || !startTs || !customerName) {
+    return res.status(400).json({ error: "Missing locationId, barberId, serviceId, startTs, customerName" });
+  }
+
+  const pool = await getPool();
+  const client = await pool.connect();
+
+  try {
+    await client.query("BEGIN");
+
+    // Validate barber belongs to location
+    const barberOk = await client.query(
+      "SELECT 1 FROM barbers WHERE id=$1 AND location_id=$2 AND is_active=true",
+      [barberId, locationId]
+    );
+    if (barberOk.rowCount === 0) {
+      await client.query("ROLLBACK");
+      return res.status(404).json({ error: "Barber not found for location" });
+    }
+
+    // Service duration
+    const svc = await client.query(
+      "SELECT duration_minutes FROM services WHERE id=$1 AND is_active=true",
+      [serviceId]
+    );
+    if (svc.rowCount === 0) {
+      await client.query("ROLLBACK");
+      return res.status(404).json({ error: "Service not found" });
+    }
+    const durationMin = svc.rows[0].duration_minutes;
+
+    const start = new Date(startTs);
+    const end = new Date(start.getTime() + durationMin * 60000);
+
+    // Overlap check
+    const overlap = await client.query(
+      `SELECT 1
+       FROM appointments
+       WHERE barber_id=$1 AND location_id=$2 AND status='booked'
+         AND start_ts < $4::timestamptz
+         AND end_ts   > $3::timestamptz
+       LIMIT 1`,
+      [barberId, locationId, start.toISOString(), end.toISOString()]
+    );
+
+    if (overlap.rowCount > 0) {
+      await client.query("ROLLBACK");
+      return res.status(409).json({ error: "Time slot already booked" });
+    }
+
+    // Insert
+    const created = await client.query(
+      `INSERT INTO appointments (location_id, barber_id, service_id, start_ts, end_ts, customer_name, status)
+       VALUES ($1,$2,$3,$4,$5,$6,'booked')
+       RETURNING id, start_ts, end_ts, status`,
+      [locationId, barberId, serviceId, start.toISOString(), end.toISOString(), customerName]
+    );
+
+    await client.query("COMMIT");
+    res.status(201).json(created.rows[0]);
+  } catch (err) {
+    await client.query("ROLLBACK");
+    res.status(500).json({ error: err.message });
+  } finally {
+    client.release();
+  }
+});
+
+app.get("/api/admin/appointments", async (req, res) => {
+  const locationId = Number(req.query.locationId);
+  const date = String(req.query.date || "");
+  if (!locationId || !date) return res.status(400).json({ error: "Missing locationId or date" });
+
+  const pool = await getPool();
+  const dayStart = new Date(date + "T00:00:00Z").toISOString();
+  const dayEnd = new Date(date + "T23:59:59Z").toISOString();
+
+  const r = await pool.query(
+    `SELECT id, barber_id, service_id, start_ts, end_ts, customer_name, status
+     FROM appointments
+     WHERE location_id=$1 AND start_ts >= $2::timestamptz AND start_ts <= $3::timestamptz
+     ORDER BY start_ts`,
+    [locationId, dayStart, dayEnd]
+  );
+
+  res.json(r.rows);
+});
 
 
 
