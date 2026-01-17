@@ -92,18 +92,18 @@ app.get("/api/services", async (request, response) => {
 /* endpoint to get barber by location */
 app.get("/api/barbers", async (request, response) => {
   const pool = await getPool();
-  const locationId = request.query.locationId
+  const locationId = request.query.LocationId
 
   if (!locationId) return response.status(400).send("Missing location ID")
-  
-  //define SQL query with (?) 
+   
   try {
+    //prepared statement
     const query = await pool.query('SELECT name, is_active FROM barbers WHERE location_id = $1',
       [locationId]
     );
     response.json(query.rows)
   } catch (error) {
-    return response.status(500).send(error);
+    return response.status(500).send("Internal Server Error");
   }
 }); 
 
@@ -112,6 +112,8 @@ app.get('/api/locations', async (request, response) => {
   const result = await pool.query('SELECT name, address1, city, is_active FROM locations WHERE is_active=true')
   response.json(request.rows)
 })
+
+app.
 
 
 
