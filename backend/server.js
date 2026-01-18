@@ -1,11 +1,20 @@
 import express from "express";
 import pg from "pg";
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
+import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
+
+
 
 const { Pool } = pg;
 
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+  origin: ["http://127.0.0.1:5500", "http://Localhost:5500"],
+})); 
 
 const PORT = process.env.PORT || 3000;
 // Start server
@@ -16,7 +25,35 @@ app.listen(PORT, () => {
 // Cache so we don't hit Secrets Manager and recreate Pool on every request
 let cachedPool = null;
 
+/*async function getDbCreds() {
+  const region = process.env.AWS_REGION;
+  const secretId = process.env.DB_SECRET_ID;
+
+  if (!region) throw new Error("Missing AWS_REGION");
+  if (!secretId) throw new Error("Missing DB_SECRET_ID");
+
+  const sm = new SecretsManagerClient({ region });
+  const resp = await sm.send(new GetSecretValueCommand({ SecretId: secretId }));
+
+  if (!resp.SecretString) throw new Error("SecretString is empty");
+  const secret = JSON.parse(resp.SecretString);
+
+  if (!secret.username || !secret.password) {
+    throw new Error("Secret missing username/password fields");
+  }
+
+  return { user: secret.username, password: secret.password };
+}*/
+
 async function getDbCreds() {
+  // ✅ Local/dev shortcut: if DB_USER + DB_PASSWORD exist, don't call AWS at all
+  const user = process.env.DB_USER;
+  const password = process.env.DB_PASSWORD;
+  if (user && password) {
+    return { user, password };
+  }
+
+  // Otherwise (App Runner), use Secrets Manager
   const region = process.env.AWS_REGION;
   const secretId = process.env.DB_SECRET_ID;
 
@@ -35,6 +72,7 @@ async function getDbCreds() {
 
   return { user: secret.username, password: secret.password };
 }
+
 
 async function getPool() {
   if (cachedPool) return cachedPool;

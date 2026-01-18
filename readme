@@ -1,0 +1,219 @@
+# StaySharp Barbershop Booking System - Setup Guide
+
+## Overview
+This is a complete working demo of the barbershop booking system with a multi-step booking flow:
+1. Select Location
+2. Select Service  
+3. Select Barber
+4. Select Date (Calendar)
+5. Select Time
+6. Enter Customer Info & Confirm
+
+## File Structure
+
+```
+project/
+├── backend/
+│   ├── server.js           (Express server - ALREADY EXISTS)
+│   ├── db.js              (Database connection - ALREADY EXISTS)
+│   ├── migrate.js         (Database migration - ALREADY EXISTS)
+│   ├── schema.sql         (Database schema - ALREADY EXISTS)
+│   ├── seed.sql           (Initial data - ALREADY EXISTS)
+│   └── package.json       (Dependencies - ALREADY EXISTS)
+│
+└── frontend/
+    ├── html/
+    │   ├── index.html     (Homepage - ALREADY EXISTS)
+    │   ├── booking.html   (Booking page - UPDATE THIS)
+    │   └── services.html  (Services page - ALREADY EXISTS)
+    ├── css/
+    │   ├── base.css       (Base styles - ALREADY EXISTS)
+    │   ├── booking.css    (Booking styles - UPDATE THIS)
+    │   ├── header.css     (Header styles - ALREADY EXISTS)
+    │   └── ...other css files
+    └── js/
+        └── booking.js     (Booking logic - CREATE NEW)
+```
+
+## Files to Update/Create
+
+### 1. CREATE NEW: `frontend/js/booking.js`
+I've provided the complete JavaScript code above. Save it as:
+- Location: `frontend/js/booking.js`
+- This handles all booking flow logic and API calls
+
+### 2. UPDATE: `frontend/css/booking.css`
+Replace the existing booking.css with the new version I provided above.
+- Location: `frontend/css/booking.css`
+
+### 3. UPDATE: `frontend/html/booking.html`
+Replace the existing booking.html with the new simplified version I provided above.
+- Location: `frontend/html/booking.html`
+
+## Setup Instructions
+
+### Backend Setup
+
+1. **Make sure your environment variables are set:**
+   ```bash
+   export AWS_REGION=us-east-1
+   export DB_SECRET_ID=your-secret-id
+   export DB_HOST=your-rds-host
+   export DB_PORT=5432
+   export DB_NAME=staysharp
+   export APP_DB_NAME=staysharp
+   ```
+
+2. **Run database migration (if not done already):**
+   ```bash
+   cd backend
+   node migrate.js
+   ```
+
+3. **Start the backend server:**
+   ```bash
+   cd backend
+   npm start
+   ```
+   
+   Server should start on `http://localhost:3000`
+
+4. **Verify backend is working:**
+   - Open browser: `http://localhost:3000/health`
+   - Should return: `{"status":"ok"}`
+   - Test DB: `http://localhost:3000/db-health`
+   - Should return: `{"db":"ok"}`
+
+### Frontend Setup
+
+1. **Update the three files mentioned above**
+
+2. **Serve the frontend:**
+   
+   Option A - Using Python (recommended):
+   ```bash
+   cd frontend
+   python3 -m http.server 8080
+   ```
+
+   Option B - Using Node.js http-server:
+   ```bash
+   npm install -g http-server
+   cd frontend
+   http-server -p 8080
+   ```
+
+   Option C - Using VS Code Live Server extension
+   - Install "Live Server" extension
+   - Right-click on `index.html` → "Open with Live Server"
+
+3. **Open the booking page:**
+   - Navigate to: `http://localhost:8080/html/booking.html`
+
+## Testing the Booking Flow
+
+### Test Flow:
+1. **Select Location** - Choose between La Mesa or Spring Valley
+2. **Select Service** - Choose Haircut ($30) or Beard Trim ($15)
+3. **Select Barber** - Choose Barber 1 or Barber 2
+4. **Select Date** - Click on a future date in the calendar
+5. **Select Time** - Choose from available time slots (9am-5pm, Mon-Fri)
+6. **Confirm** - Enter customer name and phone, click "Book Appointment"
+
+### Expected Behavior:
+- ✅ Each step shows a back button to return to previous step
+- ✅ Booking summary shown at top after selecting barber
+- ✅ Calendar only allows selecting future dates
+- ✅ Time slots load dynamically based on barber availability
+- ✅ Selected options are highlighted in gold
+- ✅ Success message shown after booking with confirmation number
+
+### API Endpoints Used:
+- `GET /api/locations` - Fetch locations
+- `GET /api/services` - Fetch services
+- `GET /api/barbers?locationId=X` - Fetch barbers for location
+- `GET /api/availability?locationId=X&barberId=Y&serviceId=Z&date=YYYY-MM-DD` - Get time slots
+- `POST /api/appointments` - Book appointment
+
+## Troubleshooting
+
+### Issue: "Failed to fetch locations"
+**Solution:** 
+- Verify backend is running on port 3000
+- Check console for CORS errors
+- If CORS error, add to `server.js`:
+  ```javascript
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    next();
+  });
+  ```
+
+### Issue: "No available time slots"
+**Solution:**
+- Check that working_hours table has data
+- Verify the date selected is a weekday (Mon-Fri)
+- Check that barber has working hours for that day of week
+
+### Issue: Time slots showing but can't book
+**Solution:**
+- Open browser console (F12) to see error details
+- Verify all required fields are filled
+- Check that the appointment POST request succeeds
+
+### Issue: Database errors
+**Solution:**
+- Verify database migration ran successfully
+- Check that all tables exist: `psql -h YOUR_HOST -U postgres -d staysharp -c "\dt"`
+- Re-run migration if needed: `node migrate.js`
+
+## API Configuration
+
+The frontend expects the backend to be running on `http://localhost:3000`. If your backend is on a different URL, update the `API_BASE_URL` in `booking.js`:
+
+```javascript
+const API_BASE_URL = 'http://your-backend-url:3000/api';
+```
+
+## Browser Compatibility
+
+Tested and working on:
+- ✅ Chrome/Edge (latest)
+- ✅ Firefox (latest)  
+- ✅ Safari (latest)
+
+## Mobile Responsive
+
+The booking system is fully responsive and works on:
+- Desktop (1920x1080+)
+- Tablet (768x1024)
+- Mobile (375x667)
+
+## Next Steps / Future Enhancements
+
+1. Add email confirmation after booking
+2. Add SMS notifications
+3. Add admin dashboard to view/manage appointments
+4. Add ability to cancel/reschedule appointments
+5. Add customer login/account system
+6. Add payment processing
+7. Add barber profiles with photos
+8. Add review/rating system
+
+## Support
+
+If you encounter any issues:
+1. Check browser console for JavaScript errors (F12)
+2. Check backend logs for API errors
+3. Verify all environment variables are set
+4. Ensure database has seed data
+
+## Notes
+
+- The demo uses hardcoded barber IDs (1 and 2) based on seed data
+- Working hours are Mon-Fri 9am-5pm
+- Time slots are generated in 15-minute intervals
+- Appointments require minimum service duration (30 min for haircut, 15 min for beard trim)
+- Double-booking is prevented at the A

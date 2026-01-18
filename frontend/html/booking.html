@@ -13,14 +13,14 @@
     <link rel="stylesheet" href="../css/hero.css">
     <link rel="stylesheet" href="../css/services.css">
     <link rel="stylesheet" href="../css/animations.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/responsiveness.css">
     <link rel="stylesheet" href="../css/booking.css">
 
     <!--Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
-   
+
 </head>
 
 <body>
@@ -38,7 +38,7 @@
 
     <!-- Header Navigation -->
     <header>
-        <img class="logo-header" src="/FrontEnd/html/logos/IMG_0035 - Edited.PNG" alt="Stay Sharp logo">
+        <img class="logo-header" src="../html/logos/IMG_0035 - Edited.PNG" alt="Stay Sharp logo">
         <nav>
             <a href="index.html">Home</a>
             <a href="services.html">Services</a>
@@ -53,50 +53,35 @@
     <section class="booking-container">
         <h1 class="booking-title pinyon-script-regular">Book Your Appointment</h1>
 
-        <div class="booking-content">
-            <!-- Calendar Section -->
-            <div class="calendar-section">
-                <div class="calendar-header pinyon-script-regular">
-                    <h3 id="monthYear"></h3>
-                    <div class="calendar-nav">
-                        <button id="prevMonth">←</button>
-                        <button id="nextMonth">→</button>
-                    </div>
-                </div>
-
-                <div class="calendar-weekdays">
-                    <div class="weekday">Sun</div>
-                    <div class="weekday">Mon</div>
-                    <div class="weekday">Tue</div>
-                    <div class="weekday">Wed</div>
-                    <div class="weekday">Thu</div>
-                    <div class="weekday">Fri</div>
-                    <div class="weekday">Sat</div>
-                </div>
-
-                <div class="calendar-days" id="calendarDays"></div>
-            </div>
-
-            <!-- Time Selection Section -->
-            <div class="time-section" id="timeSection">
-                <div class="time-header">
-                    <h3>Select Time</h3>
-                    <p class="selected-date" id="selectedDateDisplay">Choose a date first</p>
-                </div>
-
-                <div class="time-slots" id="timeSlots"></div>
-
-                <button class="confirm-button" id="confirmButton" disabled>
-                    Confirm Appointment
-                </button>
-            </div>
-        </div>
-    </section>
+        <!-- Dynamic content will be inserted here by JavaScript -->
+        <div class="booking-content" id="bookingContent">
         
+            <!-- Location selection will go here -->
+            <div id="locationSection"></div>
+        
+            <!-- Calendar -->
+            <section id="calendarSection">
+                <div class="calendar-header">
+                    <button id="prevMonth">◀</button>
+                    <h2 id="currentMonth"></h2>
+                    <button id="nextMonth">▶</button>
+                </div>
+                <div id="calendarGrid"></div>
+            </section>
+        
+            <!-- Time slots -->
+            <section id="timeSection">
+                <h3>Select a Time</h3>
+                <div id="timeSlots"></div>
+                <button id="confirmButton">Confirm Appointment</button>
+            </section>
+        
+        </div>
+
+    </section>
 
     <!-- JavaScript Files -->
-    <script src="js/background-effects.js"></script>
-    <script src="js/interactions.js"></script>
+    <script src="../js/booking.js"></script>
 </body>
 
 </html>
