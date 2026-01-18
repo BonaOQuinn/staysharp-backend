@@ -1,5 +1,5 @@
 // Booking System Configuration
-const API_BASE_URL = 'http://localhost:3000/api';
+const API_BASE_URL = 'https://4hsxwekzik.us-west-2.awsapprunner.com/api';
 
 // State Management
 const bookingState = {
@@ -35,31 +35,15 @@ async function initializeBookingSystem() {
         const timeSection = document.getElementById('timeSection');
         if (calendarSection) calendarSection.style.display = 'none';
         if (timeSection) timeSection.style.display = 'none';
-        document.getElementById('timeSection').style.display = 'none';
         
         // Create and show location selection
         await createLocationStep();
         
-        // Setup event listeners
-        setupEventListeners();
+        // DON'T setup event listeners here - they're set up in showCalendarStep() where elements exist
     } catch (error) {
         console.error('Error initializing booking system:', error);
         showError('Failed to load booking system. Please refresh the page.');
     }
-}
-
-function setupEventListeners() {
-    document.getElementById('prevMonth').addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
-    });
-
-    document.getElementById('nextMonth').addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar();
-    });
-
-    document.getElementById('confirmButton').addEventListener('click', confirmAppointment);
 }
 
 // STEP 1: Location Selection
@@ -227,7 +211,7 @@ function showCalendarStep() {
     
     document.getElementById('calendarSection').style.display = 'block';
     
-    // Re-setup event listeners for calendar
+    // Setup event listeners for calendar NOW that elements exist
     document.getElementById('prevMonth').addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         renderCalendar();
