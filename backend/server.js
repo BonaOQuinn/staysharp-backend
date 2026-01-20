@@ -339,18 +339,30 @@ app.get("/api/admin/all", async (request, response) => {
   const pool = await getPool();
   
   try {
-    request = await pool.query(
-      `SELECT a.status, a.customer_name, a.customer_phone, a.customer_email, a.start_ts, a.end_ts, b.name, l.name
+    result = await pool.query(
+      `SELECT
+      a.status,
+      a.customer_name,
+      a.customer_phone,
+      a.customer_email,
+      a.start_ts,
+      a.end_ts,
+      b.name AS barber_name,
+      l.name As location_name
      FROM appointments AS a
      INNER JOIN barbers AS b ON a.barber_id = b.barber_id
      INNER JOIN locations AS l ON b.location_id = l.id
-     ORDER BY `); 
+     ORDER BY a.start_ts DESC`);
      
-    response.json(request.rows); 
+    response.status(200).json(result.rows);
   } catch (error) {
-    response.status(500).json({ error: "No appointments found" });
+    console.error("GET /api/admin/all failed:", error);
+    return result.status(500).json({
+      error: "Failed to fetch appointments",
+      detail: error.message,
+    });
   }
-})
+});
 
 
 
