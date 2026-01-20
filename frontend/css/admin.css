@@ -1,0 +1,175 @@
+
+
+/* Override header to remove nav */
+header nav {
+    display: none;
+}
+
+/* Hero section styling */
+.hero-section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px 50px;
+    position: relative;
+}
+
+.hero-logo {
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 40px;
+    animation: fadeIn 1s ease-in;
+}
+
+.all-appointments-button {
+    background: linear-gradient(135deg, #f4d03f, #d4af37);
+    color: #1a1a1a;
+    border: none;
+    padding: 20px 60px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.all-appointments-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.appointments-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    display: none;
+}
+
+.appointments-section.active {
+    display: block;
+}
+
+.appointments-container {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-group label {
+    color: #d4af37;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.filter-group select,
+.filter-group input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.filter-group select:focus,
+.filter-group input:focus {
+    outline: none;
+    border-color: #d4af37;
+}
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.appointments-table th {
+    background: rgba(212, 175, 55, 0.2);
+    color: #d4af37;
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #d4af37;
+}
+
+.appointments-table td {
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.appointments-table tr:hover {
+    background: rgba(212, 175, 55, 0.1);
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.status-booked {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4caf50;
+}
+
+.status-canceled {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+.loading-message {
+    text-align: center;
+    color: #d4af37;
+    padding: 40px;
+    font-size: 1.2rem;
+}
+
+.no-appointments {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 40px;
+    font-size: 1.1rem;
+}
+
+.error-message {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}

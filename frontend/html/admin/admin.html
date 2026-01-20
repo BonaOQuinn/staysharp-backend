@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - STAY SHARP</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/background.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/hero.css">
+    <link rel="stylesheet" href="../../css/services.css">
+    <link rel="stylesheet" href="../../css/animations.css">
+    <link rel="stylesheet" href="../../css/responsiveness.css">
+    <link rel="stylesheet" href="../../css/booking.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+
+    <!--Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
+
+    
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="grid-background" id="scissorsContainer">
+        <div class="accent-line"></div>
+        <div class="accent-line"></div>
+        <div class="accent-line"></div>
+    </div>
+
+    <!-- Floating Elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div>ADMIN</div>
+        <nav>
+            <!-- No navigation links for admin page -->
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img class="hero-logo" src="../../html/logos/staysharporiginal.png" alt="Stay Sharp San Diego">
+        <button class="all-appointments-button" onclick="toggleAppointments()">All Appointments</button>
+    </section>
+
+    <!-- Appointments Section -->
+    <div class="appointments-section" id="appointmentsSection">
+        <div class="appointments-container">
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="locationFilter">Location</label>
+                    <select id="locationFilter" onchange="loadAppointments()">
+                        <option value="">Loading...</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="dateFilter">Date</label>
+                    <input type="date" id="dateFilter" onchange="loadAppointments()">
+                </div>
+            </div>
+
+            <div id="appointmentsContent">
+                <p class="loading-message">Click "All Appointments" to view</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
