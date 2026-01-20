@@ -354,7 +354,7 @@ app.get("/api/admin/all", async (request, response) => {
      INNER JOIN locations AS l ON b.location_id = l.id
      ORDER BY a.start_ts DESC`);
      
-    response.status(200).json(result.rows);
+    return response.status(200).json(result.rows);
   } catch (error) {
     console.error("GET /api/admin/all failed:", error);
     return result.status(500).json({
