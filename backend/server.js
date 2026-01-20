@@ -334,6 +334,24 @@ app.get("/api/admin/appointments", async (req, res) => {
   res.json(r.rows);
 });
 
+/* returns all appointments */
+app.get("/api/admin/all", async (request, response) => {
+  const pool = await getPool();
+  
+  try {
+    request = await pool.query(
+      `SELECT a.status, a.customer_name, a.customer_phone, a.customer_email, a.start_ts, a.end_ts, b.name, l.name
+     FROM appointments AS a
+     INNER JOIN barbers AS b ON a.barber_id = b.barber_id
+     INNER JOIN locations AS l ON b.location_id = l.id
+     ORDER BY `); 
+     
+    response.json(request.rows); 
+  } catch (error) {
+    response.status(500).json({ error: "No appointments found" });
+  }
+})
+
 
 
 // Add this temporary debug endpoint to your server.js to diagnose the issue
