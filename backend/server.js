@@ -339,7 +339,7 @@ app.get("/api/admin/all", async (request, response) => {
   const pool = await getPool();
   
   try {
-    result = await pool.query(
+    const result = await pool.query(
       `SELECT
       a.status,
       a.customer_name,
