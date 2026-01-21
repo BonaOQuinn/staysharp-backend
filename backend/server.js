@@ -206,11 +206,11 @@ app.get("/api/availability", async (req, res) => {
     if (wh.rowCount === 0) return res.json({ slots: [] });
 
     const startTime = String(wh.rows[0].start_time).slice(0, 5); // "09:00"
-    const endTime = String(wh.rows[0].end_time).slice(0, 5);
+    const endTime = String(wh.rows[0].end_time).slice(0, 5);     // "17:00"
 
     // 4) existing booked appts that day
-    const dayStart = new Date(date + "T00:00:00Z").toISOString();
-    const dayEnd = new Date(date + "T23:59:59Z").toISOString();
+    const dayStart = new Date(date + "T00:00:00-08:00").toISOString(); // Use Pacific timezone
+    const dayEnd = new Date(date + "T23:59:59-08:00").toISOString();
 
     const appts = await pool.query(
       `SELECT start_ts, end_ts
@@ -221,10 +221,10 @@ app.get("/api/availability", async (req, res) => {
       [barberId, locationId, dayStart, dayEnd]
     );
 
-    // 5) generate slots every 15 minutes
+    // 5) generate slots every 15 minutes IN PACIFIC TIME
     const intervalMin = 15;
-    const workStart = new Date(date + `T${startTime}:00Z`);
-    const workEnd = new Date(date + `T${endTime}:00Z`);
+    const workStart = new Date(date + `T${startTime}:00-08:00`); // Pacific time
+    const workEnd = new Date(date + `T${endTime}:00-08:00`);     // Pacific time
 
     const slots = [];
     for (let t = new Date(workStart); t.getTime() + durationMin * 60000 <= workEnd.getTime(); t = new Date(t.getTime() + intervalMin * 60000)) {
