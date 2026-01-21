@@ -339,7 +339,8 @@ app.get("/api/admin/all", async (request, response) => {
   const pool = await getPool();
   
   try {
-    console.log("RUNNING SQL:", `SELECT ...`);
+    console.log("DB:", process.env.PGDATABASE, "HOST:", process.env.PGHOST);
+
 
     const result = await pool.query(
       `SELECT
@@ -366,6 +367,9 @@ app.get("/api/admin/all", async (request, response) => {
   }
 });
 
+app.get("/version", (req, res) => {
+  res.json({ version: "2026-01-20-1" });
+});
 
 
 // Add this temporary debug endpoint to your server.js to diagnose the issue

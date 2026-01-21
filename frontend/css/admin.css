@@ -24,7 +24,7 @@ header nav {
     animation: fadeIn 1s ease-in;
 }
 
-.all-appointments-button {
+#all-appointments-button {
     background: linear-gradient(135deg, #f4d03f, #d4af37);
     color: #1a1a1a;
     border: none;
@@ -39,7 +39,7 @@ header nav {
     letter-spacing: 2px;
 }
 
-.all-appointments-button:hover {
+#all-appointments-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);
 }
