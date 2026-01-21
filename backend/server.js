@@ -339,6 +339,8 @@ app.get("/api/admin/all", async (request, response) => {
   const pool = await getPool();
   
   try {
+    console.log("RUNNING SQL:", `SELECT ...`);
+
     const result = await pool.query(
       `SELECT
       a.status,
