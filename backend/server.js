@@ -350,7 +350,7 @@ app.get("/api/admin/all", async (request, response) => {
       b.name AS barber_name,
       l.name As location_name
      FROM appointments AS a
-     INNER JOIN barbers AS b ON a.barber_id = b.barber_id
+     INNER JOIN barbers AS b ON a.barber_id = b.id
      INNER JOIN locations AS l ON b.location_id = l.id
      ORDER BY a.start_ts DESC`);
      
