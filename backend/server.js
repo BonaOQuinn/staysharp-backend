@@ -506,6 +506,64 @@ app.post("/api/admin/reset-db", async (req, res) => {
   }
 });
 
+//endpoint for adding two new barbers to location 2 for demo
+app.post("/api/admin/add-barbers", async (req, res) => {
+  try {
+    const pool = await getPool()
+    const client = await pool.connect()
+
+    try {
+      //add new barbers to barber table 
+      await client.query(`
+        INSERT INTO barbers (name, location_id, is_active)
+        VALUES ('barber3', 2, true), 
+               ('barber4', 2, true)
+        `)
+      
+      //Insert working hours
+      await client.query(`
+        INSERT INTO working_hours (barber_id, dow, start_time, end_time)
+        VALUES (3, 1, '09:00', '17:00'),
+               (3, 2, '11:00', '16:00'), 
+               (3, 3, '10:00', '18:00'), 
+               (3, 5, '09:00', '17:00'),
+               (4, 1, '09:00', '17:00'),
+               (4, 2, '11:00', '16:00'), 
+               (4, 3, '10:00', '18:00'), 
+               (4, 4, '09:00', '17:00')
+        `)
+      
+      //verify 
+      const services = await client.query("SELECT COUNT(*) FROM services");
+      const barbers = await client.query("SELECT COUNT(*) FROM barbers");
+      const locations = await client.query("SELECT COUNT(*) FROM locations");
+      const hours = await client.query("SELECT COUNT(*) FROM working_hours");
+
+      res.json({
+        success: true,
+        message: "Barbers added successfully",
+        counts: {
+          services: parseInt(services.rows[0].count),
+          barbers: parseInt(barbers.rows[0].count),
+          locations: parseInt(locations.rows[0].count),
+          working_hours: parseInt(hours.rows[0].count)
+        }
+      });
+    } catch (err) {
+      await client.query("ROLLBACK");
+      throw err;
+    } finally {
+      client.release();
+    }
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message,
+      stack: err.stack
+    });
+  }
+});
+
 
 
 
