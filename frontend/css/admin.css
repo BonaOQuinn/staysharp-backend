@@ -65,6 +65,13 @@ header nav {
     margin: 0;
 }
 
+.appointment-list {
+    display: flex; 
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style-type: none;
+}
+
 .all-appointments-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);

@@ -40,14 +40,16 @@ all.addEventListener("click", () => {
                 appointmentDiv.className = 'appointment-entry';     
                 appointmentDiv.innerHTML = `
                     <h2>Appointment ID: ${appointment.id}</h2>
-                    <p><strong>Status:</strong> ${appointment.status}</p>
-                    <p><strong>Date/Time:</strong> ${new Date(appointment.start_ts).toLocaleString()}</p>
-                    <p><strong>Name:</strong> ${appointment.customer_name}</p>
-                    <p><strong>Phone:</strong> ${appointment.customer_phone}</p>
-                    <p><strong>Email:</strong> ${appointment.customer_email}</p>
-                    <p><strong>Location:</strong> ${appointment.location_name}</p>
-                    <p><strong>Service:</strong> ${appointment.service_name}</p>
-                    <p><strong>Barber:</strong> ${appointment.barber_name}</p>
+                    <ul class="appointment-list">
+                    <li><strong>Status:</strong> ${appointment.status}</li>
+                    <li><strong>Date/Time:</strong> ${new Date(appointment.start_ts).toLocaleString()}</li>
+                    <li><strong>Name:</strong> ${appointment.customer_name}</li>
+                    <li><strong>Phone:</strong> ${appointment.customer_phone}</li>
+                    <li><strong>Email:</strong> ${appointment.customer_email}</li>
+                    <li><strong>Location:</strong> ${appointment.location_name}</li>
+                    <li><strong>Service:</strong> ${appointment.service_name}</li>
+                    <li><strong>Barber:</strong> ${appointment.barber_name}</li>
+                    </ul>
                     <hr>
                 `;
                 stepContainer.appendChild(appointmentDiv);

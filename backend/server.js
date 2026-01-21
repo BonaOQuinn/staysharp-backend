@@ -147,7 +147,7 @@ app.get("/api/barbers", async (request, response) => {
    
   try {
     //prepared statement
-    const query = await pool.query('SELECT name, is_active FROM barbers WHERE location_id = $1',
+    const query = await pool.query('SELECT id, name, is_active FROM barbers WHERE location_id = $1',
       [locationId]
     );
     response.json(query.rows)
