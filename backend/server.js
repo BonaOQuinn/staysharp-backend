@@ -344,6 +344,7 @@ app.get("/api/admin/all", async (request, response) => {
 
     const result = await pool.query(
       `SELECT
+      a.id,
       a.status,
       a.customer_name,
       a.customer_phone,
