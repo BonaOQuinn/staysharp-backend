@@ -142,9 +142,9 @@ async function createBarberStep() {
                 <p class="step-subtitle">Location: ${bookingState.location.name} | Service: ${bookingState.service.name}</p>
                 <div class="selection-grid">
                     ${barbers.map((barber, index) => `
-                        <div class="selection-card" data-id="${index + 1}">
+                        <div class="selection-card" data-id="${barber.id}">
                             <h3>${barber.name}</h3>
-                            <button class="select-button" onclick="selectBarber(${index + 1}, '${barber.name}')">
+                            <button class="select-button" onclick="selectBarber(${barber.id}, '${barber.name}')">
                                 Select Barber
                             </button>
                         </div>
