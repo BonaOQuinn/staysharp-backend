@@ -21,6 +21,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
 
+    <script>
+        // Debug: Check if page loaded
+        console.log('📄 booking.html loaded');
+        console.log('🌐 Current URL:', window.location.href);
+    </script>
 </head>
 
 <body>
@@ -29,10 +34,10 @@
         <div class="accent-line"></div>
         <div class="accent-line"></div>
         <div class="accent-line"></div>
-    <!-- Floating Elements -->
-    <div class="floating-element"></div>
-    <div class="floating-element"></div>
-    <div class="floating-element"></div>
+        <!-- Floating Elements -->
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
     </div>
 
     <!-- Header Navigation -->
@@ -54,33 +59,29 @@
 
         <!-- Dynamic content will be inserted here by JavaScript -->
         <div class="booking-content" id="bookingContent">
-        
-            <!-- Location selection will go here -->
-            <div id="locationSection"></div>
-        
-            <!-- Calendar -->
-            <section id="calendarSection">
-                <div class="calendar-header">
-                    <button id="prevMonth">◀</button>
-                    <h2 id="currentMonth"></h2>
-                    <button id="nextMonth">▶</button>
-                </div>
-                <div id="calendarGrid"></div>
-            </section>
-        
-            <!-- Time slots -->
-            <section id="timeSection">
-                <h3>Select a Time</h3>
-                <div id="timeSlots"></div>
-                <button id="confirmButton">Confirm Appointment</button>
-            </section>
-        
+            <div style="text-align: center; padding: 40px; color: #5a5a5a;">
+                <p>Loading booking system...</p>
+            </div>
         </div>
-
     </section>
 
     <!-- JavaScript Files -->
     <script src="../js/booking-new.js"></script>
+
+    <script>
+        // Debug: Check if elements exist
+        window.addEventListener('load', function () {
+            console.log('✅ Window loaded');
+            const bookingContent = document.querySelector('.booking-content');
+            console.log('📦 .booking-content element:', bookingContent);
+
+            if (!bookingContent) {
+                console.error('❌ .booking-content element not found!');
+            } else {
+                console.log('✅ .booking-content found, innerHTML:', bookingContent.innerHTML.substring(0, 100));
+            }
+        });
+    </script>
 </body>
 
 </html>

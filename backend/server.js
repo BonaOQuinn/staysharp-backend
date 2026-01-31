@@ -3,11 +3,16 @@ import pg from "pg";
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
 dotenv.config();
 
-
-
 const { Pool } = pg;
+
+// ✅ NEW: Get __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());
@@ -16,34 +21,18 @@ app.use(cors({
   origin: '*',
 })); 
 
+// ✅ NEW: Serve static files (barber images)
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
+
 const PORT = process.env.PORT || 3000;
 // Start server
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
+  console.log(`Static files served from: ${path.join(__dirname, 'public/images')}`);
 });
 
 // Cache so we don't hit Secrets Manager and recreate Pool on every request
 let cachedPool = null;
-
-/*async function getDbCreds() {
-  const region = process.env.AWS_REGION;
-  const secretId = process.env.DB_SECRET_ID;
-
-  if (!region) throw new Error("Missing AWS_REGION");
-  if (!secretId) throw new Error("Missing DB_SECRET_ID");
-
-  const sm = new SecretsManagerClient({ region });
-  const resp = await sm.send(new GetSecretValueCommand({ SecretId: secretId }));
-
-  if (!resp.SecretString) throw new Error("SecretString is empty");
-  const secret = JSON.parse(resp.SecretString);
-
-  if (!secret.username || !secret.password) {
-    throw new Error("Secret missing username/password fields");
-  }
-
-  return { user: secret.username, password: secret.password };
-}*/
 
 async function getDbCreds() {
   // ✅ Local/dev shortcut: if DB_USER + DB_PASSWORD exist, don't call AWS at all
@@ -72,7 +61,6 @@ async function getDbCreds() {
 
   return { user: secret.username, password: secret.password };
 }
-
 
 async function getPool() {
   if (cachedPool) return cachedPool;
@@ -130,29 +118,51 @@ app.get("/db-health", async (req, res) => {
   }
 });
 
-
 /* ********************API ENDPOINTS**************************** */
+
 app.get("/api/services", async (request, response) => {
   const pool = await getPool(); 
   const req = await pool.query("SELECT id, name, duration_minutes, price_cents FROM services WHERE is_active=true ORDER BY id;")
   response.json(req.rows)
 })
 
-/* endpoint to get barber by location */
+/* ✅ UPDATED: Get barbers by location with enhanced fields including photo_url */
 app.get("/api/barbers", async (request, response) => {
   const pool = await getPool();
-  const locationId = request.query.locationId
+  const locationId = request.query.locationId;
 
-  if (!locationId) return response.status(400).send("Missing location ID")
+  if (!locationId) {
+    return response.status(400).json({ 
+      error: "Missing location ID" 
+    });
+  }
    
   try {
-    //prepared statement
-    const query = await pool.query('SELECT id, name, is_active FROM barbers WHERE location_id = $1',
+    // ✅ UPDATED: Now returns all the new fields including photo_url
+    const query = await pool.query(
+      `SELECT 
+        id, 
+        name, 
+        bio, 
+        photo_url, 
+        years_experience, 
+        specialties, 
+        is_active,
+        created_at,
+        updated_at
+      FROM barbers 
+      WHERE location_id = $1 AND is_active = true
+      ORDER BY name ASC`,
       [locationId]
     );
-    response.json(query.rows)
+    
+    response.json(query.rows);
   } catch (error) {
-    return response.status(500).send("Internal Server Error");
+    console.error("Error fetching barbers:", error);
+    return response.status(500).json({ 
+      error: "Internal Server Error",
+      detail: error.message 
+    });
   }
 }); 
 
@@ -161,7 +171,6 @@ app.get('/api/locations', async (request, response) => {
   const result = await pool.query('SELECT id, name, address1, city, is_active FROM locations WHERE is_active=true')
   response.json(result.rows)
 })
-
 
 /* PSUEDO: 
 - get location from location table
@@ -240,8 +249,6 @@ app.get("/api/availability", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
 
 app.post("/api/appointments", async (req, res) => {
   const { locationId, barberId, serviceId, startTs, customerName } = req.body;
@@ -341,7 +348,6 @@ app.get("/api/admin/all", async (request, response) => {
   try {
     console.log("DB:", process.env.PGDATABASE, "HOST:", process.env.PGHOST);
 
-
     const result = await pool.query(
       `SELECT
       a.id,
@@ -369,11 +375,10 @@ app.get("/api/admin/all", async (request, response) => {
 });
 
 app.get("/version", (req, res) => {
-  res.json({ version: "2026-01-20-1" });
+  res.json({ version: "2026-01-28-images" });
 });
 
-
-// Add this temporary debug endpoint to your server.js to diagnose the issue
+// ✅ UPDATED: Enhanced debug endpoint to show new barber fields
 app.get("/api/debug", async (req, res) => {
   try {
     const pool = await getPool();
@@ -381,7 +386,7 @@ app.get("/api/debug", async (req, res) => {
     // Check all services
     const services = await pool.query("SELECT * FROM services");
     
-    // Check all barbers
+    // Check all barbers (with new fields)
     const barbers = await pool.query("SELECT * FROM barbers");
     
     // Check all locations
@@ -390,29 +395,50 @@ app.get("/api/debug", async (req, res) => {
     // Check working hours
     const hours = await pool.query("SELECT * FROM working_hours");
     
-    // Test the specific query that's failing
-    const serviceId = 1;
-    const testService = await pool.query(
-      "SELECT duration_minutes FROM services WHERE id=$1 AND is_active=true",
-      [serviceId]
-    );
+    // Check table structure
+    const barberColumns = await pool.query(`
+      SELECT column_name, data_type, is_nullable
+      FROM information_schema.columns 
+      WHERE table_name = 'barbers'
+      ORDER BY ordinal_position;
+    `);
     
     res.json({
       services: services.rows,
       barbers: barbers.rows,
       locations: locations.rows,
       working_hours: hours.rows,
-      testServiceQuery: {
-        serviceId: serviceId,
-        rowCount: testService.rowCount,
-        result: testService.rows
-      }
+      barber_schema: barberColumns.rows
     });
   } catch (err) {
     res.status(500).json({ error: err.message, stack: err.stack });
   }
 });
 
+// ✅ NEW: Verify schema changes
+app.get("/api/admin/verify-schema", async (req, res) => {
+  try {
+    const pool = await getPool();
+    
+    const columns = await pool.query(`
+      SELECT column_name, data_type, is_nullable
+      FROM information_schema.columns 
+      WHERE table_name = 'barbers'
+      ORDER BY ordinal_position;
+    `);
+    
+    const sampleBarber = await pool.query(`
+      SELECT * FROM barbers LIMIT 1;
+    `);
+    
+    res.json({
+      schema: columns.rows,
+      sample_data: sampleBarber.rows[0] || null
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // Add this to server.js - TEMPORARY endpoint to reset database
 app.post("/api/admin/reset-db", async (req, res) => {
@@ -563,10 +589,3 @@ app.post("/api/admin/add-barbers", async (req, res) => {
     });
   }
 });
-
-
-
-
-
-
-

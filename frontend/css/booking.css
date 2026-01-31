@@ -1,4 +1,6 @@
-/* Booking Page Specific Styles */
+/* ==================== BOOKING PAGE STYLES ==================== */
+
+/* Main Booking Container */
 .booking-container {
     position: relative;
     min-height: 100vh;
@@ -26,12 +28,9 @@
 .booking-content {
     max-width: 1400px;
     margin: 0 auto;
-    display : flex;
-    flex-direction: column;
-    
 }
 
-/* Step Container */
+/* ==================== STEP CONTAINER ==================== */
 .step-container {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.95));
     border: 1px solid rgba(30, 58, 95, 0.2);
@@ -75,12 +74,13 @@
 }
 
 .step-subtitle {
-    color: #5a5a5a;
-    font-size: 1.1em;
-    margin-bottom: 30px;
+    text-align: center;
+    color: #4a5568;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
 }
 
-/* Selection Grid */
+/* ==================== LOCATION SELECTION ==================== */
 .selection-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -135,22 +135,6 @@
     margin: 5px 0;
 }
 
-.selection-card .duration {
-    color: #2d5a8f;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.selection-card .price {
-    font-size: 2em;
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    margin: 15px 0;
-}
-
 .select-button {
     width: 100%;
     padding: 15px;
@@ -172,431 +156,143 @@
     box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
 }
 
-/* Booking Summary */
-.booking-summary {
-    background: linear-gradient(135deg, rgba(30, 58, 95, 0.1), rgba(45, 90, 143, 0.1));
-    border: 2px solid rgba(30, 58, 95, 0.3);
-    border-radius: 15px;
-    padding: 25px;
-    margin-bottom: 30px;
-}
-
-.summary-content {
+/* ==================== BARBER CARDS ==================== */
+.barber-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.summary-content p {
-    color: #4a4a4a;
-    font-size: 1em;
-}
-
-.summary-content strong {
-    color: #1e3a5f;
-}
-
-.booking-summary-full {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
-    border: 2px solid rgba(30, 58, 95, 0.2);
-    border-radius: 15px;
-    padding: 30px;
-    margin: 30px 0;
-}
-
-.booking-summary-full h3 {
-    font-size: 1.8em;
-    color: #1e3a5f;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.summary-item {
+.barber-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
-    justify-content: space-between;
-    padding: 15px;
-    background: white;
-    border-radius: 10px;
-    border: 1px solid rgba(30, 58, 95, 0.1);
+    flex-direction: column;
 }
 
-.summary-item strong {
-    color: #1e3a5f;
+.barber-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.summary-item span {
-    color: #5a5a5a;
+.barber-image-container {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.barber-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.barber-card:hover .barber-photo {
+    transform: scale(1.05);
+}
+
+.barber-info {
+    padding: 1.5rem;
+    flex-grow: 1;
+}
+
+.barber-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.barber-experience {
+    font-size: 0.9rem;
+    color: #4a5568;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.experience-icon {
+    font-size: 1rem;
+}
+
+.barber-bio {
+    font-size: 0.95rem;
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.barber-specialties {
+    margin-top: 1rem;
+}
+
+.specialties-label {
+    font-size: 0.85rem;
     font-weight: 600;
-}
-
-.summary-item.price-item {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
-    border-color: rgba(255, 215, 0, 0.3);
-}
-
-.summary-item.price-item span {
-    color: #FFA500;
-    font-size: 1.3em;
-    font-weight: bold;
-}
-
-/* Calendar Styles */
-.calendar-section {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
-    border: 1px solid rgba(30, 58, 95, 0.2);
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-}
-
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.calendar-header h3 {
-    font-size: 1.8em;
-    background: linear-gradient(45deg, #1e3a5f, #2d5a8f);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.calendar-nav {
-    display: flex;
-    gap: 20px;
-}
-
-.calendar-nav button {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 1.2em;
-    color: #1e3a5f;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: bold;
-}
-
-.calendar-nav button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-}
-
-.calendar-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.weekday {
-    text-align: center;
-    font-size: 0.9em;
-    color: #1e3a5f;
-    font-weight: bold;
-    padding: 10px;
-}
-
-.calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-}
-
-.calendar-day {
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid rgba(30, 58, 95, 0.2);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.1em;
-    color: #4a4a4a;
-    background: white;
-}
-
-.calendar-day:hover:not(.disabled):not(.other-month) {
-    border-color: #FFD700;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
-    transform: scale(1.05);
-}
-
-.calendar-day.selected {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    color: #1e3a5f;
-    border-color: #FFD700;
-    font-weight: bold;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-}
-
-.calendar-day.disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-
-.calendar-day.other-month {
-    opacity: 0.4;
-    color: #999;
-}
-
-/* Time Selection Styles */
-.time-section {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 245, 0.9));
-    border: 1px solid rgba(30, 58, 95, 0.2);
-    border-radius: 15px;
-    padding: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-}
-
-.time-header {
-    margin-bottom: 25px;
-}
-
-.time-header h3 {
-    font-size: 1.5em;
-    background: linear-gradient(45deg, #1e3a5f, #2d5a8f);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
-}
-
-.selected-date {
-    color: #5a5a5a;
-    font-size: 0.95em;
-}
-
-.time-slots {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
-    max-height: 400px;
-    overflow-y: auto;
-    padding: 10px;
-    margin-bottom: 25px;
-}
-
-.time-slots::-webkit-scrollbar {
-    width: 6px;
-}
-
-.time-slots::-webkit-scrollbar-track {
-    background: rgba(30, 58, 95, 0.1);
-    border-radius: 10px;
-}
-
-.time-slots::-webkit-scrollbar-thumb {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    border-radius: 10px;
-}
-
-.time-slot {
-    padding: 15px 10px;
-    background: white;
-    border: 2px solid rgba(30, 58, 95, 0.2);
-    border-radius: 25px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.95em;
-    color: #4a4a4a;
-}
-
-.time-slot:hover {
-    border-color: #FFD700;
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
-    transform: scale(1.05);
-}
-
-.time-slot.selected {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    color: #1e3a5f;
-    border-color: #FFD700;
-    font-weight: bold;
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
-}
-
-.loading-message,
-.no-slots-message,
-.error-message {
-    text-align: center;
-    padding: 30px;
-    color: #5a5a5a;
-    font-size: 1.1em;
-}
-
-.error-message {
-    color: #d32f2f;
-}
-
-.confirm-button {
-    width: 100%;
-    padding: 18px;
-    font-size: 1.1em;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #1e3a5f;
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-    font-weight: bold;
-    font-family: 'Righteous', cursive;
+    letter-spacing: 0.5px;
 }
 
-.confirm-button:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
-}
-
-.confirm-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Customer Form */
-.customer-form {
-    background: white;
-    border-radius: 15px;
-    padding: 35px;
-    border: 2px solid rgba(30, 58, 95, 0.1);
-}
-
-.customer-form h3 {
-    font-size: 1.8em;
-    color: #1e3a5f;
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-group label {
-    display: block;
-    color: #1e3a5f;
-    font-weight: bold;
-    margin-bottom: 8px;
-    font-size: 1em;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid rgba(30, 58, 95, 0.2);
-    border-radius: 10px;
-    font-size: 1em;
-    transition: all 0.3s ease;
-    font-family: 'Righteous', cursive;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #FFD700;
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-}
-
-/* Success Container */
-.success-container {
-    text-align: center;
-    padding: 60px 40px;
-    animation: fadeInUp 0.5s ease;
-}
-
-.success-icon {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 30px;
-    background: linear-gradient(45deg, #4CAF50, #45a049);
-    border-radius: 50%;
+.specialty-tags {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4em;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.specialty-tag {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    box-shadow: 0 10px 40px rgba(76, 175, 80, 0.3);
-    animation: scaleIn 0.5s ease 0.2s both;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: transform 0.2s ease;
 }
 
-.success-title {
-    font-size: 2.5em;
-    color: #4CAF50;
-    margin-bottom: 15px;
+.specialty-tag:hover {
+    transform: scale(1.05);
 }
 
-.success-message {
-    font-size: 1.2em;
-    color: #5a5a5a;
-    margin-bottom: 40px;
-}
-
-.success-actions {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 40px;
-}
-
-.primary-button,
-.secondary-button {
-    padding: 15px 40px;
-    font-size: 1.1em;
-    border-radius: 50px;
+.select-barber-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.primary-button {
-    background: linear-gradient(45deg, #FFD700, #FFA500);
-    color: #1e3a5f;
-    border: none;
+.select-barber-button:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
-.primary-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+.select-barber-button:active {
+    transform: scale(0.98);
 }
 
-.secondary-button {
-    background: white;
-    color: #1e3a5f;
-    border: 2px solid #1e3a5f;
-}
-
-.secondary-button:hover {
-    background: #1e3a5f;
-    color: white;
-}
-
-/* Error Toast */
-.error-toast {
+/* ==================== TOAST NOTIFICATIONS ==================== */
+.error-toast,
+.success-toast {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    background: #d32f2f;
     color: white;
     padding: 20px 30px;
     border-radius: 10px;
@@ -605,14 +301,24 @@
     transform: translateY(100px);
     opacity: 0;
     transition: all 0.3s ease;
+    font-weight: 500;
 }
 
-.error-toast.show {
+.error-toast {
+    background: #d32f2f;
+}
+
+.success-toast {
+    background: #48bb78;
+}
+
+.error-toast.show,
+.success-toast.show {
     transform: translateY(0);
     opacity: 1;
 }
 
-/* Animations */
+/* ==================== ANIMATIONS ==================== */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -625,17 +331,7 @@
     }
 }
 
-@keyframes scaleIn {
-    from {
-        transform: scale(0);
-    }
-
-    to {
-        transform: scale(1);
-    }
-}
-
-/* Responsive */
+/* ==================== RESPONSIVE DESIGN ==================== */
 @media (max-width: 1024px) {
     .selection-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -663,20 +359,18 @@
         grid-template-columns: 1fr;
     }
 
-    .summary-grid {
+    /* Barber Cards Mobile */
+    .barber-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
     }
 
-    .time-slots {
-        grid-template-columns: repeat(2, 1fr);
+    .barber-image-container {
+        height: 240px;
     }
 
-    .success-actions {
-        flex-direction: column;
-    }
-
-    .primary-button,
-    .secondary-button {
-        width: 100%;
+    .barber-name {
+        font-size: 1.3rem;
     }
 }
