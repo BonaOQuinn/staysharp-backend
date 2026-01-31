@@ -5,6 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
+
 
 dotenv.config();
 
@@ -586,6 +588,70 @@ app.post("/api/admin/add-barbers", async (req, res) => {
       success: false,
       error: err.message,
       stack: err.stack
+    });
+  }
+});
+
+
+
+
+//////////////////////////////////////
+// NEW ENDPOINTS FOR IMAGE UPLOAD TESTING//
+//////////////////////////////////////
+
+app.get('/api/images/check', (req, res) => {
+  const barbersPath = path.join(__dirname, 'public', 'images', 'barbers');
+  
+  try {
+    if (!fs.existsSync(barbersPath)) {
+      return res.json({
+        exists: false,
+        path: barbersPath,
+        __dirname: __dirname,
+        message: 'Barbers directory does not exist'
+      });
+    }
+    
+    const files = fs.readdirSync(barbersPath);
+    res.json({
+      exists: true,
+      path: barbersPath,
+      __dirname: __dirname,
+      files: files,
+      count: files.length
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: err.message,
+      path: barbersPath,
+      __dirname: __dirname
+    });
+  }
+});
+
+
+// One-time endpoint to update barber photo URLs to full URLs
+app.post("/api/admin/update-photo-urls", async (req, res) => {
+  try {
+    const pool = await getPool();
+    
+    const result = await pool.query(`
+      UPDATE barbers 
+      SET photo_url = 'https://4hsxwekzik.us-west-2.awsapprunner.com' || photo_url
+      WHERE photo_url NOT LIKE 'https://%' 
+        AND photo_url IS NOT NULL
+      RETURNING id, name, photo_url;
+    `);
+    
+    res.json({
+      success: true,
+      message: `Updated ${result.rowCount} barber photo URLs`,
+      barbers: result.rows
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      error: err.message
     });
   }
 });
