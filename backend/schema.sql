@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS barbers (
   -- Enhanced profile fields
   bio TEXT,
   photo_url TEXT,
+  booking_url TEXT,  -- NEW: for online booking links
   years_experience INT,  -- FIXED: was years_experiance
   specialties TEXT[],
   display_order INT DEFAULT 0,  -- NEW: for sorting on website
