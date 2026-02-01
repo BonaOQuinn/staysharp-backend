@@ -655,3 +655,29 @@ app.post("/api/admin/update-photo-urls", async (req, res) => {
     });
   }
 });
+
+app.get("/api/admin/booking-url", async (req, res) => {
+  const pool = await getPool();
+  const barberId = Number(req.query.barberId);
+
+  if (!barberId) {
+    return res.status(400).json({ 
+      error: "Missing barber ID" 
+    });
+  }
+
+  try {
+    const query = await pool.query(
+      `SELECT 
+        booking_url 
+      FROM barbers 
+      WHERE id = $1`,
+      [barberId]
+    );
+    res.json(query.rows[0]);
+  } catch (err) {
+    res.status(500).json({
+      error: err.message
+    });
+  }
+});
