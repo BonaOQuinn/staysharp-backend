@@ -462,6 +462,17 @@
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') closeLightbox();
         });
+
+        // Header scroll effect
+            (function () {
+                var h = document.getElementById('mainHeader');
+                if (!h) return;
+                function u() {
+                    h.classList[window.pageYOffset > 10 ? 'add' : 'remove']('scrolled');
+                }
+                window.addEventListener('scroll', u);
+                u();
+            })();
     </script>
 
 </body>

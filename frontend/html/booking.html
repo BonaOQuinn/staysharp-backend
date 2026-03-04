@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book an Appointment — Stay Sharp San Diego</title>
+    <title>Gallery — Stay Sharp San Diego</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,320 +13,12 @@
         href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- CSS Files -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/background.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
-
-    <style>
-        /* Override base and set black/gold theme variables */
-        :root {
-            --gold: #FFD700;
-            --gold-light: #FFD700;
-            --navy-dark: #0a0a0a;
-            --glass-bg: rgba(255,255,255,0.04);
-            --glass-border: rgba(255,255,255,0.08);
-        }
-        body { background: #0a0a0a !important; background-image: none !important; }
-
-        /* Header scroll */
-        header#mainHeader {
-            position: fixed; top: 0; left: 0; right: 0; height: 90px; padding: 0 3rem;
-            display: flex; justify-content: space-between; align-items: center;
-            background: transparent; z-index: 1000;
-            transition: background 0.4s ease, box-shadow 0.4s ease;
-        }
-        header#mainHeader.scrolled {
-            background: #0a0a0a !important;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.6);
-        }
-        #headerGoldLine {
-            position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,204,0,0.15) 15%,
-                rgba(255,204,0,0.4) 35%, rgba(255,204,0,0.5) 50%,
-                rgba(255,204,0,0.4) 65%, rgba(255,204,0,0.15) 85%, transparent 100%);
-            box-shadow: 0 0 6px rgba(255,204,0,0.3), 0 1px 4px rgba(255,204,0,0.15);
-            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
-        }
-        header#mainHeader.scrolled #headerGoldLine { opacity: 1; }
-
-        /* ── Booking Container ── */
-        .booking-container {
-            position: relative;
-            min-height: 100vh;
-            padding: 140px 2rem 80px;
-            z-index: 1;
-        }
-        .booking-hero {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .booking-title {
-            font-family: 'Lobster', cursive;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 400;
-            color: #fff;
-            margin-bottom: 0.8rem;
-        }
-        .booking-subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.05rem;
-            letter-spacing: 1px;
-        }
-        .booking-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        /* Outer wrapper card that booking-new.js generates */
-        .booking-content > div:first-child,
-        .booking-content > .step-container,
-        .booking-content > section {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 18px;
-            padding: 2.5rem;
-        }
-
-        /* ── Step Progress (used by booking-new.js) ── */
-        .step-progress {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            margin-bottom: 2.5rem;
-        }
-        .step-dot {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700; font-size: 0.9rem;
-            border: 2px solid rgba(255,255,255,0.15);
-            color: rgba(255,255,255,0.3);
-            background: transparent;
-            transition: all 0.3s ease;
-        }
-        .step-dot.active {
-            background: #FFD700;
-            border-color: #FFD700;
-            color: #0a0a0a;
-        }
-        .step-dot.completed {
-            background: rgba(255,204,0,0.2);
-            border-color: rgba(255,204,0,0.4);
-            color: #FFD700;
-        }
-        .step-connector {
-            width: 60px; height: 2px;
-            background: rgba(255,255,255,0.1);
-            transition: background 0.3s ease;
-        }
-        .step-connector.active {
-            background: rgba(255,204,0,0.4);
-        }
-        .step-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.7rem; font-weight: 700;
-            letter-spacing: 2px; text-transform: uppercase;
-            color: rgba(255,255,255,0.3);
-            margin-top: 0.5rem;
-            transition: color 0.3s ease;
-        }
-        .step-label.active { color: #FFD700; }
-        .step-group {
-            display: flex; flex-direction: column; align-items: center;
-        }
-
-        /* ── Step Containers ── */
-        .step-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            animation: fadeInUp 0.5s ease-out;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .step-header {
-            display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
-        }
-        .back-button {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 0.7rem 1.3rem;
-            color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem; font-weight: 500;
-        }
-        .back-button:hover {
-            background: rgba(255,204,0,0.1);
-            border-color: rgba(255,204,0,0.3);
-            color: #FFD700;
-        }
-        .step-title {
-            font-family: 'Lobster', cursive;
-            font-size: 2rem; font-weight: 400; color: #fff;
-        }
-
-        /* ── Selection Cards (Locations) ── */
-        .selection-grid, .barber-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem; margin-top: 1.5rem;
-        }
-        .selection-card {
-            background: #2a2a2a;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 14px;
-            padding: 2.5rem; text-align: center;
-            cursor: default;
-            transition: all 0.35s ease;
-            position: relative; overflow: hidden;
-        }
-        .selection-card:hover {
-            border-color: rgba(255,204,0,0.3);
-            box-shadow: 0 8px 30px rgba(255,204,0,0.08);
-            transform: translateY(-4px);
-        }
-        .selection-card h3 {
-            font-family: 'Lobster', cursive;
-            font-size: 1.6rem; font-weight: 400; color: #fff; margin-bottom: 0.8rem;
-        }
-        .selection-card .location-icon { color: #FFD700; margin-right: 0.3rem; }
-        .selection-card .address,
-        .selection-card .city {
-            color: rgba(255, 255, 255, 0.5); margin: 0.3rem 0; font-size: 0.95rem;
-        }
-        .selection-card hr {
-            border: none; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,204,0,0.2), transparent);
-            margin: 1.2rem 0;
-        }
-        .select-button {
-            width: 100%; margin-top: 1.2rem; padding: 1rem;
-            background: #FFD700; border: none; border-radius: 8px;
-            color: #0a0a0a;
-            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.9rem;
-            cursor: pointer; transition: all 0.3s ease;
-            letter-spacing: 2px; text-transform: uppercase;
-            position: relative; z-index: 10;
-        }
-        .select-button:hover {
-            background: #ffe84d;
-            box-shadow: 0 0 20px rgba(255,204,0,0.4);
-            transform: translateY(-2px);
-        }
-
-        /* ── Barber Cards ── */
-        .barber-card {
-            background: #1a1a1a;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 14px; overflow: hidden;
-            transition: all 0.4s ease; cursor: pointer; position: relative;
-        }
-        .barber-card:hover {
-            border-color: rgba(255,204,0,0.3);
-            box-shadow: 0 12px 40px rgba(255,204,0,0.1);
-            transform: translateY(-6px);
-        }
-        .barber-image-container {
-            width: 100%; height: 320px; overflow: hidden;
-            position: relative; background: #111;
-        }
-        .barber-image-container::after {
-            content: '';
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 120px;
-            background: linear-gradient(to top, #1a1a1a, transparent); z-index: 1;
-        }
-        .barber-photo {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .barber-card:hover .barber-photo { transform: scale(1.08); }
-        .barber-info { padding: 1.8rem; position: relative; z-index: 2; }
-        .barber-name {
-            font-family: 'Lobster', cursive;
-            font-size: 1.8rem; font-weight: 400; color: #fff; margin-bottom: 0.6rem;
-        }
-        .barber-experience {
-            display: flex; align-items: center; gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.5); margin-bottom: 1rem; font-size: 0.9rem;
-        }
-        .experience-icon { color: #FFD700; }
-        .barber-bio {
-            color: rgba(255, 255, 255, 0.6); line-height: 1.7;
-            margin-bottom: 1.5rem; font-size: 0.92rem;
-        }
-        .barber-specialties {
-            margin-top: 1.5rem; padding-top: 1.2rem;
-            border-top: 1px solid rgba(255,255,255,0.08);
-        }
-        .specialties-label {
-            font-size: 0.72rem; font-weight: 700; color: #FFD700;
-            margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
-        }
-        .specialty-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-        .specialty-tag {
-            background: rgba(255,204,0,0.08);
-            border: 1px solid rgba(255,204,0,0.2);
-            color: #FFD700; padding: 0.45rem 0.9rem;
-            border-radius: 20px; font-size: 0.8rem; font-weight: 600;
-            transition: all 0.25s ease;
-        }
-        .specialty-tag:hover {
-            background: rgba(255,204,0,0.15);
-            border-color: rgba(255,204,0,0.4);
-        }
-        .select-barber-button {
-            width: 100%; padding: 1.1rem; margin-top: 1.2rem;
-            background: #FFD700; border: none; border-radius: 8px;
-            color: #0a0a0a;
-            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.9rem;
-            cursor: pointer; transition: all 0.3s ease;
-            letter-spacing: 2px; text-transform: uppercase;
-            position: relative; overflow: hidden;
-        }
-        .select-barber-button:hover {
-            background: #ffe84d;
-            box-shadow: 0 0 20px rgba(255,204,0,0.4);
-            transform: translateY(-2px);
-        }
-        .select-barber-button span { position: relative; z-index: 1; }
-
-        /* ── Toast Notifications ── */
-        .error-toast, .success-toast {
-            position: fixed; bottom: 30px; right: 30px;
-            padding: 1rem 1.8rem; border-radius: 10px;
-            border: 1px solid; z-index: 10000;
-            transform: translateY(150px); opacity: 0;
-            transition: all 0.4s ease;
-            font-weight: 600; font-size: 0.9rem;
-            backdrop-filter: blur(12px);
-        }
-        .error-toast {
-            background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;
-        }
-        .success-toast {
-            background: rgba(34, 197, 94, 0.15);
-            border-color: rgba(34, 197, 94, 0.3); color: #86efac;
-        }
-        .error-toast.show, .success-toast.show {
-            transform: translateY(0); opacity: 1;
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 768px) {
-            .booking-container { padding: 120px 1rem 60px; }
-            .step-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
-            .selection-grid, .barber-grid { grid-template-columns: 1fr; }
-            .barber-name { font-size: 1.5rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="css/gallery.css">
 </head>
 
 <body>
@@ -348,99 +40,120 @@
                 <a href="index.html">Home</a>
                 <a href="services.html">Services</a>
                 <a href="locations.html">Locations</a>
-                <a href="gallery.html">Gallery</a>
+                <a href="gallery.html" class="active">Gallery</a>
                 <a href="contact.html">Contact</a>
             </nav>
-            <a href="booking.html" class="book-now-btn active">Book Now</a>
+            <a href="booking.html" class="book-now-btn">Book Now</a>
         </div>
         <div class="header-gold-line" id="headerGoldLine"></div>
     </header>
-    <script>
-    (function(){
-        var h=document.getElementById('mainHeader');
-        if(!h)return;
-        function u(){h.classList[window.pageYOffset>10?'add':'remove']('scrolled')}
-        window.addEventListener('scroll',u,{passive:true});
-        u();
-    })();
-    </script>
 
-    <!-- Booking Section -->
-    <section class="booking-container">
-        <div class="booking-hero">
-            <h1 class="booking-title">Book Your Appointment</h1>
-            <p class="booking-subtitle">Choose your barber, pick your time, and get sharp.</p>
-        </div>
+    <!-- HERO -->
+    <section class="gallery-hero">
+        <div class="gallery-label">OUR WORK</div>
+        <h1>Gallery</h1>
+        <p>Showcasing our craftsmanship and style</p>
+        <a href="https://www.instagram.com/staysharpsandiego" target="_blank" class="ig-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="5" />
+                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+            </svg>
+            Follow @staysharpsandiego
+        </a>
+    </section>
 
-        <!-- Dynamic content will be inserted here by JavaScript -->
-        <div class="booking-content" id="bookingContent">
-            <div style="text-align: center; padding: 40px; color: rgba(255, 255, 255, 0.5);">
-                <p>Loading booking system...</p>
+    <!-- FILTER BAR -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="haircuts">Haircuts</button>
+        <button class="filter-btn" data-filter="beard">Beard & Grooming</button>
+        <button class="filter-btn" data-filter="vibes">Vibes</button>
+    </div>
+
+    <!-- GALLERY GRID -->
+    <main class="gallery-main">
+        <div class="masonry-grid" id="masonryGrid">
+            <div class="gallery-status">
+                <div class="gallery-loading-spinner"></div>
+                <p>Loading gallery...</p>
             </div>
         </div>
-    </section>
+    </main>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-prev" onclick="event.stopPropagation(); showPrevImage()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        <img id="lightboxImg" src="" alt="Gallery image">
+        <button class="lightbox-next" onclick="event.stopPropagation(); showNextImage()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
                 <img class="footer-logo-img" src="logos/new_logo.png" alt="Stay Sharp San Diego">
-                <p class="footer-tagline">Premium barbershop experience in San Diego. Where style meets precision.</p>
+                <p class="footer-tagline">Premium barbershop experience in San Diego.</p>
                 <div class="footer-socials">
-                    <a href="https://www.instagram.com/staysharpsandiego" target="_blank">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+                    <a href="https://www.instagram.com/staysharpsandiego" target="_blank" class="footer-social-link">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+                        </svg>
                         @staysharpsandiego
                     </a>
-                    <a href="https://www.instagram.com/howtobarber" target="_blank">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+                    <a href="https://www.instagram.com/howtobarber" target="_blank" class="footer-social-link">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+                        </svg>
                         @howtobarber
                     </a>
                 </div>
             </div>
-
-            <div class="footer-col">
-                <h4 class="footer-heading">Quick Links</h4>
-                <ul class="footer-links">
-                    <li><a href="index.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</a></li>
-                    <li><a href="services.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/></svg>Services</a></li>
-                    <li><a href="locations.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Locations</a></li>
-                    <li><a href="gallery.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Gallery</a></li>
-                    <li><a href="contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Contact</a></li>
-                    <li><a href="booking.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Now</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4 class="footer-heading">Locations</h4>
-                <div class="footer-location">
-                    <div class="footer-loc-name">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        La Mesa
-                    </div>
-                    <p class="footer-loc-addr">5288 Baltimore Dr, La Mesa, CA 91942</p>
-                    <p class="footer-loc-phone">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 5.16 2 2 0 015.08 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.92z"/></svg>
-                        (619) 834-3973
-                    </p>
-                </div>
-            </div>
-
-            <div class="footer-col">
-                <h4 class="footer-heading">Hours</h4>
-                <div class="footer-hours">
-                    <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Monday – Friday: 9:00 AM – 7:00 PM</p>
-                    <p>Saturday: 8:00 AM – 5:00 PM</p>
-                    <p>Sunday: 10:00 AM – 4:00 PM</p>
-                </div>
-            </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Stay Sharp San Diego. All rights reserved.</p>
+            <p>&copy; 2025 Stay Sharp San Diego. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="js/background.js"></script>
-    <script src="js/booking-new.js"></script>
+    <script src="js/gallery-loader.js"></script>
+    <script>
+        // Header scroll effect
+        (function () {
+            var h = document.getElementById('mainHeader');
+            if (!h) return;
+            function u() {
+                h.classList[window.pageYOffset > 10 ? 'add' : 'remove']('scrolled');
+            }
+            window.addEventListener('scroll', u);
+            u();
+        })();
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', function (e) {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox || !lightbox.classList.contains('open')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowLeft') showPrevImage();
+            else if (e.key === 'ArrowRight') showNextImage();
+        });
+    </script>
 
 </body>
 
