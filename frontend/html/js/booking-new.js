@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function initializeBookingSystem() {
     try {
-        console.log('📍 Starting initialization...');
+        console.log('🔍 Starting initialization...');
         
         // Create and show location selection
         await createLocationStep();
@@ -35,10 +35,10 @@ async function initializeBookingSystem() {
     }
 }
 
-// STEP 1: Location Selection
+// STEP 1: Location Selection (subtitle removed)
 async function createLocationStep() {
     try {
-        console.log('📍 Fetching locations from:', `${API_BASE_URL}/locations`);
+        console.log('🔍 Fetching locations from:', `${API_BASE_URL}/locations`);
         
         const response = await fetch(`${API_BASE_URL}/locations`);
         console.log('Response status:', response.status);

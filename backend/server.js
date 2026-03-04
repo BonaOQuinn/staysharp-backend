@@ -140,13 +140,14 @@ app.get("/api/barbers", async (request, response) => {
   }
    
   try {
-    // ✅ UPDATED: Now returns all the new fields including photo_url
+    // ✅ UPDATED: Now returns all fields including booking_url
     const query = await pool.query(
       `SELECT 
         id, 
         name, 
         bio, 
-        photo_url, 
+        photo_url,
+        booking_url,
         years_experience, 
         specialties, 
         is_active,
@@ -154,7 +155,7 @@ app.get("/api/barbers", async (request, response) => {
         updated_at
       FROM barbers 
       WHERE location_id = $1 AND is_active = true
-      ORDER BY name ASC`,
+      ORDER BY display_order ASC, name ASC`,
       [locationId]
     );
     
@@ -656,28 +657,3 @@ app.post("/api/admin/update-photo-urls", async (req, res) => {
   }
 });
 
-app.get("/api/admin/booking-url", async (req, res) => {
-  const pool = await getPool();
-  const barberId = Number(req.query.barberId);
-
-  if (!barberId) {
-    return res.status(400).json({ 
-      error: "Missing barber ID" 
-    });
-  }
-
-  try {
-    const query = await pool.query(
-      `SELECT 
-        booking_url 
-      FROM barbers 
-      WHERE id = $1`,
-      [barberId]
-    );
-    res.json(query.rows[0]);
-  } catch (err) {
-    res.status(500).json({
-      error: err.message
-    });
-  }
-});

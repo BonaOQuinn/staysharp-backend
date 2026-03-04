@@ -4,53 +4,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APEX CUTS - Premium Barbershop</title>
+    <title>STAY SHARP - Premium Barbershop</title>
 
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/background.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/hero.css">
-    <link rel="stylesheet" href="../css/services.css">
-    <link rel="stylesheet" href="../css/animations.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/background.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/reviews.css">
+    <link rel="stylesheet" href="css/responsiveness.css">
+
+    <!-- INLINE HEADER ANIMATION STYLES -->
+    <style>
+        /* Enhanced Header Animation - Fade to Black with Gold Line */
+        header {
+            transition: background 0.5s ease, backdrop-filter 0.5s ease !important;
+        }
+
+        header.scrolled {
+            background: linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.98) 0%,
+                    rgba(0, 0, 0, 0.95) 100%) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .header-gold-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    rgba(255, 204, 0, 0.3) 10%,
+                    rgba(255, 204, 0, 0.6) 25%,
+                    #FFD700 50%,
+                    rgba(255, 204, 0, 0.6) 75%,
+                    rgba(255, 204, 0, 0.3) 90%,
+                    transparent 100%);
+            box-shadow:
+                0 0 12px rgba(255, 204, 0, 0.9),
+                0 0 24px rgba(255, 204, 0, 0.5),
+                0 0 36px rgba(255, 204, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.5s ease, box-shadow 0.5s ease;
+            pointer-events: none;
+        }
+
+        header.scrolled .header-gold-line {
+            opacity: 1;
+            animation: goldPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes goldPulse {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 0 12px rgba(255, 204, 0, 0.9),
+                    0 0 24px rgba(255, 204, 0, 0.5),
+                    0 0 36px rgba(255, 204, 0, 0.3);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 16px rgba(255, 204, 0, 1),
+                    0 0 30px rgba(255, 204, 0, 0.6),
+                    0 0 44px rgba(255, 204, 0, 0.4);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Animated Background -->
+
+    <!-- Animated Background orbs -->
     <div class="grid-background" id="scissorsContainer">
-        <div class="accent-line"></div>
-        <div class="accent-line"></div>
-        <div class="accent-line"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
     </div>
 
-    <!-- Floating Elements -->
-    <div class="floating-element"></div>
-    <div class="floating-element"></div>
-    <div class="floating-element"></div>
-
-    <!-- Header Navigation -->
-    <header>
-        <img class="logo-header" src="/FrontEnd/html/logos/IMG_0035 - Edited.PNG" alt="Black Stay Sharp logo in cursive font in the center of the page">
-        <nav>
-            <a href="#home">Home</a>
-            <a href="services.html">Services</a>
-            <a href="#about">About Us</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#contact">Contact</a>
-            <a href="#book">Book Now</a>
-        </nav>
+    <!-- ==================== HEADER ==================== -->
+    <header id="mainHeader">
+        <a href="index.html" class="header-logo">
+            <img class="logo-header" src="logos/new_logo.png" alt="Stay Sharp San Diego logo">
+        </a>
+        <div class="header-right">
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="services.html">Services</a>
+                <a href="locations.html">Locations</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <a href="booking.html" class="book-now-btn">Book Now</a>
+        </div>
+        <!-- Gold scroll line — controlled by JS -->
+        <div class="header-gold-line" id="headerGoldLine"></div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- ==================== HERO ==================== -->
     <section class="hero" id="home">
-            <img class="logo" src="/FrontEnd/html/logos/staysharporiginal.png" alt="Black Stay Sharp logo in cursive font in the center of the page">
-        <button class="cta-button" onclick="window.location.href='booking.html'" >Book Appointment</button>
+        <div class="hero-slides" id="heroSlides"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img class="logo" src="logos/new_logo.png" alt="Stay Sharp logo">
+            <div class="hero-tagline" id="heroTagline">Precision Cuts</div>
+            <div class="hero-sub" id="heroSub">Crafted for the modern gentleman</div>
+            <button class="cta-button" onclick="window.location.href='booking.html'">Book Appointment</button>
+            <div class="hero-dots" id="heroDots"></div>
+        </div>
     </section>
 
-    <!-- JavaScript Files -->
+    <!-- ==================== ABOUT / STORY ==================== -->
+    <section class="about-section" id="about">
+
+        <!-- Background photo — update filename to match your Supabase Gallery folder -->
+        <div class="about-bg" id="aboutBg"></div>
+        <div class="about-overlay"></div>
+
+        <div class="about-inner">
+
+            <!-- Left: story -->
+            <div class="about-text">
+                <div class="section-label">OUR STORY</div>
+                <h2 class="about-title">The Art of the Cut</h2>
+                <div class="gold-divider" style="margin: 1rem 0 1.5rem; margin-left: 0;"></div>
+
+                <p class="about-story">
+                    <strong>Stay Sharp San Diego</strong> started as a personal reminder — <em>stay focused, stay
+                        centered.</em>
+                    Founded by <strong>Bebos Diez</strong> at just 21 years old with no financial backing, only faith
+                    and determination,
+                    Stay Sharp has grown into one of San Diego's most recognized barbershops over <strong>9
+                        years</strong> in the game.
+                </p>
+
+                <p class="about-story">
+                    When COVID shut down our Chula Vista location, it only sharpened the craft. Since then,
+                    Bebos has cut for Jason Derulo, Jake Paul, Jimmy Butler, Terry Crews, Swizz Beatz and more —
+                    with cuts going viral worldwide surpassing <strong>100+ million views and likes.</strong>
+                </p>
+
+                <p class="about-story about-quote">
+                    "Stay Sharp hasn't been nothing but a self reminder. Feels like this is only the beginning." — Bebos
+                    Diez
+                </p>
+
+                <!-- Stats row -->
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <span class="stat-number">9+</span>
+                        <span class="stat-label">Years in Business</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="stat-number">100M+</span>
+                        <span class="stat-label">Viral Views</span>
+                    </div>
+                    <div class="about-stat">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">SD Locations</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: pillars -->
+            <div class="about-pillars">
+                <div class="pillar-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="6" cy="6" r="3" />
+                            <circle cx="6" cy="18" r="3" />
+                            <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                            <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                            <line x1="8.12" y1="8.12" x2="12" y2="12" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="pillar-name">Master Barbers</h3>
+                        <p class="pillar-desc">Celebrity-trusted cuts perfected over nearly a decade of dedicated craft.
+                        </p>
+                    </div>
+                </div>
+                <div class="pillar-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="pillar-name">Premium Products</h3>
+                        <p class="pillar-desc">Only the finest grooming products used on every client, every time.</p>
+                    </div>
+                </div>
+                <div class="pillar-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="pillar-name">Luxury Atmosphere</h3>
+                        <p class="pillar-desc">Immaculate spaces designed for your comfort and relaxation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== GALLERY ==================== -->
+    <section class="home-gallery-section" id="gallery">
+        <div class="section-label">OUR WORK</div>
+        <h2 class="section-heading">Gallery</h2>
+        <div class="gold-divider"></div>
+
+        <div id="galleryGrid" class="gallery-grid">
+            <div style="text-align: center; width: 100%; padding: 40px;">
+                <p style="color: rgba(255, 255, 255, 0.4);">Loading gallery...</p>
+            </div>
+        </div>
+
+        <a href="gallery.html" class="view-more-link">
+            <span>View Full Gallery</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6" />
+            </svg>
+        </a>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="Gallery image">
+    </div>
+
+    <!-- ==================== REVIEWS ==================== -->
+    <section class="reviews-section" id="reviews">
+        <div class="section-label">TESTIMONIALS</div>
+        <h2 class="section-heading">What Our Clients Say</h2>
+        <div class="gold-divider"></div>
+        <div class="reviews-container" id="reviewsContainer">
+            <p style="text-align: center; color: rgba(255, 255, 255, 0.4);">Loading reviews...</p>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer>
+        <div class="footer-grid">
+
+            <!-- Col 1: Logo + Socials -->
+            <div class="footer-col">
+                <img class="footer-logo-img" src="logos/new_logo.png" alt="Stay Sharp San Diego">
+                <p class="footer-tagline">Premium barbershop experience in San Diego. Where style meets precision.</p>
+
+                <div class="footer-socials">
+                    <a href="https://www.instagram.com/staysharpsandiego" target="_blank">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+                        </svg>
+                        @staysharpsandiego
+                    </a>
+                    <a href="https://www.instagram.com/howtobarber" target="_blank">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+                        </svg>
+                        @howtobarber
+                    </a>
+                </div>
+            </div>
+
+            <!-- Col 2: Quick Links -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>
+                            Home</a></li>
+                    <li><a href="services.html">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="6" cy="6" r="3" />
+                                <circle cx="6" cy="18" r="3" />
+                                <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                                <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                                <line x1="8.12" y1="8.12" x2="12" y2="12" />
+                            </svg>
+                            Services</a></li>
+                    <li><a href="locations.html">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                                <line x1="8" y1="2" x2="8" y2="18" />
+                                <line x1="16" y1="6" x2="16" y2="22" />
+                            </svg>
+                            Locations</a></li>
+                    <li><a href="gallery.html">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>
+                            Gallery</a></li>
+                    <li><a href="contact.html">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                            </svg>
+                            Contact</a></li>
+                    <li><a href="booking.html">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            Book Now</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Locations -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Locations</h4>
+                <div class="footer-location">
+                    <div class="footer-loc-name">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        La Mesa
+                    </div>
+                    <p class="footer-loc-addr">La Mesa, San Diego, CA</p>
+                    <p class="footer-loc-phone">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 5.16 2 2 0 015.08 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.92z" />
+                        </svg>
+                        (858) 416-8186
+                    </p>
+                </div>
+                <div class="footer-location">
+                    <div class="footer-loc-name">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        Spring Valley
+                    </div>
+                    <p class="footer-loc-addr">Spring Valley, San Diego, CA</p>
+                    <p class="footer-loc-phone">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 5.16 2 2 0 015.08 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.92z" />
+                        </svg>
+                        (619) 834-3973
+                    </p>
+                </div>
+            </div>
+
+            <!-- Col 4: Hours -->
+            <div class="footer-col">
+                <h4 class="footer-heading">Hours</h4>
+                <div class="footer-hours">
+                    <div class="footer-hours-row">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        <div>
+                            <p>Monday – Friday: 9:00 AM – 7:00 PM</p>
+                            <p>Saturday: 8:00 AM – 5:00 PM</p>
+                            <p>Sunday: 10:00 AM – 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Stay Sharp San Diego. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="js/header-scroll.js"></script>
     <script src="js/background-effects.js"></script>
-    <script src="js/interactions.js"></script>
+    <script src="js/hero-slideshow.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/reviews.js"></script>
+    <script>
+        // ── About section background from Supabase ──
+
+
+        // ── Lightbox ──
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+
 </body>
 
 </html>

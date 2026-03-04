@@ -1,0 +1,424 @@
+{
+  "locations": [
+    {
+      "id": 1,
+      "name": "StaySharp - La Mesa",
+      "address1": "5288 Baltimore Drive",
+      "city": "La Mesa",
+      "state": "CA",
+      "zip": "91942",
+      "phone": null,
+      "is_active": true
+    },
+    {
+      "id": 2,
+      "name": "StaySharp - Spring Valley",
+      "address1": "9903 Campo Road",
+      "city": "Spring Valley",
+      "state": "CA",
+      "zip": "91977",
+      "phone": null,
+      "is_active": true
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "name": "Haircut",
+      "duration_minutes": 30,
+      "price_cents": 3000,
+      "is_active": true
+    },
+    {
+      "id": 2,
+      "name": "Beard Trim",
+      "duration_minutes": 15,
+      "price_cents": 1500,
+      "is_active": true
+    }
+  ],
+  "barbers": [
+    {
+      "id": 1,
+      "name": "Nolen",
+      "location_id": 1,
+      "is_active": true,
+      "bio": "barber for members of the SDSU mens basketball team",
+      "photo_url": "https://4hsxwekzik.us-west-2.awsapprunner.com/images/barbers/nolen.jpg",
+      "years_experience": 5,
+      "specialties": [
+        "Fade/Taper WITH Scissor-work",
+        "Hair Design + Shaver and Razor enhancements"
+      ],
+      "created_at": "2026-01-30T23:09:10.836Z",
+      "updated_at": "2026-02-01T22:22:07.922Z",
+      "display_order": 1,
+      "booking_url": "https://book.thecut.co/blenededbynolen"
+    },
+    {
+      "id": 2,
+      "name": "AdrianBlendz",
+      "location_id": 1,
+      "is_active": true,
+      "bio": "4.9/5 rating",
+      "photo_url": "https://4hsxwekzik.us-west-2.awsapprunner.com/images/barbers/adrian-blends.jpg",
+      "years_experience": 5,
+      "specialties": [
+        "Beard Work",
+        "Fades",
+        "lineups",
+        "enhancements"
+      ],
+      "created_at": "2026-01-30T23:09:10.836Z",
+      "updated_at": "2026-02-01T22:22:08.216Z",
+      "display_order": 2,
+      "booking_url": "https://book.thecut.co/adriancarmona"
+    },
+    {
+      "id": 3,
+      "name": "fadesbyluis",
+      "location_id": 1,
+      "is_active": true,
+      "bio": "3rd place winner of Arizona Barber Expo 2022, 4.8/5 rating",
+      "photo_url": "https://4hsxwekzik.us-west-2.awsapprunner.com/images/barbers/fadesbyluis.jpg",
+      "years_experience": 5,
+      "specialties": [
+        "Fades",
+        "Enhancements",
+        "sheer work"
+      ],
+      "created_at": "2026-01-30T23:09:10.836Z",
+      "updated_at": "2026-02-01T22:22:08.264Z",
+      "display_order": 3,
+      "booking_url": "https://book.thecut.co/Fadesbyluis"
+    },
+    {
+      "id": 4,
+      "name": "HowToBarber",
+      "location_id": 1,
+      "is_active": true,
+      "bio": "4.1/5 rating, Special Appointment services",
+      "photo_url": "https://4hsxwekzik.us-west-2.awsapprunner.com/images/barbers/howto.jpg",
+      "years_experience": 4,
+      "specialties": [
+        "Haircuts",
+        "Beard Trims",
+        "Razor Work"
+      ],
+      "created_at": "2026-01-30T23:09:10.836Z",
+      "updated_at": "2026-02-01T22:22:08.314Z",
+      "display_order": 4,
+      "booking_url": "https://book.thecut.co/howtobarber"
+    },
+    {
+      "id": 5,
+      "name": "Diego Lopez",
+      "location_id": 2,
+      "is_active": true,
+      "bio": "100% all natural cuts, 5/5 rating",
+      "photo_url": "https://4hsxwekzik.us-west-2.awsapprunner.com/images/barbers/diego-holder.jpg",
+      "years_experience": 4,
+      "specialties": [
+        "Razor work",
+        "Facial Masks",
+        "Hot Towel Shave",
+        "Beard Work"
+      ],
+      "created_at": "2026-01-30T23:09:10.836Z",
+      "updated_at": "2026-02-01T22:22:08.362Z",
+      "display_order": 1,
+      "booking_url": "https://book.thecut.co/Daygo-Fadez-dl5vlul"
+    },
+    {
+      "id": 6,
+      "name": "Jp.Kuttz",
+      "location_id": 2,
+      "is_active": true,
+      "bio": "Award winning barber, 4.9/5 rating, $20 tuesdays",
+      "photo_url": "https://4hsxwekzik.us-west-2.awsapprunner.com/images/barbers/jpkuttz.jpg",
+      "years_experience": 6,
+      "specialties": [
+        "Fades/Tapers",
+        "Beard Work",
+        "Lineups",
+        "Razor Work",
+        "Scissor-Work",
+        "Skin-Fades"
+      ],
+      "created_at": "2026-01-30T23:09:10.836Z",
+      "updated_at": "2026-02-01T22:22:08.406Z",
+      "display_order": 2,
+      "booking_url": "https://book.thecut.co/JPKUTTZ_-jdj12en"
+    }
+  ],
+  "working_hours": [
+    {
+      "id": 1,
+      "barber_id": 1,
+      "dow": 0,
+      "start_time": "14:00:00",
+      "end_time": "18:00:00"
+    },
+    {
+      "id": 2,
+      "barber_id": 1,
+      "dow": 1,
+      "start_time": "14:00:00",
+      "end_time": "18:00:00"
+    },
+    {
+      "id": 3,
+      "barber_id": 1,
+      "dow": 2,
+      "start_time": "10:00:00",
+      "end_time": "18:00:00"
+    },
+    {
+      "id": 4,
+      "barber_id": 1,
+      "dow": 4,
+      "start_time": "10:30:00",
+      "end_time": "18:00:00"
+    },
+    {
+      "id": 5,
+      "barber_id": 1,
+      "dow": 5,
+      "start_time": "10:00:00",
+      "end_time": "16:00:00"
+    },
+    {
+      "id": 6,
+      "barber_id": 1,
+      "dow": 6,
+      "start_time": "10:00:00",
+      "end_time": "18:00:00"
+    },
+    {
+      "id": 7,
+      "barber_id": 2,
+      "dow": 1,
+      "start_time": "12:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 8,
+      "barber_id": 2,
+      "dow": 2,
+      "start_time": "12:00:00",
+      "end_time": "19:00:00"
+    },
+    {
+      "id": 9,
+      "barber_id": 2,
+      "dow": 3,
+      "start_time": "12:00:00",
+      "end_time": "19:00:00"
+    },
+    {
+      "id": 10,
+      "barber_id": 2,
+      "dow": 4,
+      "start_time": "10:30:00",
+      "end_time": "19:30:00"
+    },
+    {
+      "id": 11,
+      "barber_id": 2,
+      "dow": 5,
+      "start_time": "09:00:00",
+      "end_time": "19:30:00"
+    },
+    {
+      "id": 12,
+      "barber_id": 2,
+      "dow": 6,
+      "start_time": "09:00:00",
+      "end_time": "20:30:00"
+    },
+    {
+      "id": 13,
+      "barber_id": 3,
+      "dow": 0,
+      "start_time": "09:00:00",
+      "end_time": "16:00:00"
+    },
+    {
+      "id": 14,
+      "barber_id": 3,
+      "dow": 1,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 15,
+      "barber_id": 3,
+      "dow": 2,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 16,
+      "barber_id": 3,
+      "dow": 3,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 17,
+      "barber_id": 3,
+      "dow": 4,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 18,
+      "barber_id": 3,
+      "dow": 5,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 19,
+      "barber_id": 3,
+      "dow": 6,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 20,
+      "barber_id": 4,
+      "dow": 0,
+      "start_time": "09:00:00",
+      "end_time": "21:00:00"
+    },
+    {
+      "id": 21,
+      "barber_id": 4,
+      "dow": 1,
+      "start_time": "09:00:00",
+      "end_time": "21:00:00"
+    },
+    {
+      "id": 22,
+      "barber_id": 4,
+      "dow": 2,
+      "start_time": "09:00:00",
+      "end_time": "21:00:00"
+    },
+    {
+      "id": 23,
+      "barber_id": 4,
+      "dow": 3,
+      "start_time": "08:00:00",
+      "end_time": "17:00:00"
+    },
+    {
+      "id": 24,
+      "barber_id": 4,
+      "dow": 4,
+      "start_time": "08:00:00",
+      "end_time": "17:00:00"
+    },
+    {
+      "id": 25,
+      "barber_id": 4,
+      "dow": 5,
+      "start_time": "09:00:00",
+      "end_time": "19:00:00"
+    },
+    {
+      "id": 26,
+      "barber_id": 4,
+      "dow": 6,
+      "start_time": "09:00:00",
+      "end_time": "19:00:00"
+    },
+    {
+      "id": 27,
+      "barber_id": 5,
+      "dow": 0,
+      "start_time": "09:00:00",
+      "end_time": "18:00:00"
+    },
+    {
+      "id": 28,
+      "barber_id": 5,
+      "dow": 1,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 29,
+      "barber_id": 5,
+      "dow": 2,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 30,
+      "barber_id": 5,
+      "dow": 3,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 31,
+      "barber_id": 5,
+      "dow": 4,
+      "start_time": "09:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 32,
+      "barber_id": 5,
+      "dow": 6,
+      "start_time": "09:00:00",
+      "end_time": "18:00:00"
+    },
+    {
+      "id": 33,
+      "barber_id": 6,
+      "dow": 0,
+      "start_time": "10:00:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 34,
+      "barber_id": 6,
+      "dow": 1,
+      "start_time": "15:30:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 35,
+      "barber_id": 6,
+      "dow": 2,
+      "start_time": "15:30:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 36,
+      "barber_id": 6,
+      "dow": 3,
+      "start_time": "15:30:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 37,
+      "barber_id": 6,
+      "dow": 5,
+      "start_time": "14:30:00",
+      "end_time": "20:00:00"
+    },
+    {
+      "id": 38,
+      "barber_id": 6,
+      "dow": 6,
+      "start_time": "10:00:00",
+      "end_time": "20:00:00"
+    }
+  ],
+  "appointments": [],
+  "users": []
+}

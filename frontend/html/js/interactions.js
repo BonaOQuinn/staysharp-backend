@@ -23,8 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const ctaButton = document.querySelector('.cta-button');
     if (ctaButton) {
         ctaButton.addEventListener('click', function() {
-            // Add booking functionality here
-            alert('Booking system coming soon!');
         });
     }
 

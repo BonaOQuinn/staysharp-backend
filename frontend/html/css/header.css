@@ -1,0 +1,207 @@
+/* ==================== HEADER ==================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 90px;
+    padding: 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    z-index: 1000;
+    /* Enhanced transition for smooth fade effect */
+    transition: background 0.5s ease, backdrop-filter 0.5s ease;
+    transform: translateZ(0);
+}
+
+/* ── Scrolled state with fade-to-black effect ── */
+header.scrolled {
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.98) 0%,
+            rgba(0, 0, 0, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Gold accent line with enhanced glow ── */
+.header-gold-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 204, 0, 0.3) 10%,
+            rgba(255, 204, 0, 0.6) 25%,
+            #FFD700 50%,
+            rgba(255, 204, 0, 0.6) 75%,
+            rgba(255, 204, 0, 0.3) 90%,
+            transparent 100%);
+    /* Enhanced glow effect */
+    box-shadow:
+        0 0 12px rgba(255, 204, 0, 0.9),
+        0 0 24px rgba(255, 204, 0, 0.5),
+        0 0 36px rgba(255, 204, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease, box-shadow 0.5s ease;
+    pointer-events: none;
+}
+
+header.scrolled .header-gold-line {
+    opacity: 1;
+    /* Animate the glow intensity when scrolled */
+    animation: goldPulse 3s ease-in-out infinite;
+}
+
+/* Subtle pulsing glow animation */
+@keyframes goldPulse {
+
+    0%,
+    100% {
+        box-shadow:
+            0 0 12px rgba(255, 204, 0, 0.9),
+            0 0 24px rgba(255, 204, 0, 0.5),
+            0 0 36px rgba(255, 204, 0, 0.3);
+    }
+
+    50% {
+        box-shadow:
+            0 0 16px rgba(255, 204, 0, 1),
+            0 0 30px rgba(255, 204, 0, 0.6),
+            0 0 44px rgba(255, 204, 0, 0.4);
+    }
+}
+
+/* ── Logo (left) ── */
+.header-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo-header {
+    height: 80px;
+    width: auto;
+    transition: opacity 0.3s ease;
+}
+
+.logo-header:hover {
+    opacity: 0.85;
+}
+
+/* ── Right group: nav + Book Now (right side) ── */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin-left: auto;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2.8rem;
+}
+
+nav a {
+    font-family: 'Lobster', cursive;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    position: relative;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 204, 0, 0.6), #FFD700, rgba(255, 204, 0, 0.6));
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.8);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+nav a:hover,
+nav a.active {
+    color: #FFD700;
+    text-shadow:
+        0 0 8px rgba(255, 204, 0, 0.9),
+        0 0 20px rgba(255, 204, 0, 0.5),
+        0 0 40px rgba(255, 204, 0, 0.25);
+}
+
+nav a.active::after,
+nav a:hover::after {
+    width: 100%;
+}
+
+/* ── Book Now button ── */
+.book-now-btn {
+    padding: 0.75rem 1.8rem;
+    background: #FFD700;
+    color: #0a0a0a;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 14px rgba(255, 204, 0, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.book-now-btn:hover {
+    background: #ffe84d;
+    box-shadow: 0 0 22px rgba(255, 204, 0, 0.7), 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+    color: #0a0a0a;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 900px) {
+    header {
+        padding: 0 1.5rem;
+        height: 70px;
+    }
+
+    nav {
+        gap: 1.4rem;
+    }
+
+    nav a {
+        font-size: 1.1rem;
+    }
+
+    .header-right {
+        gap: 1.5rem;
+    }
+
+    .logo-header {
+        height: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    .book-now-btn {
+        font-size: 0.75rem;
+        padding: 0.6rem 1.2rem;
+    }
+}

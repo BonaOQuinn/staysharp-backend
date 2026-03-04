@@ -73,6 +73,19 @@
     margin: 0;
 }
 
+/* HIDE SUBTITLE ON LOCATION STEP - This removes "Select a shop near you to get started" */
+#locationStep .step-subtitle {
+    display: none !important;
+}
+
+/* Keep subtitle visible on barber step (shows location name) */
+#barberStep .step-subtitle {
+    text-align: center;
+    color: #4a5568;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
 .step-subtitle {
     text-align: center;
     color: #4a5568;
