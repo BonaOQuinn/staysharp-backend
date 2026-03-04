@@ -25,54 +25,31 @@
             --gold: #FFD700;
             --gold-light: #FFD700;
             --navy-dark: #0a0a0a;
-            --glass-bg: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.08);
         }
-
-        body {
-            background: #0a0a0a !important;
-            background-image: none !important;
-        }
+        body { background: #0a0a0a !important; background-image: none !important; }
 
         /* Header scroll */
         header#mainHeader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 90px;
-            padding: 0 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: transparent;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; right: 0; height: 90px; padding: 0 3rem;
+            display: flex; justify-content: space-between; align-items: center;
+            background: transparent; z-index: 1000;
             transition: background 0.4s ease, box-shadow 0.4s ease;
         }
-
         header#mainHeader.scrolled {
             background: #0a0a0a !important;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.6);
         }
-
         #headerGoldLine {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 204, 0, 0.15) 15%,
-                    rgba(255, 204, 0, 0.4) 35%, rgba(255, 204, 0, 0.5) 50%,
-                    rgba(255, 204, 0, 0.4) 65%, rgba(255, 204, 0, 0.15) 85%, transparent 100%);
-            box-shadow: 0 0 6px rgba(255, 204, 0, 0.3), 0 1px 4px rgba(255, 204, 0, 0.15);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
+            position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,204,0,0.15) 15%,
+                rgba(255,204,0,0.4) 35%, rgba(255,204,0,0.5) 50%,
+                rgba(255,204,0,0.4) 65%, rgba(255,204,0,0.15) 85%, transparent 100%);
+            box-shadow: 0 0 6px rgba(255,204,0,0.3), 0 1px 4px rgba(255,204,0,0.15);
+            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
         }
-
-        header#mainHeader.scrolled #headerGoldLine {
-            opacity: 1;
-        }
+        header#mainHeader.scrolled #headerGoldLine { opacity: 1; }
 
         /* ── Booking Container ── */
         .booking-container {
@@ -81,12 +58,10 @@
             padding: 140px 2rem 80px;
             z-index: 1;
         }
-
         .booking-hero {
             text-align: center;
             margin-bottom: 3rem;
         }
-
         .booking-title {
             font-family: 'Lobster', cursive;
             font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -94,19 +69,22 @@
             color: #fff;
             margin-bottom: 0.8rem;
         }
-
         .booking-subtitle {
             text-align: center;
             color: rgba(255, 255, 255, 0.5);
             font-size: 1.05rem;
             letter-spacing: 1px;
         }
-
         .booking-content {
             max-width: 1400px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        /* Outer wrapper card that booking-new.js generates */
+        .booking-content > div:first-child,
+        .booking-content > .step-container,
+        .booking-content > section {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
             border-radius: 18px;
             padding: 2.5rem;
         }
@@ -119,481 +97,234 @@
             gap: 0;
             margin-bottom: 2.5rem;
         }
-
         .step-dot {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            color: rgba(255, 255, 255, 0.3);
+            font-weight: 700; font-size: 0.9rem;
+            border: 2px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.3);
             background: transparent;
             transition: all 0.3s ease;
         }
-
         .step-dot.active {
             background: #FFD700;
             border-color: #FFD700;
             color: #0a0a0a;
         }
-
         .step-dot.completed {
-            background: rgba(255, 204, 0, 0.2);
-            border-color: rgba(255, 204, 0, 0.4);
+            background: rgba(255,204,0,0.2);
+            border-color: rgba(255,204,0,0.4);
             color: #FFD700;
         }
-
         .step-connector {
-            width: 60px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
+            width: 60px; height: 2px;
+            background: rgba(255,255,255,0.1);
             transition: background 0.3s ease;
         }
-
         .step-connector.active {
-            background: rgba(255, 204, 0, 0.4);
+            background: rgba(255,204,0,0.4);
         }
-
         .step-label {
             font-family: 'Inter', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
             margin-top: 0.5rem;
             transition: color 0.3s ease;
         }
-
-        .step-label.active {
-            color: #FFD700;
-        }
-
+        .step-label.active { color: #FFD700; }
         .step-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        /* ── Step Containers (generated by booking-new.js) ── */
+        /* ── Step Containers ── */
         .step-container {
             max-width: 1400px;
             margin: 0 auto;
             animation: fadeInUp 0.5s ease-out;
         }
-
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         .step-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;
         }
-
-        /* Hide the default "Step 1: Select Location" text and restyle */
-        .step-title {
-            font-family: 'Lobster', cursive;
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: #fff;
-            text-align: center;
-            width: 100%;
-        }
-
-        /* Injected step progress bar */
-        .ss-step-progress {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            margin-bottom: 2rem;
-            padding-top: 1rem;
-        }
-
-        .ss-step-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .ss-step-dot {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 1rem;
-            border: 2.5px solid rgba(255, 255, 255, 0.15);
-            color: rgba(255, 255, 255, 0.3);
-            background: transparent;
-            transition: all 0.3s ease;
-        }
-
-        .ss-step-dot.active {
-            background: #FFD700;
-            border-color: #FFD700;
-            color: #0a0a0a;
-        }
-
-        .ss-step-dot.completed {
-            background: rgba(255, 204, 0, 0.2);
-            border-color: rgba(255, 204, 0, 0.5);
-            color: #FFD700;
-        }
-
-        .ss-step-connector {
-            width: 80px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .ss-step-connector.active {
-            background: rgba(255, 204, 0, 0.4);
-        }
-
-        .ss-step-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.3);
-            margin-top: 0.6rem;
-        }
-
-        .ss-step-label.active {
-            color: #FFD700;
-        }
-
-        /* Step subtitle */
-        .ss-step-subtitle {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.45);
-            font-size: 0.95rem;
-            margin-top: -0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
         .back-button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
             padding: 0.7rem 1.3rem;
             color: rgba(255, 255, 255, 0.8);
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.9rem; font-weight: 500;
         }
-
         .back-button:hover {
-            background: rgba(255, 204, 0, 0.1);
-            border-color: rgba(255, 204, 0, 0.3);
+            background: rgba(255,204,0,0.1);
+            border-color: rgba(255,204,0,0.3);
             color: #FFD700;
+        }
+        .step-title {
+            font-family: 'Lobster', cursive;
+            font-size: 2rem; font-weight: 400; color: #fff;
         }
 
         /* ── Selection Cards (Locations) ── */
-        .selection-grid,
-        .barber-grid {
+        .selection-grid, .barber-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            gap: 1.5rem; margin-top: 1.5rem;
         }
-
         .selection-card {
             background: #2a2a2a;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 14px;
-            padding: 2.5rem;
-            text-align: center;
+            padding: 2.5rem; text-align: center;
             cursor: default;
             transition: all 0.35s ease;
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
-
         .selection-card:hover {
-            border-color: rgba(255, 204, 0, 0.3);
-            box-shadow: 0 8px 30px rgba(255, 204, 0, 0.08);
+            border-color: rgba(255,204,0,0.3);
+            box-shadow: 0 8px 30px rgba(255,204,0,0.08);
             transform: translateY(-4px);
         }
-
         .selection-card h3 {
             font-family: 'Lobster', cursive;
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: #fff;
-            margin-bottom: 0.8rem;
+            font-size: 1.6rem; font-weight: 400; color: #fff; margin-bottom: 0.8rem;
         }
-
-        .selection-card .location-icon {
-            color: #FFD700;
-            margin-right: 0.3rem;
-        }
-
+        .selection-card .location-icon { color: #FFD700; margin-right: 0.3rem; }
         .selection-card .address,
         .selection-card .city {
-            color: rgba(255, 255, 255, 0.5);
-            margin: 0.3rem 0;
-            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.5); margin: 0.3rem 0; font-size: 0.95rem;
         }
-
         .selection-card hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.2), transparent);
+            border: none; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,204,0,0.2), transparent);
             margin: 1.2rem 0;
         }
-
         .select-button {
-            width: 100%;
-            margin-top: 1.2rem;
-            padding: 1rem;
-            background: #FFD700;
-            border: none;
-            border-radius: 8px;
+            width: 100%; margin-top: 1.2rem; padding: 1rem;
+            background: #FFD700; border: none; border-radius: 8px;
             color: #0a0a0a;
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 10;
+            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s ease;
+            letter-spacing: 2px; text-transform: uppercase;
+            position: relative; z-index: 10;
         }
-
         .select-button:hover {
             background: #ffe84d;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255,204,0,0.4);
             transform: translateY(-2px);
         }
 
         /* ── Barber Cards ── */
         .barber-card {
             background: #1a1a1a;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px; overflow: hidden;
+            transition: all 0.4s ease; cursor: pointer; position: relative;
         }
-
         .barber-card:hover {
-            border-color: rgba(255, 204, 0, 0.3);
-            box-shadow: 0 12px 40px rgba(255, 204, 0, 0.1);
+            border-color: rgba(255,204,0,0.3);
+            box-shadow: 0 12px 40px rgba(255,204,0,0.1);
             transform: translateY(-6px);
         }
-
         .barber-image-container {
-            width: 100%;
-            height: 320px;
-            overflow: hidden;
-            position: relative;
-            background: #111;
+            width: 100%; height: 320px; overflow: hidden;
+            position: relative; background: #111;
         }
-
         .barber-image-container::after {
             content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(to top, #1a1a1a, transparent);
-            z-index: 1;
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 120px;
+            background: linear-gradient(to top, #1a1a1a, transparent); z-index: 1;
         }
-
         .barber-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100%; height: 100%; object-fit: cover;
             transition: transform 0.5s ease;
         }
-
-        .barber-card:hover .barber-photo {
-            transform: scale(1.08);
-        }
-
-        .barber-info {
-            padding: 1.8rem;
-            position: relative;
-            z-index: 2;
-        }
-
+        .barber-card:hover .barber-photo { transform: scale(1.08); }
+        .barber-info { padding: 1.8rem; position: relative; z-index: 2; }
         .barber-name {
             font-family: 'Lobster', cursive;
-            font-size: 1.8rem;
-            font-weight: 400;
-            color: #fff;
-            margin-bottom: 0.6rem;
+            font-size: 1.8rem; font-weight: 400; color: #fff; margin-bottom: 0.6rem;
         }
-
         .barber-experience {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.5); margin-bottom: 1rem; font-size: 0.9rem;
         }
-
-        .experience-icon {
-            color: #FFD700;
-        }
-
+        .experience-icon { color: #FFD700; }
         .barber-bio {
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-size: 0.92rem;
+            color: rgba(255, 255, 255, 0.6); line-height: 1.7;
+            margin-bottom: 1.5rem; font-size: 0.92rem;
         }
-
         .barber-specialties {
-            margin-top: 1.5rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 1.5rem; padding-top: 1.2rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
-
         .specialties-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #FFD700;
-            margin-bottom: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 0.72rem; font-weight: 700; color: #FFD700;
+            margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 2px;
         }
-
-        .specialty-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
+        .specialty-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .specialty-tag {
-            background: rgba(255, 204, 0, 0.08);
-            border: 1px solid rgba(255, 204, 0, 0.2);
-            color: #FFD700;
-            padding: 0.45rem 0.9rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            background: rgba(255,204,0,0.08);
+            border: 1px solid rgba(255,204,0,0.2);
+            color: #FFD700; padding: 0.45rem 0.9rem;
+            border-radius: 20px; font-size: 0.8rem; font-weight: 600;
             transition: all 0.25s ease;
         }
-
         .specialty-tag:hover {
-            background: rgba(255, 204, 0, 0.15);
-            border-color: rgba(255, 204, 0, 0.4);
+            background: rgba(255,204,0,0.15);
+            border-color: rgba(255,204,0,0.4);
         }
-
         .select-barber-button {
-            width: 100%;
-            padding: 1.1rem;
-            margin-top: 1.2rem;
-            background: #FFD700;
-            border: none;
-            border-radius: 8px;
+            width: 100%; padding: 1.1rem; margin-top: 1.2rem;
+            background: #FFD700; border: none; border-radius: 8px;
             color: #0a0a0a;
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
+            font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.9rem;
+            cursor: pointer; transition: all 0.3s ease;
+            letter-spacing: 2px; text-transform: uppercase;
+            position: relative; overflow: hidden;
         }
-
         .select-barber-button:hover {
             background: #ffe84d;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255,204,0,0.4);
             transform: translateY(-2px);
         }
-
-        .select-barber-button span {
-            position: relative;
-            z-index: 1;
-        }
+        .select-barber-button span { position: relative; z-index: 1; }
 
         /* ── Toast Notifications ── */
-        .error-toast,
-        .success-toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            padding: 1rem 1.8rem;
-            border-radius: 10px;
-            border: 1px solid;
-            z-index: 10000;
-            transform: translateY(150px);
-            opacity: 0;
+        .error-toast, .success-toast {
+            position: fixed; bottom: 30px; right: 30px;
+            padding: 1rem 1.8rem; border-radius: 10px;
+            border: 1px solid; z-index: 10000;
+            transform: translateY(150px); opacity: 0;
             transition: all 0.4s ease;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 600; font-size: 0.9rem;
             backdrop-filter: blur(12px);
         }
-
         .error-toast {
             background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
+            border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;
         }
-
         .success-toast {
             background: rgba(34, 197, 94, 0.15);
-            border-color: rgba(34, 197, 94, 0.3);
-            color: #86efac;
+            border-color: rgba(34, 197, 94, 0.3); color: #86efac;
         }
-
-        .error-toast.show,
-        .success-toast.show {
-            transform: translateY(0);
-            opacity: 1;
+        .error-toast.show, .success-toast.show {
+            transform: translateY(0); opacity: 1;
         }
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-            .booking-container {
-                padding: 120px 1rem 60px;
-            }
-
-            .step-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.8rem;
-            }
-
-            .selection-grid,
-            .barber-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .barber-name {
-                font-size: 1.5rem;
-            }
+            .booking-container { padding: 120px 1rem 60px; }
+            .step-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+            .selection-grid, .barber-grid { grid-template-columns: 1fr; }
+            .barber-name { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -625,13 +356,13 @@
         <div class="header-gold-line" id="headerGoldLine"></div>
     </header>
     <script>
-        (function () {
-            var h = document.getElementById('mainHeader');
-            if (!h) return;
-            function u() { h.classList[window.pageYOffset > 10 ? 'add' : 'remove']('scrolled') }
-            window.addEventListener('scroll', u, { passive: true });
-            u();
-        })();
+    (function(){
+        var h=document.getElementById('mainHeader');
+        if(!h)return;
+        function u(){h.classList[window.pageYOffset>10?'add':'remove']('scrolled')}
+        window.addEventListener('scroll',u,{passive:true});
+        u();
+    })();
     </script>
 
     <!-- Booking Section -->
@@ -657,21 +388,11 @@
                 <p class="footer-tagline">Premium barbershop experience in San Diego. Where style meets precision.</p>
                 <div class="footer-socials">
                     <a href="https://www.instagram.com/staysharpsandiego" target="_blank">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" />
-                            <circle cx="12" cy="12" r="4" />
-                            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-                        </svg>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
                         @staysharpsandiego
                     </a>
                     <a href="https://www.instagram.com/howtobarber" target="_blank">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" />
-                            <circle cx="12" cy="12" r="4" />
-                            <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" />
-                        </svg>
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
                         @howtobarber
                     </a>
                 </div>
@@ -680,37 +401,12 @@
             <div class="footer-col">
                 <h4 class="footer-heading">Quick Links</h4>
                 <ul class="footer-links">
-                    <li><a href="index.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                            </svg>Home</a></li>
-                    <li><a href="services.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <circle cx="6" cy="6" r="3" />
-                                <circle cx="6" cy="18" r="3" />
-                                <line x1="20" y1="4" x2="8.12" y2="15.88" />
-                            </svg>Services</a></li>
-                    <li><a href="locations.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-                            </svg>Locations</a></li>
-                    <li><a href="gallery.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>Gallery</a></li>
-                    <li><a href="contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                            </svg>Contact</a></li>
-                    <li><a href="booking.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" />
-                                <line x1="16" y1="2" x2="16" y2="6" />
-                                <line x1="8" y1="2" x2="8" y2="6" />
-                                <line x1="3" y1="10" x2="21" y2="10" />
-                            </svg>Book Now</a></li>
+                    <li><a href="index.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Home</a></li>
+                    <li><a href="services.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/></svg>Services</a></li>
+                    <li><a href="locations.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Locations</a></li>
+                    <li><a href="gallery.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Gallery</a></li>
+                    <li><a href="contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Contact</a></li>
+                    <li><a href="booking.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Book Now</a></li>
                 </ul>
             </div>
 
@@ -718,20 +414,12 @@
                 <h4 class="footer-heading">Locations</h4>
                 <div class="footer-location">
                     <div class="footer-loc-name">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                         La Mesa
                     </div>
                     <p class="footer-loc-addr">5288 Baltimore Dr, La Mesa, CA 91942</p>
                     <p class="footer-loc-phone">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 5.16 2 2 0 015.08 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.92z" />
-                        </svg>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 5.16 2 2 0 015.08 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.92z"/></svg>
                         (619) 834-3973
                     </p>
                 </div>
@@ -740,11 +428,7 @@
             <div class="footer-col">
                 <h4 class="footer-heading">Hours</h4>
                 <div class="footer-hours">
-                    <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg>Monday – Friday: 9:00 AM – 7:00 PM</p>
+                    <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Monday – Friday: 9:00 AM – 7:00 PM</p>
                     <p>Saturday: 8:00 AM – 5:00 PM</p>
                     <p>Sunday: 10:00 AM – 4:00 PM</p>
                 </div>
@@ -757,113 +441,6 @@
 
     <script src="js/background.js"></script>
     <script src="js/booking-new.js"></script>
-    <script>
-        // Inject step progress indicator into booking content
-        (function () {
-            var stepLabels = ['LOCATION', 'BARBER'];
-            var subtitles = {
-                'location': 'Select a shop near you to get started',
-                'barber': 'Pick your preferred barber'
-            };
-
-            function injectProgress() {
-                var content = document.getElementById('bookingContent');
-                if (!content) return;
-
-                // Check if booking-new.js has rendered
-                var stepTitle = content.querySelector('.step-title, h2, h3');
-                if (!stepTitle) return;
-
-                // Determine current step from text
-                var titleText = (stepTitle.textContent || '').toLowerCase();
-                var currentStep = 0;
-                if (titleText.indexOf('location') !== -1 || titleText.indexOf('step 1') !== -1) currentStep = 0;
-                else if (titleText.indexOf('barber') !== -1 || titleText.indexOf('step 2') !== -1) currentStep = 1;
-
-                // Don't inject if already injected
-                if (content.querySelector('.ss-step-progress')) {
-                    // Update active states
-                    updateProgress(content, currentStep);
-                    return;
-                }
-
-                // Build progress HTML
-                var progressHTML = '<div class="ss-step-progress">';
-                for (var i = 0; i < stepLabels.length; i++) {
-                    if (i > 0) {
-                        progressHTML += '<div class="ss-step-connector' + (i <= currentStep ? ' active' : '') + '"></div>';
-                    }
-                    var dotClass = 'ss-step-dot';
-                    if (i === currentStep) dotClass += ' active';
-                    else if (i < currentStep) dotClass += ' completed';
-                    var labelClass = 'ss-step-label' + (i === currentStep ? ' active' : '');
-                    progressHTML += '<div class="ss-step-group">';
-                    progressHTML += '<div class="' + dotClass + '">' + (i + 1) + '</div>';
-                    progressHTML += '<div class="' + labelClass + '">' + stepLabels[i] + '</div>';
-                    progressHTML += '</div>';
-                }
-                progressHTML += '</div>';
-
-                // Restyle the step title
-                var newTitle = currentStep === 0 ? 'Choose Your Location' : 'Choose Your Barber';
-                stepTitle.textContent = newTitle;
-                stepTitle.className = 'step-title';
-
-                // Find where to insert (before the step title or its parent)
-                var insertTarget = stepTitle.closest('.step-header') || stepTitle.parentElement;
-                if (insertTarget) {
-                    var progressEl = document.createElement('div');
-                    progressEl.innerHTML = progressHTML;
-                    insertTarget.parentElement.insertBefore(progressEl.firstChild, insertTarget);
-
-                    // Add subtitle
-                    var subKey = currentStep === 0 ? 'location' : 'barber';
-                    var subEl = document.createElement('p');
-                    subEl.className = 'ss-step-subtitle';
-                    subEl.textContent = subtitles[subKey];
-                    // Insert after step title / header
-                    if (insertTarget.nextSibling) {
-                        insertTarget.parentElement.insertBefore(subEl, insertTarget.nextSibling);
-                    } else {
-                        insertTarget.parentElement.appendChild(subEl);
-                    }
-
-                    // Hide back button on step 1, show on step 2+
-                    var backBtn = content.querySelector('.back-button');
-                    if (backBtn && currentStep === 0) {
-                        backBtn.style.display = 'none';
-                    }
-                }
-            }
-
-            function updateProgress(content, currentStep) {
-                var dots = content.querySelectorAll('.ss-step-dot');
-                var connectors = content.querySelectorAll('.ss-step-connector');
-                var labels = content.querySelectorAll('.ss-step-label');
-                dots.forEach(function (d, i) {
-                    d.className = 'ss-step-dot' + (i === currentStep ? ' active' : (i < currentStep ? ' completed' : ''));
-                });
-                connectors.forEach(function (c, i) {
-                    c.className = 'ss-step-connector' + (i < currentStep ? ' active' : '');
-                });
-                labels.forEach(function (l, i) {
-                    l.className = 'ss-step-label' + (i === currentStep ? ' active' : '');
-                });
-            }
-
-            // Watch for DOM changes from booking-new.js
-            var observer = new MutationObserver(function () {
-                setTimeout(injectProgress, 100);
-            });
-            var target = document.getElementById('bookingContent');
-            if (target) {
-                observer.observe(target, { childList: true, subtree: true });
-            }
-            // Also try immediately and after a delay
-            setTimeout(injectProgress, 500);
-            setTimeout(injectProgress, 1500);
-        })();
-    </script>
 
 </body>
 
