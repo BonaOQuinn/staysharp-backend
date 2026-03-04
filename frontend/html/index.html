@@ -21,69 +21,6 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/reviews.css">
     <link rel="stylesheet" href="css/responsiveness.css">
-
-    <!-- INLINE HEADER ANIMATION STYLES -->
-    <style>
-        /* Enhanced Header Animation - Fade to Black with Gold Line */
-        header {
-            transition: background 0.5s ease, backdrop-filter 0.5s ease !important;
-        }
-
-        header.scrolled {
-            background: linear-gradient(180deg,
-                    rgba(0, 0, 0, 0.98) 0%,
-                    rgba(0, 0, 0, 0.95) 100%) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-        }
-
-        .header-gold-line {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg,
-                    transparent 0%,
-                    rgba(255, 204, 0, 0.3) 10%,
-                    rgba(255, 204, 0, 0.6) 25%,
-                    #FFD700 50%,
-                    rgba(255, 204, 0, 0.6) 75%,
-                    rgba(255, 204, 0, 0.3) 90%,
-                    transparent 100%);
-            box-shadow:
-                0 0 12px rgba(255, 204, 0, 0.9),
-                0 0 24px rgba(255, 204, 0, 0.5),
-                0 0 36px rgba(255, 204, 0, 0.3);
-            opacity: 0;
-            transition: opacity 0.5s ease, box-shadow 0.5s ease;
-            pointer-events: none;
-        }
-
-        header.scrolled .header-gold-line {
-            opacity: 1;
-            animation: goldPulse 3s ease-in-out infinite;
-        }
-
-        @keyframes goldPulse {
-
-            0%,
-            100% {
-                box-shadow:
-                    0 0 12px rgba(255, 204, 0, 0.9),
-                    0 0 24px rgba(255, 204, 0, 0.5),
-                    0 0 36px rgba(255, 204, 0, 0.3);
-            }
-
-            50% {
-                box-shadow:
-                    0 0 16px rgba(255, 204, 0, 1),
-                    0 0 30px rgba(255, 204, 0, 0.6),
-                    0 0 44px rgba(255, 204, 0, 0.4);
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -221,60 +158,146 @@
                     </div>
                     <div>
                         <h3 class="pillar-name">Luxury Atmosphere</h3>
-                        <p class="pillar-desc">Immaculate spaces designed for your comfort and relaxation.</p>
+                        <p class="pillar-desc">A welcoming space where clients become friends and every visit feels
+                            special.</p>
+                    </div>
+                </div>
+                <div class="pillar-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="pillar-name">Built on Dedication</h3>
+                        <p class="pillar-desc">No shortcuts. Nine years of perfecting the craft, one haircut at a time.
+                        </p>
                     </div>
                 </div>
             </div>
+
         </div>
+    </section>
+
+    <!-- ==================== SERVICES ==================== -->
+    <section class="section services-section">
+        <div class="section-label">WHAT WE OFFER</div>
+        <h2 class="section-title">Our Services</h2>
+        <div class="gold-divider"></div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="6" cy="6" r="3" />
+                        <circle cx="6" cy="18" r="3" />
+                        <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                        <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                        <line x1="8.12" y1="8.12" x2="12" y2="12" />
+                    </svg>
+                </div>
+                <h3 class="service-name">Signature Cut</h3>
+                <p class="service-desc">Precision haircuts tailored to your style and face shape.</p>
+                <a href="booking.html" class="service-btn">Book Now</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="6" cy="6" r="3" />
+                        <circle cx="6" cy="18" r="3" />
+                        <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                        <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                        <line x1="8.12" y1="8.12" x2="12" y2="12" />
+                    </svg>
+                </div>
+                <h3 class="service-name">Hot Towel Shave</h3>
+                <p class="service-desc">Classic straight razor shave with hot towel treatment.</p>
+                <a href="booking.html" class="service-btn">Book Now</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="6" cy="6" r="3" />
+                        <circle cx="6" cy="18" r="3" />
+                        <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                        <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                        <line x1="8.12" y1="8.12" x2="12" y2="12" />
+                    </svg>
+                </div>
+                <h3 class="service-name">Beard Sculpting</h3>
+                <p class="service-desc">Expert beard shaping and grooming for the perfect look.</p>
+                <a href="booking.html" class="service-btn">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== REVIEWS ==================== -->
+    <section class="section reviews-section">
+        <div class="section-label">REVIEWS</div>
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="gold-divider"></div>
+
+        <div class="google-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <polygon
+                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+            Google Reviews
+        </div>
+
+        <div class="reviews-carousel">
+            <button class="reviews-arrow reviews-arrow-left" id="reviewPrev"
+                aria-label="Previous review">&#8249;</button>
+            <div class="reviews-track-wrapper">
+                <div class="reviews-track" id="reviewsTrack"></div>
+            </div>
+            <button class="reviews-arrow reviews-arrow-right" id="reviewNext" aria-label="Next review">&#8250;</button>
+        </div>
+        <div class="reviews-dots" id="reviewsDots"></div>
     </section>
 
     <!-- ==================== GALLERY ==================== -->
-    <section class="home-gallery-section" id="gallery">
+    <section class="section gallery-section">
         <div class="section-label">OUR WORK</div>
-        <h2 class="section-heading">Gallery</h2>
+        <h2 class="section-title">Gallery</h2>
         <div class="gold-divider"></div>
 
-        <div id="galleryGrid" class="gallery-grid">
-            <div style="text-align: center; width: 100%; padding: 40px;">
-                <p style="color: rgba(255, 255, 255, 0.4);">Loading gallery...</p>
-            </div>
+        <!-- Gallery grid — populated by gallery.js -->
+        <div class="gallery-grid" id="galleryGrid">
+            <div class="gallery-loading">Loading gallery...</div>
         </div>
 
-        <a href="gallery.html" class="view-more-link">
-            <span>View Full Gallery</span>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="9 18 15 12 9 6" />
-            </svg>
-        </a>
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+            <img id="lightboxImg" src="" alt="Gallery image">
+        </div>
+
+        <div class="gallery-cta">
+            <a href="gallery.html" class="gallery-full-link">View Full Gallery &rarr;</a>
+        </div>
     </section>
 
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <img id="lightboxImg" src="" alt="Gallery image">
-    </div>
-
-    <!-- ==================== REVIEWS ==================== -->
-    <section class="reviews-section" id="reviews">
-        <div class="section-label">TESTIMONIALS</div>
-        <h2 class="section-heading">What Our Clients Say</h2>
-        <div class="gold-divider"></div>
-        <div class="reviews-container" id="reviewsContainer">
-            <p style="text-align: center; color: rgba(255, 255, 255, 0.4);">Loading reviews...</p>
-        </div>
+    <!-- ==================== CTA ==================== -->
+    <section class="section cta-section">
+        <h2 class="cta-title">Ready to Get Sharp?</h2>
+        <p class="cta-desc">Book your appointment today and experience the Stay Sharp difference.</p>
+        <a href="booking.html" class="cta-main-btn">Book Your Appointment</a>
     </section>
 
     <!-- ==================== FOOTER ==================== -->
-    <footer>
+    <footer class="site-footer">
         <div class="footer-grid">
-
-            <!-- Col 1: Logo + Socials -->
-            <div class="footer-col">
-                <img class="footer-logo-img" src="logos/new_logo.png" alt="Stay Sharp San Diego">
+            <!-- Col 1: Logo + tagline + socials -->
+            <div class="footer-col footer-brand">
+                <img src="logos/IMG_0035 - Edited.PNG" alt="Stay Sharp Logo" class="footer-logo">
                 <p class="footer-tagline">Premium barbershop experience in San Diego. Where style meets precision.</p>
-
                 <div class="footer-socials">
-                    <a href="https://www.instagram.com/staysharpsandiego" target="_blank">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <a href="https://instagram.com/staysharpsandiego" target="_blank" class="footer-social-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <rect x="2" y="2" width="20" height="20" rx="5" />
                             <circle cx="12" cy="12" r="5" />
@@ -282,8 +305,8 @@
                         </svg>
                         @staysharpsandiego
                     </a>
-                    <a href="https://www.instagram.com/howtobarber" target="_blank">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <a href="https://instagram.com/howtobarber" target="_blank" class="footer-social-link">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <rect x="2" y="2" width="20" height="20" rx="5" />
                             <circle cx="12" cy="12" r="5" />
