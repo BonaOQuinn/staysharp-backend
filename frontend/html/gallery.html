@@ -13,12 +13,148 @@
         href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
+    <!-- Supabase JS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/background.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <style>
+        /* Override base navy gradient */
+        body {
+            background: #0a0a0a !important;
+            background-image: none !important;
+        }
+
+        /* Header scroll */
+        header#mainHeader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            z-index: 1000;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        header#mainHeader.scrolled {
+            background: #0a0a0a !important;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        #headerGoldLine {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 204, 0, 0.15) 15%,
+                    rgba(255, 204, 0, 0.4) 35%, rgba(255, 204, 0, 0.5) 50%,
+                    rgba(255, 204, 0, 0.4) 65%, rgba(255, 204, 0, 0.15) 85%, transparent 100%);
+            box-shadow: 0 0 6px rgba(255, 204, 0, 0.3), 0 1px 4px rgba(255, 204, 0, 0.15);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        header#mainHeader.scrolled #headerGoldLine {
+            opacity: 1;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: #0f0f0f;
+            padding: 60px 40px 30px;
+            border-top: 1px solid rgba(255, 204, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col {
+            min-width: 0;
+        }
+
+        .footer-title {
+            font-family: 'Lobster', cursive;
+            font-size: 1.3rem;
+            color: #FFD700;
+            margin: 0 0 1rem 0;
+        }
+
+        .footer-desc {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #FFD700;
+        }
+
+        .footer-links svg {
+            flex-shrink: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 40px 20px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -48,30 +184,29 @@
         <div class="header-gold-line" id="headerGoldLine"></div>
     </header>
 
-    <!-- HERO -->
+    <!-- Hero -->
     <section class="gallery-hero">
         <div class="gallery-label">OUR WORK</div>
         <h1>Gallery</h1>
-        <p>Showcasing our craftsmanship and style</p>
-        <a href="https://www.instagram.com/staysharpsandiego" target="_blank" class="ig-link">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="2" width="20" height="20" rx="5" />
-                <circle cx="12" cy="12" r="5" />
-                <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+        <p>Fresh cuts, sharp styles, legendary results</p>
+        <a href="https://instagram.com/staysharpsd" target="_blank" rel="noopener" class="ig-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.01 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772c-.5.509-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.01-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.01 15.056 2 14.717 2 12s.01-3.056.06-4.122c.05-1.065.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z" />
             </svg>
-            Follow @staysharpsandiego
+            @staysharpsd
         </a>
     </section>
 
-    <!-- FILTER BAR -->
+    <!-- Filter Tabs -->
     <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="haircuts">Haircuts</button>
-        <button class="filter-btn" data-filter="beard">Beard & Grooming</button>
+        <button class="filter-btn" data-filter="beard">Beard</button>
         <button class="filter-btn" data-filter="vibes">Vibes</button>
     </div>
 
-    <!-- GALLERY GRID -->
+    <!-- Gallery Grid -->
     <main class="gallery-main">
         <div class="masonry-grid" id="masonryGrid">
             <div class="gallery-status">
@@ -81,59 +216,79 @@
         </div>
     </main>
 
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-        <button class="lightbox-prev" onclick="event.stopPropagation(); showPrevImage()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </button>
-        <img id="lightboxImg" src="" alt="Gallery image">
-        <button class="lightbox-next" onclick="event.stopPropagation(); showNextImage()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-prev" id="lightboxPrev">&#8249;</button>
+        <img src="" alt="" id="lightboxImg">
+        <button class="lightbox-next" id="lightboxNext">&#8250;</button>
     </div>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-grid">
+        <div class="footer-content">
             <div class="footer-col">
-                <img class="footer-logo-img" src="logos/new_logo.png" alt="Stay Sharp San Diego">
-                <p class="footer-tagline">Premium barbershop experience in San Diego.</p>
-                <div class="footer-socials">
-                    <a href="https://www.instagram.com/staysharpsandiego" target="_blank" class="footer-social-link">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" />
-                            <circle cx="12" cy="12" r="5" />
-                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
-                        </svg>
-                        @staysharpsandiego
-                    </a>
-                    <a href="https://www.instagram.com/howtobarber" target="_blank" class="footer-social-link">
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="2" y="2" width="20" height="20" rx="5" />
-                            <circle cx="12" cy="12" r="5" />
-                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
-                        </svg>
-                        @howtobarber
-                    </a>
-                </div>
+                <h4 class="footer-title">Stay Sharp San Diego</h4>
+                <p class="footer-desc">Premium barbershop experience with master barbers delivering precision cuts and
+                    legendary results.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>Home</a></li>
+                    <li><a href="services.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <circle cx="6" cy="6" r="3" />
+                                <circle cx="6" cy="18" r="3" />
+                                <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                            </svg>Services</a></li>
+                    <li><a href="locations.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                            </svg>Locations</a></li>
+                    <li><a href="gallery.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>Gallery</a></li>
+                    <li><a href="contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                            </svg>Contact</a></li>
+                    <li><a href="booking.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>Book Now</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 class="footer-title">Connect</h4>
+                <ul class="footer-links">
+                    <li><a href="https://instagram.com/staysharpsd" target="_blank" rel="noopener">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 011.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.01 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772 4.915 4.915 0 01-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.01-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.01 15.056 2 14.717 2 12s.01-3.056.06-4.122c.05-1.065.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z" />
+                            </svg>Instagram</a></li>
+                </ul>
             </div>
         </div>
+
         <div class="footer-bottom">
             <p>&copy; 2025 Stay Sharp San Diego. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="js/background.js"></script>
-    <script src="js/gallery-loader.js"></script>
+    <!-- Header Scroll Script -->
     <script>
-        // Header scroll effect
         (function () {
             var h = document.getElementById('mainHeader');
             if (!h) return;
@@ -143,16 +298,250 @@
             window.addEventListener('scroll', u);
             u();
         })();
+    </script>
 
-        // Keyboard navigation for lightbox
-        document.addEventListener('keydown', function (e) {
+    <!-- ==================== GALLERY SCRIPT WITH SUPABASE SDK ==================== -->
+    <script>
+        // REAL Supabase SDK initialization
+        const { createClient } = supabase;
+
+        const SUPABASE_URL = 'https://txioesoxmxprlhnivcle.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4aW9lc294bXhwcmxobml2Y2xlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4MjcyMjUsImV4cCI6MjA4NjQwMzIyNX0._tmjg6n9BlAjrMZVvPwjg3hsmCZIOvJifo_slurLQd8';
+        const SUPABASE_BUCKET = 'staysharp_rotation';
+        const SUPABASE_FOLDER = 'Gallery';
+
+        // Initialize Supabase client
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // State management
+        let allImages = [];
+        let currentFilter = 'all';
+        let currentLightboxIndex = 0;
+
+        // Initialize on load
+        (function () {
+            'use strict';
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initGallery);
+            } else {
+                initGallery();
+            }
+        })();
+
+        async function initGallery() {
+            console.log('🎨 Initializing gallery with Supabase SDK...');
+
+            try {
+                // List ALL files from the Gallery folder
+                const { data: files, error } = await supabaseClient
+                    .storage
+                    .from(SUPABASE_BUCKET)
+                    .list(SUPABASE_FOLDER, {
+                        limit: 100,
+                        offset: 0,
+                        sortBy: { column: 'name', order: 'asc' }
+                    });
+
+                if (error) {
+                    console.error('❌ Error listing files:', error);
+                    throw error;
+                }
+
+                console.log('📦 Files found:', files);
+
+                // Filter for images only
+                const imageFiles = files.filter(file =>
+                    file.name.match(/\.(png|jpg|jpeg|webp|gif)$/i)
+                );
+
+                console.log(`🖼️  ${imageFiles.length} images found`);
+
+                // Generate image objects with public URLs
+                allImages = imageFiles.map((file, index) => {
+                    const path = `${SUPABASE_FOLDER}/${file.name}`;
+
+                    // Get public URL using SDK
+                    const { data } = supabaseClient
+                        .storage
+                        .from(SUPABASE_BUCKET)
+                        .getPublicUrl(path);
+
+                    // Determine category
+                    let category = 'vibes';
+                    const match = file.name.match(/(\d+)/);
+                    if (match) {
+                        const num = parseInt(match[1]);
+                        if ([1, 2, 3, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46].includes(num)) {
+                            category = 'haircuts';
+                        } else if ([5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47].includes(num)) {
+                            category = 'beard';
+                        }
+                    }
+
+                    return {
+                        id: index + 1,
+                        filename: file.name,
+                        url: data.publicUrl,
+                        category: category,
+                        alt: `Stay Sharp barbershop - ${category}`
+                    };
+                });
+
+                console.log(`✅ Generated ${allImages.length} image URLs`);
+
+                renderGallery();
+                setupFilters();
+                setupLightbox();
+
+                console.log('✅ Gallery initialized successfully');
+            } catch (error) {
+                console.error('❌ Gallery initialization error:', error);
+                showError(error.message);
+            }
+        }
+
+        function renderGallery(filter = 'all') {
+            const grid = document.getElementById('masonryGrid');
+            if (!grid) return;
+
+            const filteredImages = filter === 'all'
+                ? allImages
+                : allImages.filter(img => img.category === filter);
+
+            if (filteredImages.length === 0) {
+                grid.innerHTML = `<div class="gallery-status"><p>No images found</p></div>`;
+                return;
+            }
+
+            grid.innerHTML = filteredImages.map((img, index) => `
+                <div class="masonry-item" 
+                     data-category="${img.category}" 
+                     data-index="${index}" 
+                     onclick="openLightbox(${index})">
+                    <img src="${img.url}" 
+                         alt="${img.alt}" 
+                         loading="lazy"
+                         onerror="console.error('Failed to load:', '${img.url}'); this.parentElement.style.display='none';">
+                    <div class="item-overlay">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            <line x1="11" y1="8" x2="11" y2="14"/>
+                            <line x1="8" y1="11" x2="14" y2="11"/>
+                        </svg>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentFilter = this.getAttribute('data-filter');
+                    renderGallery(currentFilter);
+                });
+            });
+        }
+
+        function setupLightbox() {
             const lightbox = document.getElementById('lightbox');
-            if (!lightbox || !lightbox.classList.contains('open')) return;
+            const closeBtn = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
 
-            if (e.key === 'Escape') closeLightbox();
-            else if (e.key === 'ArrowLeft') showPrevImage();
-            else if (e.key === 'ArrowRight') showNextImage();
-        });
+            if (!lightbox || !closeBtn || !prevBtn || !nextBtn) return;
+
+            closeBtn.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            prevBtn.addEventListener('click', showPrevImage);
+            nextBtn.addEventListener('click', showNextImage);
+
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrevImage();
+                if (e.key === 'ArrowRight') showNextImage();
+            });
+        }
+
+        function openLightbox(index) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            if (!lightbox || !lightboxImg) return;
+
+            currentLightboxIndex = index;
+            const filteredImages = currentFilter === 'all'
+                ? allImages
+                : allImages.filter(img => img.category === currentFilter);
+
+            const image = filteredImages[index];
+            if (!image) return;
+
+            lightboxImg.src = image.url;
+            lightboxImg.alt = image.alt;
+            lightbox.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            if (!lightbox) return;
+            lightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function showPrevImage() {
+            const filteredImages = currentFilter === 'all'
+                ? allImages
+                : allImages.filter(img => img.category === currentFilter);
+            currentLightboxIndex = (currentLightboxIndex - 1 + filteredImages.length) % filteredImages.length;
+            const lightboxImg = document.getElementById('lightboxImg');
+            const image = filteredImages[currentLightboxIndex];
+            if (lightboxImg && image) {
+                lightboxImg.style.opacity = '0.4';
+                setTimeout(() => {
+                    lightboxImg.src = image.url;
+                    lightboxImg.alt = image.alt;
+                    lightboxImg.style.opacity = '1';
+                }, 150);
+            }
+        }
+
+        function showNextImage() {
+            const filteredImages = currentFilter === 'all'
+                ? allImages
+                : allImages.filter(img => img.category === currentFilter);
+            currentLightboxIndex = (currentLightboxIndex + 1) % filteredImages.length;
+            const lightboxImg = document.getElementById('lightboxImg');
+            const image = filteredImages[currentLightboxIndex];
+            if (lightboxImg && image) {
+                lightboxImg.style.opacity = '0.4';
+                setTimeout(() => {
+                    lightboxImg.src = image.url;
+                    lightboxImg.alt = image.alt;
+                    lightboxImg.style.opacity = '1';
+                }, 150);
+            }
+        }
+
+        function showError(message) {
+            const grid = document.getElementById('masonryGrid');
+            if (!grid) return;
+            grid.innerHTML = `
+                <div class="gallery-status">
+                    <p>Error: ${message}</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Check console for details</p>
+                </div>
+            `;
+        }
+
+        window.openLightbox = openLightbox;
     </script>
 
 </body>
