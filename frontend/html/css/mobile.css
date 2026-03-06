@@ -1,0 +1,645 @@
+/* ============================================================
+   STAY SHARP SAN DIEGO — MOBILE RESPONSIVE STYLESHEET
+   Ensures all pages render identically on mobile as on desktop
+   ============================================================ */
+
+/* ── Hamburger Menu Button ── */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1.5px solid rgba(255, 204, 0, 0.35);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 8px;
+    transition: border-color 0.25s ease, background 0.25s ease;
+    flex-shrink: 0;
+    z-index: 1100;
+}
+
+.hamburger:hover {
+    border-color: #FFD700;
+    background: rgba(255, 204, 0, 0.08);
+}
+
+.hamburger span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #FFD700;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+    transform-origin: center;
+}
+
+/* Hamburger → X animation */
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+    width: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile Nav Drawer ── */
+.mobile-nav-drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.97);
+    z-index: 1050;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+}
+
+.mobile-nav-drawer.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.mobile-nav-drawer nav {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+}
+
+.mobile-nav-drawer nav a {
+    font-family: 'Lobster', cursive;
+    font-size: 2.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: color 0.2s ease, background 0.2s ease;
+    position: relative;
+}
+
+.mobile-nav-drawer nav a:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.mobile-nav-drawer nav a:hover,
+.mobile-nav-drawer nav a.active {
+    color: #FFD700;
+    background: rgba(255, 204, 0, 0.04);
+    text-shadow: 0 0 18px rgba(255, 204, 0, 0.5);
+}
+
+.mobile-nav-drawer .mobile-book-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 1rem 3rem;
+    background: #FFD700;
+    color: #0a0a0a;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.35);
+}
+
+.mobile-nav-drawer .mobile-book-btn:hover {
+    background: #ffe84d;
+    box-shadow: 0 0 32px rgba(255, 204, 0, 0.55);
+}
+
+/* Close button inside drawer */
+.mobile-nav-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 2.2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+    z-index: 1200;
+}
+
+.mobile-nav-close:hover {
+    color: #FFD700;
+}
+
+/* ============================================================
+   BREAKPOINT: ≤ 768px  (phones + small tablets)
+   ============================================================ */
+@media (max-width: 768px) {
+
+    /* ── Global ── */
+    body {
+        overflow-x: hidden;
+    }
+
+    /* ── Header ── */
+    header,
+    header#mainHeader {
+        height: 70px !important;
+        padding: 0 1.2rem !important;
+    }
+
+    /* Hide desktop nav & book-now on mobile */
+    header .header-right nav,
+    header nav {
+        display: none !important;
+    }
+
+    header .header-right .book-now-btn,
+    header .book-now-btn {
+        display: none !important;
+    }
+
+    /* Show hamburger */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Logo sizing */
+    .logo-header {
+        height: 56px !important;
+        width: auto;
+    }
+
+    /* header-right stays flex for potential other items */
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    /* ── Hero Section ── */
+    .hero {
+        min-height: 100svh;
+    }
+
+    .hero-content {
+        margin-top: 0;
+        padding: 0 1.2rem;
+    }
+
+    .logo {
+        width: clamp(200px, 78vw, 320px) !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-tagline {
+        font-size: clamp(1.8rem, 7.5vw, 2.6rem) !important;
+    }
+
+    .hero-sub {
+        font-size: 0.9rem !important;
+        letter-spacing: 1px;
+    }
+
+    .cta-button {
+        padding: 0.9rem 2.4rem;
+        font-size: 0.88rem;
+    }
+
+    .hero-dots {
+        gap: 8px;
+        margin-top: 0.75rem;
+    }
+
+    /* ── About Section ── */
+    .about-section {
+        padding: 60px 1.2rem !important;
+    }
+
+    .about-inner {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
+
+    .about-title {
+        font-size: clamp(2rem, 8vw, 2.8rem) !important;
+    }
+
+    .about-stats {
+        gap: 1.2rem !important;
+        flex-wrap: wrap;
+    }
+
+    .about-stat {
+        min-width: 80px;
+    }
+
+    .stat-number {
+        font-size: 1.6rem !important;
+    }
+
+    /* ── Section Padding ── */
+    .section {
+        padding: 60px 1.2rem !important;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 8vw, 3rem) !important;
+    }
+
+    /* ── Services Grid ── */
+    .services-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.2rem !important;
+    }
+
+    /* ── Reviews ── */
+    .reviews-carousel {
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .review-card {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .review-text {
+        font-size: 0.95rem;
+    }
+
+    .reviews-arrow {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1.3rem !important;
+    }
+
+    /* ── Gallery Grid (home page) ── */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-rows: auto !important;
+        grid-auto-rows: 160px !important;
+    }
+
+    /* Remove the complex spanning layout on mobile */
+    .gallery-item:nth-child(n) {
+        grid-column: auto !important;
+        grid-row: auto !important;
+    }
+
+    /* Re-apply span to center item */
+    .gallery-item:nth-child(4) {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+    }
+
+    /* ── CTA Section ── */
+    .cta-section {
+        padding: 60px 1.2rem !important;
+    }
+
+    .cta-title {
+        font-size: clamp(1.8rem, 7vw, 2.4rem) !important;
+    }
+
+    .cta-main-btn {
+        padding: 1rem 2.5rem;
+        font-size: 0.88rem;
+    }
+
+    /* ── Footer ── */
+    .site-footer,
+    footer {
+        padding: 50px 1.2rem 24px !important;
+    }
+
+    .footer-grid,
+    .footer-inner {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+    }
+
+    .footer-logo,
+    .footer-logo-img,
+    .f-logo {
+        height: 60px !important;
+    }
+
+    /* ── Booking Page ── */
+    .booking-container {
+        padding: 90px 1rem 60px !important;
+    }
+
+    .booking-content {
+        padding: 1.5rem 1rem !important;
+    }
+
+    .booking-title {
+        font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
+    }
+
+    .selection-grid,
+    .barber-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .step-container {
+        padding: 1.5rem 1rem !important;
+    }
+
+    .step-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .step-title {
+        font-size: 1.8rem !important;
+    }
+
+    .ss-step-connector {
+        width: 40px !important;
+    }
+
+    .ss-step-dot {
+        width: 38px !important;
+        height: 38px !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* ── Contact Page ── */
+    .contact-hero {
+        min-height: auto;
+        padding: 90px 0 0;
+    }
+
+    .hero-center h1 {
+        font-size: clamp(2.8rem, 10vw, 4.5rem) !important;
+    }
+
+    .hero-labels {
+        display: none !important;
+    }
+
+    .contact-main {
+        grid-template-columns: 1fr !important;
+        padding: 2rem 1.2rem 50px !important;
+    }
+
+    .col-left {
+        padding-right: 0 !important;
+        margin-bottom: 2rem;
+    }
+
+    .col-right {
+        padding-left: 0 !important;
+    }
+
+    .map-wrap {
+        height: 220px !important;
+    }
+
+    /* ── Gallery Page ── */
+    .gallery-hero {
+        padding: 100px 1.2rem 50px !important;
+    }
+
+    .gallery-hero h1 {
+        font-size: clamp(2.5rem, 9vw, 4rem) !important;
+    }
+
+    .masonry-grid {
+        columns: 2 !important;
+        column-gap: 8px !important;
+    }
+
+    .masonry-item {
+        margin-bottom: 8px !important;
+    }
+
+    .filter-bar {
+        padding: 1.5rem 1rem !important;
+        gap: 0.5rem !important;
+    }
+
+    .filter-btn {
+        font-size: 0.8rem !important;
+        padding: 0.45rem 1rem !important;
+    }
+
+    .lightbox-prev {
+        left: 0.75rem !important;
+    }
+
+    .lightbox-next {
+        right: 0.75rem !important;
+    }
+
+    .lightbox-close {
+        top: 1rem !important;
+        right: 1rem !important;
+    }
+
+    /* ── Locations Page ── */
+    .locations-hero {
+        padding: 100px 1.2rem 50px !important;
+    }
+
+    .locations-hero h1 {
+        font-size: clamp(2.5rem, 9vw, 4rem) !important;
+    }
+
+    .locations-main {
+        padding: 30px 1rem 50px !important;
+        gap: 40px !important;
+    }
+
+    .location-card {
+        grid-template-columns: 1fr !important;
+    }
+
+    .location-map {
+        min-height: 240px !important;
+    }
+
+    .location-info {
+        padding: 1.5rem !important;
+    }
+
+    .location-actions {
+        flex-direction: column !important;
+    }
+
+    .loc-btn {
+        justify-content: center;
+    }
+
+    /* ── Services Page ── */
+    .services-hero {
+        padding: 100px 1.2rem 50px !important;
+    }
+
+    .services-hero h1 {
+        font-size: clamp(2.5rem, 9vw, 4rem) !important;
+    }
+
+    .services-main {
+        padding: 30px 1rem 50px !important;
+    }
+
+    /* services-grid handled by .services-grid rule above */
+
+    /* ── Toasts ── */
+    .error-toast,
+    .success-toast {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        font-size: 0.85rem;
+        padding: 0.85rem 1.2rem;
+    }
+}
+
+/* ============================================================
+   BREAKPOINT: ≤ 480px  (small phones)
+   ============================================================ */
+@media (max-width: 480px) {
+
+    .footer-grid,
+    .footer-inner {
+        grid-template-columns: 1fr !important;
+    }
+
+    .about-stats {
+        gap: 1rem !important;
+    }
+
+    .masonry-grid {
+        columns: 1 !important;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr !important;
+        grid-auto-rows: 200px !important;
+    }
+
+    .hero-tagline {
+        font-size: clamp(1.6rem, 7vw, 2.2rem) !important;
+    }
+
+    .booking-hero .booking-title {
+        font-size: 2rem !important;
+    }
+
+    .ss-step-progress {
+        gap: 8px !important;
+    }
+
+    .ss-step-label {
+        font-size: 0.62rem !important;
+        letter-spacing: 1px !important;
+    }
+
+    .location-name,
+    .services-hero h1,
+    .gallery-hero h1,
+    .locations-hero h1 {
+        font-size: clamp(2.2rem, 10vw, 3.2rem) !important;
+    }
+}
+
+/* ============================================================
+   BREAKPOINT: 769px – 1024px  (tablets)
+   ============================================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    header,
+    header#mainHeader {
+        padding: 0 1.8rem !important;
+    }
+
+    nav {
+        gap: 1.6rem !important;
+    }
+
+    nav a {
+        font-size: 1.1rem !important;
+    }
+
+    .header-right {
+        gap: 1.5rem !important;
+    }
+
+    .logo-header {
+        height: 75px !important;
+    }
+
+    .about-inner {
+        gap: 3rem !important;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .footer-grid,
+    .footer-inner {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 2rem !important;
+    }
+
+    .gallery-grid {
+        grid-auto-rows: 180px !important;
+    }
+
+    .location-card {
+        grid-template-columns: 1fr !important;
+    }
+
+    .location-map {
+        min-height: 280px !important;
+    }
+
+    .booking-content {
+        padding: 2rem 1.5rem !important;
+    }
+
+    .contact-main {
+        grid-template-columns: 1fr !important;
+        padding: 0 2rem 60px !important;
+    }
+
+    .hero-labels {
+        display: none !important;
+    }
+
+    .col-left {
+        padding-right: 0 !important;
+        margin-bottom: 2rem;
+    }
+
+    .col-right {
+        padding-left: 0 !important;
+    }
+}

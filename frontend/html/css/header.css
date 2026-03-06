@@ -11,12 +11,11 @@ header {
     align-items: center;
     background: transparent;
     z-index: 1000;
-    /* Enhanced transition for smooth fade effect */
     transition: background 0.5s ease, backdrop-filter 0.5s ease;
     transform: translateZ(0);
 }
 
-/* ── Scrolled state with fade-to-black effect ── */
+/* ── Scrolled state ── */
 header.scrolled {
     background: linear-gradient(180deg,
             rgba(0, 0, 0, 0.98) 0%,
@@ -26,7 +25,7 @@ header.scrolled {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* ── Gold accent line with enhanced glow ── */
+/* ── Gold accent line ── */
 .header-gold-line {
     position: absolute;
     bottom: 0;
@@ -41,7 +40,6 @@ header.scrolled {
             rgba(255, 204, 0, 0.6) 75%,
             rgba(255, 204, 0, 0.3) 90%,
             transparent 100%);
-    /* Enhanced glow effect */
     box-shadow:
         0 0 12px rgba(255, 204, 0, 0.9),
         0 0 24px rgba(255, 204, 0, 0.5),
@@ -53,11 +51,9 @@ header.scrolled {
 
 header.scrolled .header-gold-line {
     opacity: 1;
-    /* Animate the glow intensity when scrolled */
     animation: goldPulse 3s ease-in-out infinite;
 }
 
-/* Subtle pulsing glow animation */
 @keyframes goldPulse {
 
     0%,
@@ -76,7 +72,7 @@ header.scrolled .header-gold-line {
     }
 }
 
-/* ── Logo (left) ── */
+/* ── Logo ── */
 .header-logo {
     display: flex;
     align-items: center;
@@ -93,7 +89,7 @@ header.scrolled .header-gold-line {
     opacity: 0.85;
 }
 
-/* ── Right group: nav + Book Now (right side) ── */
+/* ── Right group ── */
 .header-right {
     display: flex;
     align-items: center;
@@ -175,7 +171,7 @@ nav a:hover::after {
 @media (max-width: 900px) {
     header {
         padding: 0 1.5rem;
-        height: 70px;
+        height: 80px;
     }
 
     nav {
@@ -187,21 +183,31 @@ nav a:hover::after {
     }
 
     .header-right {
-        gap: 1.5rem;
+        gap: 1.2rem;
     }
 
     .logo-header {
-        height: 60px;
+        height: 70px;
     }
 }
 
 @media (max-width: 768px) {
+    header {
+        height: 70px !important;
+        padding: 0 1.2rem !important;
+    }
+
+    /* Desktop nav + book-now hidden; hamburger from mobile.css takes over */
+    .header-right nav,
     nav {
-        display: none;
+        display: none !important;
     }
 
     .book-now-btn {
-        font-size: 0.75rem;
-        padding: 0.6rem 1.2rem;
+        display: none !important;
+    }
+
+    .logo-header {
+        height: 56px !important;
     }
 }
