@@ -193,11 +193,11 @@ nav a:hover::after {
 
 @media (max-width: 768px) {
     header {
-        height: 70px !important;
+        height: 90px !important;
         padding: 0 1.2rem !important;
+        align-items: center !important;
     }
 
-    /* Desktop nav + book-now hidden; hamburger from mobile.css takes over */
     .header-right nav,
     nav {
         display: none !important;
@@ -208,6 +208,6 @@ nav a:hover::after {
     }
 
     .logo-header {
-        height: 56px !important;
+        height: 80px !important;
     }
 }

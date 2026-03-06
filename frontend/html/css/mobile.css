@@ -166,8 +166,9 @@
     /* ── Header ── */
     header,
     header#mainHeader {
-        height: 70px !important;
+        height: 90px !important;
         padding: 0 1.2rem !important;
+        align-items: center !important;
     }
 
     /* Hide desktop nav & book-now on mobile */
@@ -181,22 +182,30 @@
         display: none !important;
     }
 
-    /* Show hamburger */
+    /* Show hamburger — vertically centered with header logo */
     .hamburger {
         display: flex;
+        align-self: center;
+        width: 48px;
+        height: 48px;
     }
 
-    /* Logo sizing */
+    /* Header logo — bigger on mobile */
     .logo-header {
-        height: 56px !important;
+        height: 80px !important;
         width: auto;
     }
 
-    /* header-right stays flex for potential other items */
+    /* header-right + header-logo vertically centered */
     .header-right {
         display: flex;
         align-items: center;
         gap: 0.75rem;
+    }
+
+    .header-logo {
+        display: flex;
+        align-items: center;
     }
 
     /* ── Hero Section ── */
@@ -212,6 +221,7 @@
     .logo {
         width: 55vw !important;
         max-width: none !important;
+        min-width: 220px;
         margin-bottom: 0.5rem;
     }
 
@@ -349,7 +359,7 @@
 
     /* ── Booking Page ── */
     .booking-container {
-        padding: 90px 1rem 60px !important;
+        padding: 110px 1rem 60px !important;
     }
 
     .booking-content {
