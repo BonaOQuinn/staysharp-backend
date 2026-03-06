@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Stay Sharp San Diego</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/background.css">
+    <link rel="stylesheet" href="css/header.css">
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="css/contact.css">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="grid-background" id="scissorsContainer">
+        <div class="orb"></div>
+        <div class="orb"></div>
+        <div class="orb"></div>
+    </div>
+
+    <!-- ══════════════════ HEADER ══════════════════ -->
+    <header id="mainHeader">
+        <a href="index.html" class="header-logo">
+            <img class="logo-header" src="logos/new_logo.png" alt="Stay Sharp San Diego">
+        </a>
+        <div class="header-right">
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="locations.html">Locations</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+            <a href="booking.html" class="book-now-btn">Book Now</a>
+        </div>
+        <div class="header-gold-line" id="headerGoldLine"></div>
+    </header>
+
+    <!-- ══════════════════ HERO ══════════════════ -->
+    <section class="contact-hero">
+
+        <!-- Centered title + subtitle -->
+        <div class="hero-center">
+            <h1>Contact Us</h1>
+            <p>Have a question or want to get in touch?&nbsp;We'd love to hear from you.</p>
+        </div>
+
+        <!-- Column headings shown at the bottom of the hero viewport -->
+        <div class="hero-labels">
+            <span class="hero-col-title hl-left">Send a Message</span>
+            <span class="hero-col-title hl-right">Get in Touch</span>
+        </div>
+
+    </section>
+
+    <!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+    <div class="contact-main">
+
+        <!-- ── LEFT: Contact Form ── -->
+        <div class="col-left">
+            <form class="contact-form" id="contactForm" novalidate>
+                <input type="text" class="form-field" id="fname" name="name" placeholder="Your Name" required>
+                <input type="email" class="form-field" id="femail" name="email" placeholder="Email Address" required>
+                <input type="tel" class="form-field" id="fphone" name="phone" placeholder="Phone Number">
+                <textarea class="form-field" id="fmsg" name="message" placeholder="Your Message" rows="5"
+                    required></textarea>
+                <button type="submit" class="btn-send" id="submitBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                    Send Message
+                </button>
+                <div class="form-status" id="formStatus"></div>
+            </form>
+        </div>
+
+        <!-- ── RIGHT: Info Cards ── -->
+        <div class="col-right">
+            <div class="info-stack">
+
+                <!-- Address -->
+                <div class="info-card">
+                    <div class="ic-dot">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                    </div>
+                    <div class="ic-body">
+                        <span class="ic-label">Address</span>
+                        <span class="ic-val">La Mesa, San Diego, CA</span>
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <a href="tel:6195550123" class="info-card">
+                    <div class="ic-dot">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015 12.83a19.79 19.79 0 01-3.07-8.67A2 2 0 013.92 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                        </svg>
+                    </div>
+                    <div class="ic-body">
+                        <span class="ic-label">Phone</span>
+                        <span class="ic-val">(619) 555-0123</span>
+                    </div>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:info@staysharpsd.com" class="info-card">
+                    <div class="ic-dot">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                    </div>
+                    <div class="ic-body">
+                        <span class="ic-label">Email</span>
+                        <span class="ic-val">staysharpsd@yahoo.com</span>
+                    </div>
+                </a>
+
+                <!-- Business Hours -->
+                <div class="hours-card">
+                    <div class="hours-hd">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        <span class="hours-hd-title">Business Hours</span>
+                    </div>
+                    <div class="h-row">
+                        <span class="h-day">Monday &ndash; Friday</span>
+                        <span class="h-time">9:00 AM &ndash; 7:00 PM</span>
+                    </div>
+                    <div class="h-row">
+                        <span class="h-day">Saturday</span>
+                        <span class="h-time">8:00 AM &ndash; 5:00 PM</span>
+                    </div>
+                    <div class="h-row">
+                        <span class="h-day">Sunday</span>
+                        <span class="h-time">10:00 AM &ndash; 4:00 PM</span>
+                    </div>
+                </div>
+
+                <!-- Instagram @staysharpsandiego -->
+                <a href="https://instagram.com/staysharpsandiego" target="_blank" rel="noopener" class="info-card">
+                    <div class="ic-dot">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123s-.012 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.637.247-1.363.416-2.428.465-1.066.048-1.405.06-4.122.06s-3.056-.012-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.637-.416-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.012-3.056.06-4.122c.049-1.065.218-1.79.465-2.428a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.054-.058 1.37-.058 4.041 0 2.67.01 2.986.058 4.04.045.976.207 1.505.344 1.858.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.047 1.37.058 4.041.058 2.67 0 2.987-.01 4.04-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.399 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.047-1.054.058-1.37.058-4.041 0-2.67-.01-2.987-.058-4.04-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.054-.048-1.371-.059-4.041-.059zm0 3.063a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 8.468a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" />
+                        </svg>
+                    </div>
+                    <div class="ic-body">
+                        <span class="ic-val">@staysharpsandiego</span>
+                        <span class="ic-sub">Follow us on Instagram</span>
+                    </div>
+                </a>
+
+                <!-- Instagram @howtobarber -->
+                <a href="https://instagram.com/howtobarber" target="_blank" rel="noopener" class="info-card">
+                    <div class="ic-dot">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123s-.012 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.637.247-1.363.416-2.428.465-1.066.048-1.405.06-4.122.06s-3.056-.012-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.637-.416-1.363-.465-2.428C2.013 15.056 2 14.717 2 12s.012-3.056.06-4.122c.049-1.065.218-1.79.465-2.428a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.944 2.013 9.283 2 12 2zm0 1.802c-2.67 0-2.987.01-4.04.059-.976.045-1.505.207-1.858.344-.466.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.054-.058 1.37-.058 4.041 0 2.67.01 2.986.058 4.04.045.976.207 1.505.344 1.858.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.047 1.37.058 4.041.058 2.67 0 2.987-.01 4.04-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.399 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.047-1.054.058-1.37.058-4.041 0-2.67-.01-2.987-.058-4.04-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.054-.048-1.371-.059-4.041-.059zm0 3.063a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 8.468a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666zm5.338-9.87a1.2 1.2 0 100 2.4 1.2 1.2 0 000-2.4z" />
+                        </svg>
+                    </div>
+                    <div class="ic-body">
+                        <span class="ic-val">@howtobarber</span>
+                        <span class="ic-sub">Follow us on Instagram</span>
+                    </div>
+                </a>
+
+                <!-- Google Map — Stay Sharp La Mesa -->
+                <div class="map-wrap">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.4!2d-117.0215!3d32.7689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d958e9ac5b6e21%3A0xa8b690a3afda4db5!2s5288%20Baltimore%20Dr%2C%20La%20Mesa%2C%20CA%2091942!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="Stay Sharp San Diego — La Mesa">
+                    </iframe>
+                </div>
+
+            </div><!-- /info-stack -->
+        </div><!-- /col-right -->
+
+    </div><!-- /contact-main -->
+
+    <!-- ══════════════════ FOOTER ══════════════════ -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+
+            <!-- Col 1: Brand -->
+            <div>
+                <img class="f-logo" src="logos/new_logo.png" alt="Stay Sharp San Diego">
+                <p class="f-tagline">Premium barbershop experience in San Diego. Where style meets precision.</p>
+                <div class="f-socials">
+                    <a href="https://instagram.com/staysharpsandiego" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+                        </svg>
+                        @staysharpsandiego
+                    </a>
+                    <a href="https://instagram.com/howtobarber" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" />
+                            <circle cx="12" cy="12" r="5" />
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+                        </svg>
+                        @howtobarber
+                    </a>
+                </div>
+            </div>
+
+            <!-- Col 2: Quick Links -->
+            <div>
+                <h4 class="f-heading">Quick Links</h4>
+                <ul class="f-links">
+                    <li><a href="index.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>
+                            Home</a></li>
+                    <li><a href="services.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="6" cy="6" r="3" />
+                                <circle cx="6" cy="18" r="3" />
+                                <line x1="20" y1="4" x2="8.12" y2="15.88" />
+                                <line x1="14.47" y1="14.48" x2="20" y2="20" />
+                            </svg>
+                            Services</a></li>
+                    <li><a href="locations.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
+                            </svg>
+                            Locations</a></li>
+                    <li><a href="gallery.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>
+                            Gallery</a></li>
+                    <li><a href="contact.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                            </svg>
+                            Contact</a></li>
+                    <li><a href="booking.html">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                            Book Now</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Locations -->
+            <div>
+                <h4 class="f-heading">Locations</h4>
+                <div class="f-loc">
+                    <p class="f-loc-name">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
+                        </svg>
+                        La Mesa
+                    </p>
+                    <p class="f-loc-addr">La Mesa, San Diego, CA</p>
+                    <a href="tel:8584168186" class="f-loc-phone">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015 12.83a19.79 19.79 0 01-3.07-8.67A2 2 0 013.92 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                        </svg>
+                        (858) 416-8186
+                    </a>
+                </div>
+                <div class="f-loc">
+                    <p class="f-loc-name">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z" />
+                        </svg>
+                        Spring Valley
+                    </p>
+                    <p class="f-loc-addr">Spring Valley, San Diego, CA</p>
+                    <a href="tel:6198343973" class="f-loc-phone">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 015 12.83a19.79 19.79 0 01-3.07-8.67A2 2 0 013.92 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                        </svg>
+                        (619) 834-3973
+                    </a>
+                </div>
+            </div>
+
+            <!-- Col 4: Hours -->
+            <div>
+                <h4 class="f-heading">Hours</h4>
+                <div class="f-hours">
+                    <p>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                        Monday &ndash; Friday: 9:00 AM &ndash; 7:00 PM
+                    </p>
+                    <p>Saturday: 8:00 AM &ndash; 5:00 PM</p>
+                    <p>Sunday: 10:00 AM &ndash; 4:00 PM</p>
+                </div>
+            </div>
+
+        </div><!-- /footer-inner -->
+        <div class="footer-bar">
+            <p>&copy; 2026 Stay Sharp San Diego. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/background.js"></script>
+    <script src="js/contact.js"></script>
+
+</body>
+
+</html>

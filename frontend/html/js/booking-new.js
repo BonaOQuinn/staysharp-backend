@@ -1,93 +1,90 @@
 // Booking System Configuration
-const API_BASE_URL = 'https://4hsxwekzik.us-west-2.awsapprunner.com/api';
+// ── Queries Supabase directly via PostgREST ──
+const SUPABASE_URL = 'https://txioesoxmxprlhnivcle.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4aW9lc294bXhwcmxobml2Y2xlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4MjcyMjUsImV4cCI6MjA4NjQwMzIyNX0._tmjg6n9BlAjrMZVvPwjg3hsmCZIOvJifo_slurLQd8';
+
+const SUPABASE_HEADERS = {
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type': 'application/json'
+};
 
 // State Management
 const bookingState = {
     location: null,
-    service: null,
-    barber: null,
-    date: null,
-    time: null,
-    customerInfo: {
-        name: '',
-        phone: '',
-        email: ''
-    }
+    barber: null
 };
 
 // Initialize the booking system
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Booking system initializing...');
-    initializeBookingSystem();
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('🚀 Booking system initializing (Supabase direct)...');
+    createLocationStep();
 });
 
-async function initializeBookingSystem() {
-    try {
-        console.log('🔍 Starting initialization...');
-        
-        // Create and show location selection
-        await createLocationStep();
-        
-        console.log('✅ Initialization complete');
-    } catch (error) {
-        console.error('❌ Error initializing booking system:', error);
-        showError('Failed to load booking system. Please refresh the page.');
-    }
+// ── Supabase fetch helper ──
+async function sbFetch(table, params = '') {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}${params}`, {
+        headers: SUPABASE_HEADERS
+    });
+    if (!res.ok) throw new Error(`Supabase error ${res.status}: ${await res.text()}`);
+    return res.json();
 }
 
-// STEP 1: Location Selection (subtitle removed)
+// STEP 1: Location Selection
 async function createLocationStep() {
     try {
-        console.log('🔍 Fetching locations from:', `${API_BASE_URL}/locations`);
-        
-        const response = await fetch(`${API_BASE_URL}/locations`);
-        console.log('Response status:', response.status);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch locations: ${response.status}`);
-        }
-        
-        const locations = await response.json();
+        console.log('🔍 Fetching locations from Supabase...');
+
+        const locations = await sbFetch('locations', '?is_active=eq.true&order=id.asc');
         console.log('✅ Locations loaded:', locations);
-        
+
         const bookingContent = document.querySelector('.booking-content');
-        
-        if (!bookingContent) {
-            console.error('❌ .booking-content element not found!');
-            return;
-        }
-        
+        if (!bookingContent) return;
+
+        // Extract short display name (e.g. "StaySharp - La Mesa" → "La Mesa")
+        const shortName = (loc) => {
+            const parts = loc.name.split(' - ');
+            return parts.length > 1 ? parts[1] : loc.name;
+        };
+
         bookingContent.innerHTML = `
             <div class="step-container" id="locationStep">
-                <h2 class="step-title">Step 1: Select Location</h2>
+                <h2 class="step-title">Choose Your Location</h2>
+                <p class="location-step-subtitle">Select a shop near you to get started</p>
                 <div class="selection-grid">
                     ${locations.map(location => `
                         <div class="selection-card" data-id="${location.id}">
-                            <h3>${location.name}</h3>
-                            <p class="address">${location.address1 || ''}</p>
-                            <p class="city">${location.city || ''}, CA</p>
-                            <button type="button" class="select-button" data-location-id="${location.id}" data-location-name="${escapeAttribute(location.name)}">
-                                Select Location
+                            <div class="location-card-body">
+                                <h3 class="location-card-name">
+                                    <span class="location-pin">📍</span>${shortName(location)}
+                                </h3>
+                                <p class="location-card-address">${location.city || ''}, San Diego, CA</p>
+                                <p class="location-card-city">${location.city || ''}, CA</p>
+                            </div>
+                            <div class="location-card-divider"></div>
+                            <button type="button" class="select-button"
+                                data-location-id="${location.id}"
+                                data-location-name="${escapeAttribute(location.name)}">
+                                SELECT LOCATION
                             </button>
                         </div>
                     `).join('')}
                 </div>
             </div>
         `;
-        
-        // Add event listeners to buttons
-        const buttons = bookingContent.querySelectorAll('.select-button');
-        buttons.forEach(button => {
-            button.addEventListener('click', function(e) {
+
+        bookingContent.querySelectorAll('.select-button').forEach(btn => {
+            btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                const locationId = parseInt(this.getAttribute('data-location-id'));
-                const locationName = this.getAttribute('data-location-name');
-                selectLocation(locationId, locationName);
+                selectLocation(
+                    parseInt(this.getAttribute('data-location-id')),
+                    this.getAttribute('data-location-name')
+                );
             });
         });
-        
-        console.log('✅ Location selection rendered');
+
+        console.log('✅ Location step rendered');
     } catch (error) {
         console.error('❌ Error loading locations:', error);
         showError('Failed to load locations: ' + error.message);
@@ -100,28 +97,24 @@ function selectLocation(locationId, locationName) {
     createBarberStep();
 }
 
-// STEP 2: Barber Selection
+// STEP 2: Barber Selection — loads ALL barbers for selected location from Supabase
 async function createBarberStep() {
     try {
-        console.log('👨‍💼 Fetching barbers for location:', bookingState.location.id);
-        
-        const response = await fetch(`${API_BASE_URL}/barbers?locationId=${bookingState.location.id}`);
-        console.log('Response status:', response.status);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch barbers: ${response.status}`);
-        }
-        
-        const barbers = await response.json();
+        console.log('👨‍💼 Fetching barbers from Supabase for location:', bookingState.location.id);
+
+        const barbers = await sbFetch(
+            'barbers',
+            `?location_id=eq.${bookingState.location.id}&is_active=eq.true&order=display_order.asc,name.asc`
+        );
         console.log('✅ Barbers loaded:', barbers);
-        
+
         if (!barbers || barbers.length === 0) {
             showError('No barbers available at this location.');
             return;
         }
-        
+
         const bookingContent = document.querySelector('.booking-content');
-        
+
         bookingContent.innerHTML = `
             <div class="step-container" id="barberStep">
                 <div class="step-header">
@@ -131,12 +124,12 @@ async function createBarberStep() {
                 <p class="step-subtitle">📍 ${bookingState.location.name}</p>
                 <div class="barber-grid">
                     ${barbers.map(barber => {
-                        console.log('Rendering barber:', barber);
+                        const specialties = Array.isArray(barber.specialties) ? barber.specialties : [];
                         return `
                         <div class="barber-card" data-id="${barber.id}">
                             <div class="barber-image-container">
-                                <img src="${barber.photo_url || '/images/barbers/default.jpg'}" 
-                                     alt="${barber.name}" 
+                                <img src="${barber.photo_url || '/images/barbers/default.jpg'}"
+                                     alt="${escapeAttribute(barber.name)}"
                                      class="barber-photo"
                                      onerror="this.onerror=null; this.src='/images/barbers/default.jpg';">
                             </div>
@@ -151,64 +144,66 @@ async function createBarberStep() {
                                 ${barber.bio ? `
                                     <p class="barber-bio">${escapeHtml(barber.bio)}</p>
                                 ` : ''}
-                                ${barber.specialties && barber.specialties.length > 0 ? `
+                                ${specialties.length > 0 ? `
                                     <div class="barber-specialties">
                                         <p class="specialties-label">Specialties:</p>
                                         <div class="specialty-tags">
-                                            ${barber.specialties.map(specialty => `
-                                                <span class="specialty-tag">${escapeHtml(specialty)}</span>
+                                            ${specialties.map(s => `
+                                                <span class="specialty-tag">${escapeHtml(s)}</span>
                                             `).join('')}
                                         </div>
                                     </div>
                                 ` : ''}
                             </div>
-                            <button type="button" class="select-barber-button" data-barber-id="${barber.id}" data-barber-name="${escapeAttribute(barber.name)}">
-                                Book with ${escapeHtml(barber.name)}
+                            <button type="button" class="select-barber-button"
+                                data-barber-id="${barber.id}"
+                                data-barber-name="${escapeAttribute(barber.name)}"
+                                data-booking-url="${escapeAttribute(barber.booking_url || '')}">
+                                <span>📅 Book with ${escapeHtml(barber.name)}</span>
                             </button>
                         </div>
                     `}).join('')}
                 </div>
             </div>
         `;
-        
-        // Add event listener for back button
-        const backButton = document.getElementById('backToLocations');
-        if (backButton) {
-            backButton.addEventListener('click', function(e) {
+
+        document.getElementById('backToLocations')?.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            createLocationStep();
+        });
+
+        bookingContent.querySelectorAll('.select-barber-button').forEach(btn => {
+            btn.addEventListener('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
-                createLocationStep();
-            });
-        }
-        
-        // Add event listeners to barber buttons
-        const barberButtons = bookingContent.querySelectorAll('.select-barber-button');
-        barberButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const barberId = parseInt(this.getAttribute('data-barber-id'));
-                const barberName = this.getAttribute('data-barber-name');
-                selectBarber(barberId, barberName);
+                selectBarber(
+                    parseInt(this.getAttribute('data-barber-id')),
+                    this.getAttribute('data-barber-name'),
+                    this.getAttribute('data-booking-url')
+                );
             });
         });
-        
-        console.log('✅ Barber selection rendered');
+
+        console.log('✅ Barber step rendered with', barbers.length, 'barbers');
     } catch (error) {
         console.error('❌ Error loading barbers:', error);
         showError('Failed to load barbers: ' + error.message);
     }
 }
 
-function selectBarber(barberId, barberName) {
-    console.log('👨‍💼 Barber selected:', barberId, barberName);
+function selectBarber(barberId, barberName, bookingUrl) {
+    console.log('👨‍💼 Barber selected:', barberId, barberName, bookingUrl);
     bookingState.barber = { id: barberId, name: barberName };
-    
-    // Show success message since booking is external
-    showSuccess(`You've selected ${barberName}. Booking is handled externally through our booking platform.`);
+
+    if (bookingUrl) {
+        window.open(bookingUrl, '_blank');
+    } else {
+        showSuccess(`You've selected ${barberName}. Booking is handled externally through our booking platform.`);
+    }
 }
 
-// Utility Functions
+// ── Utility Functions ──
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -221,45 +216,24 @@ function escapeAttribute(text) {
     return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-// Toast Notification Functions
 function showError(message) {
     console.error('🔴 Error:', message);
-    
-    // Create error toast notification
-    const errorToast = document.createElement('div');
-    errorToast.className = 'error-toast';
-    errorToast.textContent = message;
-    document.body.appendChild(errorToast);
-
-    setTimeout(() => {
-        errorToast.classList.add('show');
-    }, 100);
-
-    setTimeout(() => {
-        errorToast.classList.remove('show');
-        setTimeout(() => errorToast.remove(), 300);
-    }, 5000);
+    const toast = document.createElement('div');
+    toast.className = 'error-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 5000);
 }
 
 function showSuccess(message) {
     console.log('✅ Success:', message);
-    
-    // Create success toast notification
-    const successToast = document.createElement('div');
-    successToast.className = 'success-toast';
-    successToast.textContent = message;
-    document.body.appendChild(successToast);
-
-    setTimeout(() => {
-        successToast.classList.add('show');
-    }, 100);
-
-    setTimeout(() => {
-        successToast.classList.remove('show');
-        setTimeout(() => successToast.remove(), 300);
-    }, 5000);
+    const toast = document.createElement('div');
+    toast.className = 'success-toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 5000);
 }
 
-// Debug: Log when script loads
-console.log('📜 booking-new.js loaded successfully');
-console.log('🔗 API URL:', API_BASE_URL);
+console.log('📜 booking-new.js loaded (Supabase direct mode)');

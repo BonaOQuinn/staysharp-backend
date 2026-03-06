@@ -20,13 +20,13 @@
     <link rel="stylesheet" href="css/footer.css">
 
     <style>
-        /* Override base and set black/gold theme variables */
         :root {
             --gold: #FFD700;
-            --gold-light: #FFD700;
-            --navy-dark: #0a0a0a;
-            --glass-bg: rgba(255, 255, 255, 0.04);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --gold-bright: #FFCC00;
+            --bg: #0a0a0a;
+            --card-bg: #1e1e1e;
+            --card-bg-hover: #252525;
+            --text-muted: rgba(255, 255, 255, 0.5);
         }
 
         body {
@@ -34,7 +34,7 @@
             background-image: none !important;
         }
 
-        /* Header scroll */
+        /* ── Header ── */
         header#mainHeader {
             position: fixed;
             top: 0;
@@ -74,123 +74,125 @@
             opacity: 1;
         }
 
-        /* ── Booking Container ── */
+        /* ── Page Layout ── */
         .booking-container {
             position: relative;
             min-height: 100vh;
-            padding: 140px 2rem 80px;
+            padding: 110px 2rem 80px;
             z-index: 1;
         }
 
         .booking-hero {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
         .booking-title {
             font-family: 'Lobster', cursive;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
             font-weight: 400;
             color: #fff;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
+            line-height: 1.1;
         }
 
         .booking-subtitle {
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.05rem;
-            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+            font-family: 'Inter', sans-serif;
         }
 
+        /* ── Booking Content Box ── */
         .booking-content {
-            max-width: 1400px;
+            max-width: 1100px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 2.5rem;
+            background: #161616;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
         }
 
-        /* ── Step Progress (used by booking-new.js) ── */
-        .step-progress {
+        /* ── Step Progress Bar ── */
+        .ss-step-progress {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0;
             margin-bottom: 2.5rem;
         }
 
-        .step-dot {
-            width: 40px;
-            height: 40px;
+        .ss-step-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .ss-step-dot {
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border: 2px solid rgba(255, 255, 255, 0.15);
+            font-weight: 800;
+            font-size: 1.15rem;
+            border: 2.5px solid rgba(255, 255, 255, 0.15);
             color: rgba(255, 255, 255, 0.3);
             background: transparent;
             transition: all 0.3s ease;
         }
 
-        .step-dot.active {
-            background: #FFD700;
-            border-color: #FFD700;
+        .ss-step-dot.active {
+            background: var(--gold);
+            border-color: var(--gold);
             color: #0a0a0a;
+            box-shadow: 0 0 18px rgba(255, 204, 0, 0.35);
         }
 
-        .step-dot.completed {
-            background: rgba(255, 204, 0, 0.2);
-            border-color: rgba(255, 204, 0, 0.4);
-            color: #FFD700;
+        .ss-step-dot.completed {
+            background: rgba(255, 204, 0, 0.15);
+            border-color: rgba(255, 204, 0, 0.5);
+            color: var(--gold);
         }
 
-        .step-connector {
-            width: 60px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            transition: background 0.3s ease;
-        }
-
-        .step-connector.active {
-            background: rgba(255, 204, 0, 0.4);
-        }
-
-        .step-label {
+        .ss-step-label {
             font-family: 'Inter', sans-serif;
             font-size: 0.7rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.3);
-            margin-top: 0.5rem;
-            transition: color 0.3s ease;
+            color: rgba(255, 255, 255, 0.25);
         }
 
-        .step-label.active {
-            color: #FFD700;
+        .ss-step-label.active {
+            color: var(--gold);
         }
 
-        .step-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .ss-step-connector {
+            width: 90px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 4px;
+            margin-bottom: 28px;
+            /* align with dot centers */
         }
 
-        /* ── Step Containers (generated by booking-new.js) ── */
+        .ss-step-connector.active {
+            background: rgba(255, 204, 0, 0.35);
+        }
+
+        /* ── Step Container ── */
         .step-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            animation: fadeInUp 0.5s ease-out;
+            animation: fadeInUp 0.4s ease-out;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
 
             to {
@@ -199,97 +201,119 @@
             }
         }
 
-        .step-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+        /* ── Location Step Title & Subtitle ── */
+        .step-title {
+            font-family: 'Lobster', cursive;
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #fff;
+            text-align: center;
+            margin: 0 0 0.5rem;
         }
 
-        /* Hide the default "Step 1: Select Location" text and restyle */
-        .step-title {
+        .location-step-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin: 0 0 2rem;
+        }
+
+        /* ── Location Cards Grid ── */
+        .selection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ── Individual Location Card ── */
+        .selection-card {
+            background: #252525;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .selection-card:hover {
+            border-color: rgba(255, 204, 0, 0.25);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+            transform: translateY(-3px);
+        }
+
+        /* Card body — contains name + address */
+        .location-card-body {
+            padding: 2rem 1.8rem 1.4rem;
+            text-align: center;
+            flex: 1;
+        }
+
+        .location-card-name {
             font-family: 'Lobster', cursive;
             font-size: 1.8rem;
             font-weight: 400;
             color: #fff;
-            text-align: center;
-            width: 100%;
-        }
-
-        /* Injected step progress bar */
-        .ss-step-progress {
+            margin: 0 0 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0;
-            margin-bottom: 2rem;
-            padding-top: 1rem;
+            gap: 0.4rem;
         }
 
-        .ss-step-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .location-pin {
+            font-size: 1.1rem;
+            line-height: 1;
         }
 
-        .ss-step-dot {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .location-card-address,
+        .location-card-city {
             font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 1rem;
-            border: 2.5px solid rgba(255, 255, 255, 0.15);
-            color: rgba(255, 255, 255, 0.3);
-            background: transparent;
-            transition: all 0.3s ease;
-        }
-
-        .ss-step-dot.active {
-            background: #FFD700;
-            border-color: #FFD700;
-            color: #0a0a0a;
-        }
-
-        .ss-step-dot.completed {
-            background: rgba(255, 204, 0, 0.2);
-            border-color: rgba(255, 204, 0, 0.5);
-            color: #FFD700;
-        }
-
-        .ss-step-connector {
-            width: 80px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.12);
-        }
-
-        .ss-step-connector.active {
-            background: rgba(255, 204, 0, 0.4);
-        }
-
-        .ss-step-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.68rem;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.3);
-            margin-top: 0.6rem;
-        }
-
-        .ss-step-label.active {
-            color: #FFD700;
-        }
-
-        /* Step subtitle */
-        .ss-step-subtitle {
-            text-align: center;
+            font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.45);
-            font-size: 0.95rem;
-            margin-top: -0.5rem;
+            margin: 0.2rem 0;
+        }
+
+        /* Divider line */
+        .location-card-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 0 1.2rem;
+        }
+
+        /* Full-width yellow SELECT LOCATION button */
+        .select-button {
+            display: block;
+            width: 100%;
+            padding: 1.1rem 1rem;
+            background: var(--gold);
+            border: none;
+            border-radius: 0 0 13px 13px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #0a0a0a;
+            cursor: pointer;
+            transition: background 0.25s ease, box-shadow 0.25s ease;
+            margin-top: 0;
+        }
+
+        .select-button:hover {
+            background: #ffe033;
+            box-shadow: 0 0 18px rgba(255, 204, 0, 0.3);
+        }
+
+        /* ── Barber Step ── */
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
             margin-bottom: 1.5rem;
         }
 
@@ -303,242 +327,152 @@
             transition: all 0.3s ease;
             font-size: 0.9rem;
             font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
         }
 
         .back-button:hover {
             background: rgba(255, 204, 0, 0.1);
             border-color: rgba(255, 204, 0, 0.3);
-            color: #FFD700;
+            color: var(--gold);
         }
 
-        /* ── Selection Cards (Locations) ── */
-        .selection-grid,
+        .step-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* ── Barber Grid ── */
         .barber-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
-        .selection-card {
-            background: #2a2a2a;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 14px;
-            padding: 2.5rem;
-            text-align: center;
-            cursor: default;
-            transition: all 0.35s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .selection-card:hover {
-            border-color: rgba(255, 204, 0, 0.3);
-            box-shadow: 0 8px 30px rgba(255, 204, 0, 0.08);
-            transform: translateY(-4px);
-        }
-
-        .selection-card h3 {
-            font-family: 'Lobster', cursive;
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: #fff;
-            margin-bottom: 0.8rem;
-        }
-
-        .selection-card .location-icon {
-            color: #FFD700;
-            margin-right: 0.3rem;
-        }
-
-        .selection-card .address,
-        .selection-card .city {
-            color: rgba(255, 255, 255, 0.5);
-            margin: 0.3rem 0;
-            font-size: 0.95rem;
-        }
-
-        .selection-card hr {
-            border: none;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.2), transparent);
-            margin: 1.2rem 0;
-        }
-
-        .select-button {
-            width: 100%;
-            margin-top: 1.2rem;
-            padding: 1rem;
-            background: #FFD700;
-            border: none;
-            border-radius: 8px;
-            color: #0a0a0a;
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 10;
-        }
-
-        .select-button:hover {
-            background: #ffe84d;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* ── Barber Cards ── */
         .barber-card {
             background: #1a1a1a;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
+            border: 1px solid rgba(255, 204, 0, 0.18);
+            border-radius: 15px;
             overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .barber-card:hover {
-            border-color: rgba(255, 204, 0, 0.3);
-            box-shadow: 0 12px 40px rgba(255, 204, 0, 0.1);
+            border-color: var(--gold);
+            box-shadow: 0 12px 40px rgba(255, 204, 0, 0.25);
             transform: translateY(-6px);
         }
 
         .barber-image-container {
             width: 100%;
-            height: 320px;
+            aspect-ratio: 1;
             overflow: hidden;
-            position: relative;
             background: #111;
-        }
-
-        .barber-image-container::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 120px;
-            background: linear-gradient(to top, #1a1a1a, transparent);
-            z-index: 1;
         }
 
         .barber-photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.4s ease;
         }
 
         .barber-card:hover .barber-photo {
-            transform: scale(1.08);
+            transform: scale(1.07);
         }
 
         .barber-info {
-            padding: 1.8rem;
-            position: relative;
-            z-index: 2;
+            padding: 1.4rem 1.4rem 0.8rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
         }
 
         .barber-name {
             font-family: 'Lobster', cursive;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
+            color: var(--gold);
+            margin: 0;
             font-weight: 400;
-            color: #fff;
-            margin-bottom: 0.6rem;
         }
 
         .barber-experience {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.55);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .experience-icon {
-            color: #FFD700;
+            gap: 6px;
+            margin: 0;
         }
 
         .barber-bio {
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-size: 0.92rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.55;
+            margin: 0;
         }
 
         .barber-specialties {
-            margin-top: 1.5rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-top: 4px;
         }
 
         .specialties-label {
+            font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
             font-weight: 700;
-            color: #FFD700;
-            margin-bottom: 0.8rem;
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
+            margin: 0 0 6px;
         }
 
         .specialty-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 5px;
         }
 
         .specialty-tag {
-            background: rgba(255, 204, 0, 0.08);
-            border: 1px solid rgba(255, 204, 0, 0.2);
-            color: #FFD700;
-            padding: 0.45rem 0.9rem;
+            background: rgba(255, 204, 0, 0.09);
+            border: 1px solid rgba(255, 204, 0, 0.22);
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.25s ease;
-        }
-
-        .specialty-tag:hover {
-            background: rgba(255, 204, 0, 0.15);
-            border-color: rgba(255, 204, 0, 0.4);
+            padding: 3px 10px;
+            font-size: 0.75rem;
+            color: rgba(255, 204, 0, 0.85);
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
         }
 
         .select-barber-button {
-            width: 100%;
-            padding: 1.1rem;
-            margin-top: 1.2rem;
-            background: #FFD700;
+            background: var(--gold);
             border: none;
-            border-radius: 8px;
-            color: #0a0a0a;
+            border-radius: 0 0 15px 15px;
+            padding: 1rem;
             font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
             font-weight: 800;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
+            color: #0a0a0a;
+            cursor: pointer;
+            transition: background 0.25s ease;
+            width: 100%;
         }
 
         .select-barber-button:hover {
-            background: #ffe84d;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
-            transform: translateY(-2px);
+            background: #ffe033;
         }
 
-        .select-barber-button span {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ── Toast Notifications ── */
+        /* ── Toasts ── */
         .error-toast,
         .success-toast {
             position: fixed;
@@ -553,6 +487,7 @@
             transition: all 0.4s ease;
             font-weight: 600;
             font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
             backdrop-filter: blur(12px);
         }
 
@@ -577,13 +512,11 @@
         /* ── Responsive ── */
         @media (max-width: 768px) {
             .booking-container {
-                padding: 120px 1rem 60px;
+                padding: 100px 1rem 60px;
             }
 
-            .step-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.8rem;
+            .booking-content {
+                padding: 2rem 1.2rem;
             }
 
             .selection-grid,
@@ -591,8 +524,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .barber-name {
-                font-size: 1.5rem;
+            .ss-step-connector {
+                width: 50px;
+            }
+
+            .booking-title {
+                font-size: 2.8rem;
             }
         }
     </style>
@@ -628,7 +565,7 @@
         (function () {
             var h = document.getElementById('mainHeader');
             if (!h) return;
-            function u() { h.classList[window.pageYOffset > 10 ? 'add' : 'remove']('scrolled') }
+            function u() { h.classList[window.pageYOffset > 10 ? 'add' : 'remove']('scrolled'); }
             window.addEventListener('scroll', u, { passive: true });
             u();
         })();
@@ -641,10 +578,9 @@
             <p class="booking-subtitle">Choose your barber, pick your time, and get sharp.</p>
         </div>
 
-        <!-- Dynamic content will be inserted here by JavaScript -->
         <div class="booking-content" id="bookingContent">
-            <div style="text-align: center; padding: 40px; color: rgba(255, 255, 255, 0.5);">
-                <p>Loading booking system...</p>
+            <div style="text-align:center;padding:40px;color:rgba(255,255,255,0.4);font-family:'Inter',sans-serif;">
+                Loading...
             </div>
         </div>
     </section>
@@ -676,126 +612,58 @@
                     </a>
                 </div>
             </div>
-
             <div class="footer-col">
                 <h4 class="footer-heading">Quick Links</h4>
                 <ul class="footer-links">
-                    <li><a href="index.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                            </svg>Home</a></li>
-                    <li><a href="services.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <circle cx="6" cy="6" r="3" />
-                                <circle cx="6" cy="18" r="3" />
-                                <line x1="20" y1="4" x2="8.12" y2="15.88" />
-                            </svg>Services</a></li>
-                    <li><a href="locations.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-                            </svg>Locations</a></li>
-                    <li><a href="gallery.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>Gallery</a></li>
-                    <li><a href="contact.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                            </svg>Contact</a></li>
-                    <li><a href="booking.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" />
-                                <line x1="16" y1="2" x2="16" y2="6" />
-                                <line x1="8" y1="2" x2="8" y2="6" />
-                                <line x1="3" y1="10" x2="21" y2="10" />
-                            </svg>Book Now</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="locations.html">Locations</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="booking.html">Book Now</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
                 <h4 class="footer-heading">Locations</h4>
-                <div class="footer-location">
-                    <div class="footer-loc-name">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                            <circle cx="12" cy="10" r="3" />
-                        </svg>
-                        La Mesa
-                    </div>
-                    <p class="footer-loc-addr">5288 Baltimore Dr, La Mesa, CA 91942</p>
-                    <p class="footer-loc-phone">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.1 5.16 2 2 0 015.08 3h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L9.09 10.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 17.92z" />
-                        </svg>
-                        (619) 834-3973
-                    </p>
-                </div>
-            </div>
-
-            <div class="footer-col">
-                <h4 class="footer-heading">Hours</h4>
-                <div class="footer-hours">
-                    <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg>Monday – Friday: 9:00 AM – 7:00 PM</p>
-                    <p>Saturday: 8:00 AM – 5:00 PM</p>
-                    <p>Sunday: 10:00 AM – 4:00 PM</p>
-                </div>
+                <ul class="footer-links">
+                    <li>5288 Baltimore Drive, La Mesa CA</li>
+                    <li>9903 Campo Road, Spring Valley CA</li>
+                </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Stay Sharp San Diego. All rights reserved.</p>
+            <p>&copy; 2025 Stay Sharp San Diego. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="js/background.js"></script>
     <script src="js/booking-new.js"></script>
     <script>
-        // Inject step progress indicator into booking content
+        // Inject step progress indicator
         (function () {
             var stepLabels = ['LOCATION', 'BARBER'];
-            var subtitles = {
-                'location': 'Select a shop near you to get started',
-                'barber': 'Pick your preferred barber'
-            };
 
             function injectProgress() {
                 var content = document.getElementById('bookingContent');
                 if (!content) return;
-
-                // Check if booking-new.js has rendered
-                var stepTitle = content.querySelector('.step-title, h2, h3');
+                var stepTitle = content.querySelector('.step-title, h2');
                 if (!stepTitle) return;
 
-                // Determine current step from text
                 var titleText = (stepTitle.textContent || '').toLowerCase();
                 var currentStep = 0;
-                if (titleText.indexOf('location') !== -1 || titleText.indexOf('step 1') !== -1) currentStep = 0;
-                else if (titleText.indexOf('barber') !== -1 || titleText.indexOf('step 2') !== -1) currentStep = 1;
+                if (titleText.indexOf('barber') !== -1 || titleText.indexOf('step 2') !== -1) currentStep = 1;
 
-                // Don't inject if already injected
                 if (content.querySelector('.ss-step-progress')) {
-                    // Update active states
                     updateProgress(content, currentStep);
                     return;
                 }
 
-                // Build progress HTML
                 var progressHTML = '<div class="ss-step-progress">';
                 for (var i = 0; i < stepLabels.length; i++) {
                     if (i > 0) {
                         progressHTML += '<div class="ss-step-connector' + (i <= currentStep ? ' active' : '') + '"></div>';
                     }
-                    var dotClass = 'ss-step-dot';
-                    if (i === currentStep) dotClass += ' active';
-                    else if (i < currentStep) dotClass += ' completed';
+                    var dotClass = 'ss-step-dot' + (i === currentStep ? ' active' : (i < currentStep ? ' completed' : ''));
                     var labelClass = 'ss-step-label' + (i === currentStep ? ' active' : '');
                     progressHTML += '<div class="ss-step-group">';
                     progressHTML += '<div class="' + dotClass + '">' + (i + 1) + '</div>';
@@ -804,62 +672,32 @@
                 }
                 progressHTML += '</div>';
 
-                // Restyle the step title
-                var newTitle = currentStep === 0 ? 'Choose Your Location' : 'Choose Your Barber';
-                stepTitle.textContent = newTitle;
-                stepTitle.className = 'step-title';
-
-                // Find where to insert (before the step title or its parent)
                 var insertTarget = stepTitle.closest('.step-header') || stepTitle.parentElement;
                 if (insertTarget) {
-                    var progressEl = document.createElement('div');
-                    progressEl.innerHTML = progressHTML;
-                    insertTarget.parentElement.insertBefore(progressEl.firstChild, insertTarget);
+                    var el = document.createElement('div');
+                    el.innerHTML = progressHTML;
+                    insertTarget.parentElement.insertBefore(el.firstChild, insertTarget);
 
-                    // Add subtitle
-                    var subKey = currentStep === 0 ? 'location' : 'barber';
-                    var subEl = document.createElement('p');
-                    subEl.className = 'ss-step-subtitle';
-                    subEl.textContent = subtitles[subKey];
-                    // Insert after step title / header
-                    if (insertTarget.nextSibling) {
-                        insertTarget.parentElement.insertBefore(subEl, insertTarget.nextSibling);
-                    } else {
-                        insertTarget.parentElement.appendChild(subEl);
-                    }
-
-                    // Hide back button on step 1, show on step 2+
                     var backBtn = content.querySelector('.back-button');
-                    if (backBtn && currentStep === 0) {
-                        backBtn.style.display = 'none';
-                    }
+                    if (backBtn && currentStep === 0) backBtn.style.display = 'none';
                 }
             }
 
             function updateProgress(content, currentStep) {
-                var dots = content.querySelectorAll('.ss-step-dot');
-                var connectors = content.querySelectorAll('.ss-step-connector');
-                var labels = content.querySelectorAll('.ss-step-label');
-                dots.forEach(function (d, i) {
+                content.querySelectorAll('.ss-step-dot').forEach(function (d, i) {
                     d.className = 'ss-step-dot' + (i === currentStep ? ' active' : (i < currentStep ? ' completed' : ''));
                 });
-                connectors.forEach(function (c, i) {
+                content.querySelectorAll('.ss-step-connector').forEach(function (c, i) {
                     c.className = 'ss-step-connector' + (i < currentStep ? ' active' : '');
                 });
-                labels.forEach(function (l, i) {
+                content.querySelectorAll('.ss-step-label').forEach(function (l, i) {
                     l.className = 'ss-step-label' + (i === currentStep ? ' active' : '');
                 });
             }
 
-            // Watch for DOM changes from booking-new.js
-            var observer = new MutationObserver(function () {
-                setTimeout(injectProgress, 100);
-            });
+            var observer = new MutationObserver(function () { setTimeout(injectProgress, 80); });
             var target = document.getElementById('bookingContent');
-            if (target) {
-                observer.observe(target, { childList: true, subtree: true });
-            }
-            // Also try immediately and after a delay
+            if (target) observer.observe(target, { childList: true, subtree: true });
             setTimeout(injectProgress, 500);
             setTimeout(injectProgress, 1500);
         })();
