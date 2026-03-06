@@ -210,7 +210,8 @@
     }
 
     .logo {
-        width: clamp(200px, 78vw, 320px) !important;
+        width: 55vw !important;
+        max-width: none !important;
         margin-bottom: 0.5rem;
     }
 
