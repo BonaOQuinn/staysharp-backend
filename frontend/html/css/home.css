@@ -701,3 +701,170 @@ body {
         padding: 40px 24px 0;
     }
 }
+
+
+/* ==================== SERVICES SECTION (photo cards) ====================
+   Add these rules to frontend/html/css/home.css.
+   They work alongside the existing .service-card styles without breaking them.
+======================================================================== */
+
+/* 5-card responsive grid */
+.services-grid--5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    max-width: 1400px;
+    margin: 2rem auto 0;
+}
+
+@media (max-width: 1200px) {
+    .services-grid--5 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .services-grid--5 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 500px) {
+    .services-grid--5 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Photo card shell ── */
+.service-card--photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    /* Reset padding — content layer handles it */
+    padding: 0;
+    background: #111;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.service-card--photo:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 204, 0, 0.35);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 28px rgba(255, 204, 0, 0.1);
+}
+
+/* ── Photo layer ── */
+.service-card__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    /* Starts slightly zoomed; eases out on hover */
+    transform: scale(1.07);
+    opacity: 0.5;
+    /* semi-translucent — tweak 0.3–0.7 to taste */
+    transition: transform 0.6s ease, opacity 0.4s ease;
+}
+
+.service-card--photo:hover .service-card__bg {
+    transform: scale(1.0);
+    opacity: 0.62;
+}
+
+/* ── Dark gradient overlay ── */
+.service-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(170deg,
+            rgba(10, 10, 10, 0.30) 0%,
+            rgba(10, 10, 10, 0.68) 55%,
+            rgba(10, 10, 10, 0.92) 100%);
+    transition: background 0.4s ease;
+}
+
+.service-card--photo:hover .service-card__overlay {
+    background: linear-gradient(170deg,
+            rgba(10, 10, 10, 0.18) 0%,
+            rgba(10, 10, 10, 0.58) 55%,
+            rgba(10, 10, 10, 0.88) 100%);
+}
+
+/* ── Content (z-index above both layers) ── */
+.service-card__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    height: 100%;
+}
+
+/* Icon */
+.service-card--photo .service-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #FFD700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a0a0a;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.35);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.service-card--photo:hover .service-icon {
+    box-shadow: 0 0 30px rgba(255, 204, 0, 0.6);
+    transform: scale(1.08);
+}
+
+/* Title */
+.service-card--photo .service-name {
+    font-family: 'Lobster', cursive;
+    font-weight: 400;
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Description */
+.service-card--photo .service-desc {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Button */
+.service-card--photo .service-btn {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.65rem 2rem;
+    border: 1.5px solid #FFD700;
+    border-radius: 6px;
+    color: #FFD700;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    background: transparent;
+    transition: all 0.25s ease;
+}
+
+.service-card--photo .service-btn:hover {
+    background: #FFD700;
+    color: #0a0a0a;
+    box-shadow: 0 0 18px rgba(255, 204, 0, 0.4);
+}
