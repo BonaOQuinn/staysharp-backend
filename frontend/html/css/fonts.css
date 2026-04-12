@@ -1,0 +1,97 @@
+/* ==================== OSWALD FONT — GLOBAL OVERRIDE ==================== */
+/* Add to EVERY HTML <head> LAST (after all other CSS links):
+   <link rel="stylesheet" href="css/fonts.css">
+   You can then remove Lobster & Playfair Display from the Google Fonts URL.
+======================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+/* ── Nuclear catch-all — overrides Lobster, Inter, Playfair everywhere ── */
+*,
+*::before,
+*::after {
+    font-family: 'Oswald', sans-serif !important;
+}
+
+/* ── Weight map ──────────────────────────────────────────────────────────
+   Heading / display text   → 700
+   Nav / buttons / labels   → 600
+   Body / descriptions      → 400
+   Fine print / muted text  → 300
+──────────────────────────────────────────────────────────────────────── */
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.section-title,
+.about-title,
+.hero-tagline,
+.footer-title,
+.barber-name,
+.service-name,
+.gallery-hero h1,
+.contact-hero h1 {
+    font-weight: 700 !important;
+    letter-spacing: 2px !important;
+}
+
+/* Navigation & buttons */
+nav a,
+.book-now-btn,
+.cta-button,
+.service-btn,
+.services-cta-link,
+.barber-book-btn,
+button,
+input[type="submit"],
+input[type="button"] {
+    font-weight: 600 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+}
+
+/* Labels / tags */
+.section-label,
+.gallery-label,
+.barber-specialty,
+.stat-label,
+.footer-location h5,
+.pull-tab__label {
+    font-weight: 600 !important;
+    letter-spacing: 3px !important;
+}
+
+/* Body / paragraph text */
+p,
+.section-desc,
+.about-story,
+.about-quote,
+.barber-bio,
+.service-desc,
+.hero-sub,
+.footer-links a,
+.footer-hours p,
+.footer-location p,
+li {
+    font-weight: 400 !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* Prices & stat numbers */
+.service-price,
+.stat-number {
+    font-weight: 700 !important;
+}
+
+/* Form inputs */
+input,
+textarea,
+select,
+::placeholder {
+    font-weight: 300 !important;
+    letter-spacing: 0.5px !important;
+}

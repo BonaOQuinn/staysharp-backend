@@ -5,19 +5,28 @@
 }
 
 :root {
-    --navy-dark: #0a1628;
-    --navy: #1e3a5f;
-    --navy-light: #2d5a8f;
-    --gold: #d4af37;
+    /* ── New: Off-White + Blue + Gold palette ── */
+    --off-white: #f8f4ee;
+    --off-white-mid: #edf1f9;
+    --blue-deep: #1a3a6b;
+    --blue-mid: #2d5a9e;
+    --blue-light: #4a7fd4;
+    --gold: #c8981f;
     --gold-light: #FFD700;
-    --glass-bg: rgba(255, 255, 255, 0.08);
-    --glass-border: rgba(255, 255, 255, 0.18);
+
+    /* Legacy aliases kept for compatibility */
+    --navy-dark: var(--blue-deep);
+    --navy: var(--blue-mid);
+    --navy-light: var(--blue-light);
+
+    --glass-bg: rgba(30, 74, 138, 0.07);
+    --glass-border: rgba(30, 74, 138, 0.18);
 }
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 50%, var(--navy-light) 100%);
-    color: #fff;
+    background: linear-gradient(135deg, var(--off-white) 0%, var(--off-white-mid) 50%, #d4e3f8 100%);
+    color: #1a2a3a;
     overflow-x: hidden;
     min-height: 100vh;
 }
