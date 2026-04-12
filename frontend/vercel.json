@@ -1,22 +1,19 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/",
-      "destination": "/html/index.html"
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
     },
     {
-      "source": "/booking.html",
-      "destination": "/html/booking.html"
-    },
-    {
-      "source": "/services.html",
-      "destination": "/html/services.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/$1"
+      "src": "/(.*)",
+      "dest": "server.js"
     }
   ]
 }
