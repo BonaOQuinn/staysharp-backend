@@ -2,34 +2,9 @@
 
 const SLIDES = [
   {
-    img: 'https://txioesoxmxprlhnivcle.supabase.co/storage/v1/object/public/staysharp_rotation/slideshow/collage.png',
+    img: 'https://txioesoxmxprlhnivcle.supabase.co/storage/v1/object/public/staysharp_rotation/index_services/collage.png',
     tagline: 'Premium Experience',
     sub: 'Where style meets sharp'
-  },
-  {
-    img: 'https://txioesoxmxprlhnivcle.supabase.co/storage/v1/object/public/staysharp_rotation/slideshow/fendi.png',
-    tagline: 'Precision Cuts',
-    sub: 'Crafted for the modern gentleman'
-  },
-  {
-    img: 'https://txioesoxmxprlhnivcle.supabase.co/storage/v1/object/public/staysharp_rotation/slideshow/fire.png',
-    tagline: 'Master Barbers',
-    sub: 'Experience meets artistry'
-  },
-  {
-    img: 'https://txioesoxmxprlhnivcle.supabase.co/storage/v1/object/public/staysharp_rotation/slideshow/mustang.png',
-    tagline: 'Celebrity Cuts',
-    sub: 'The sharpest cuts in San Diego'
-  },
-  {
-    img: 'https://txioesoxmxprlhnivcle.supabase.co/storage/v1/object/public/staysharp_rotation/slideshow/cross.png',
-    tagline: 'Artistry in Every Line',
-    sub: 'Where creativity meets the craft'
-  },
-  {
-    img: 'https://txioesoxmxprlhnivcle.supabase.co/storage/v1/object/public/staysharp_rotation/slideshow/lineup.png',
-    tagline: 'Sharp Every Time',
-    sub: 'Your barber, your style'
   }
 ];
 
@@ -60,30 +35,33 @@ function buildSlideshow() {
     slidesEl.appendChild(outer);
   });
 
-  // Arrow left
-  const arrowLeft = document.createElement('button');
-  arrowLeft.className = 'hero-arrow hero-arrow--left';
-  arrowLeft.innerHTML = '&#8249;';
-  arrowLeft.setAttribute('aria-label', 'Previous slide');
-  arrowLeft.addEventListener('click', () => goTo(current - 1));
-  dotsEl.appendChild(arrowLeft);
+  // Only show dots/arrows if there are multiple slides
+  if (SLIDES.length > 1) {
+    // Arrow left
+    const arrowLeft = document.createElement('button');
+    arrowLeft.className = 'hero-arrow hero-arrow--left';
+    arrowLeft.innerHTML = '&#8249;';
+    arrowLeft.setAttribute('aria-label', 'Previous slide');
+    arrowLeft.addEventListener('click', () => goTo(current - 1));
+    dotsEl.appendChild(arrowLeft);
 
-  // Dots
-  SLIDES.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-    dot.addEventListener('click', () => goTo(i));
-    dotsEl.appendChild(dot);
-  });
+    // Dots
+    SLIDES.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    });
 
-  // Arrow right
-  const arrowRight = document.createElement('button');
-  arrowRight.className = 'hero-arrow hero-arrow--right';
-  arrowRight.innerHTML = '&#8250;';
-  arrowRight.setAttribute('aria-label', 'Next slide');
-  arrowRight.addEventListener('click', () => goTo(current + 1));
-  dotsEl.appendChild(arrowRight);
+    // Arrow right
+    const arrowRight = document.createElement('button');
+    arrowRight.className = 'hero-arrow hero-arrow--right';
+    arrowRight.innerHTML = '&#8250;';
+    arrowRight.setAttribute('aria-label', 'Next slide');
+    arrowRight.addEventListener('click', () => goTo(current + 1));
+    dotsEl.appendChild(arrowRight);
+  }
 
   if (taglineEl) taglineEl.textContent = SLIDES[0].tagline;
   if (subEl)     subEl.textContent     = SLIDES[0].sub;

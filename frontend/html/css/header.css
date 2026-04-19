@@ -216,19 +216,19 @@ nav a::after {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, rgba(255, 204, 0, 0.6), #FFD700, rgba(255, 204, 0, 0.6));
-    box-shadow: 0 0 8px rgba(255, 204, 0, 0.8);
+    background: linear-gradient(90deg, rgba(0, 127, 255, 0.6), #007FFF, rgba(0, 127, 255, 0.6));
+    box-shadow: 0 0 8px rgba(0, 127, 255, 0.8);
     transition: width 0.3s ease;
     border-radius: 2px;
 }
 
 nav a:hover,
 nav a.active {
-    color: #FFD700;
+    color: #007FFF;
     text-shadow:
-        0 0 8px rgba(255, 204, 0, 0.9),
-        0 0 20px rgba(255, 204, 0, 0.5),
-        0 0 40px rgba(255, 204, 0, 0.25);
+        0 0 8px rgba(0, 127, 255, 0.9),
+        0 0 20px rgba(0, 127, 255, 0.5),
+        0 0 40px rgba(0, 127, 255, 0.25);
 }
 
 nav a.active::after,
@@ -239,8 +239,8 @@ nav a:hover::after {
 /* ── Book Now ── */
 .book-now-btn {
     padding: 0.75rem 1.8rem;
-    background: #FFD700;
-    color: #0a0a0a;
+    background: #007FFF;
+    color: #fff;
     font-family: 'Oswald', sans-serif !important;
     font-weight: 700;
     font-size: 0.9rem;
@@ -250,16 +250,16 @@ nav a:hover::after {
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.25s ease;
-    box-shadow: 0 0 14px rgba(255, 204, 0, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 14px rgba(0, 127, 255, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3);
     white-space: nowrap;
     flex-shrink: 0;
 }
 
 .book-now-btn:hover {
-    background: #ffe84d;
-    box-shadow: 0 0 22px rgba(255, 204, 0, 0.7), 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: #339FFF;
+    box-shadow: 0 0 22px rgba(0, 127, 255, 0.7), 0 6px 20px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px) translateZ(0);
-    color: #0a0a0a;
+    color: #fff;
 }
 
 /* ==================== RESPONSIVE ==================== */

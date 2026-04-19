@@ -26,7 +26,7 @@ body {
     font-family: 'Lobster', cursive;
     font-weight: 400;
     font-size: clamp(2.4rem, 5vw, 4rem);
-    color: #1a3a6b;
+    color: #007FFF;
     margin: 0 0 1.2rem;
     line-height: 1.1;
 }
@@ -53,7 +53,7 @@ body {
 .about-section {
     position: relative;
     padding: 100px 80px;
-    background: rgba(237, 241, 249, 0.9);
+    background: rgba(212, 227, 248, 0.5);
     overflow: hidden;
 }
 
@@ -83,7 +83,7 @@ body {
     font-family: 'Lobster', cursive;
     font-weight: 400;
     font-size: clamp(2.4rem, 4vw, 3.5rem);
-    color: #1a3a6b;
+    color: #007FFF;
     margin: 0.4rem 0 0;
     line-height: 1.1;
 }
@@ -182,7 +182,7 @@ body {
     font-family: 'Lobster', cursive;
     font-weight: 400;
     font-size: 1.2rem;
-    color: #1a3a6b;
+    color: #007FFF;
     margin: 0 0 0.3rem;
 }
 
@@ -241,16 +241,85 @@ body {
     transform: translateY(-4px);
 }
 
+.service-card--photo {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+}
+
+.service-card__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease;
+}
+
+.service-card--photo:hover .service-card__bg {
+    transform: scale(1.05);
+}
+
+.service-card__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.2) 50%, transparent 100%);
+}
+
+.service-card__content {
+    position: relative;
+    z-index: 1;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    min-height: 280px;
+    justify-content: flex-end;
+}
+
+.service-card--photo .service-name {
+    color: #fff;
+}
+
+.service-card--photo .service-desc {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.service-btn {
+    display: inline-block;
+    padding: 0.6rem 1.6rem;
+    background: transparent;
+    border: 1.5px solid rgba(200, 152, 31, 0.5);
+    border-radius: 6px;
+    color: #007FFF;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.service-card--photo .service-btn {
+    color: #FFD700;
+    border-color: rgba(255, 204, 0, 0.5);
+}
+
+.service-btn:hover {
+    background: rgba(200, 152, 31, 0.1);
+    border-color: #c8981f;
+}
+
 .service-icon {
     font-size: 2rem;
-    color: #2d5a9e;
+    color: #007FFF;
 }
 
 .service-name {
     font-family: 'Lobster', cursive;
     font-size: 1.3rem;
     font-weight: 400;
-    color: #1a3a6b;
+    color: #007FFF;
 }
 
 .service-desc {
@@ -318,7 +387,7 @@ body {
     font-family: 'Lobster', cursive;
     font-size: 1.1rem;
     font-weight: 400;
-    color: #1a3a6b;
+    color: #007FFF;
 }
 
 .feature-desc {
@@ -329,8 +398,45 @@ body {
 
 /* ==================== GALLERY PREVIEW ==================== */
 
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.93);
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 10000;
+}
+
 .gallery-section {
-    background: rgba(248, 244, 238, 0.85);
+    background: rgba(212, 227, 248, 0.5);
 }
 
 .gallery-grid {
@@ -409,7 +515,7 @@ body {
 .review-author {
     font-weight: 700;
     font-size: 0.88rem;
-    color: #1a3a6b;
+    color: #007FFF;
 }
 
 .review-barber {
@@ -417,20 +523,62 @@ body {
     color: #c8981f;
 }
 
+/* ==================== CTA SECTION ==================== */
+
+.cta-section {
+    background: rgba(212, 227, 248, 0.5) !important;
+}
+
+.cta-title {
+    font-family: 'Lobster', cursive;
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5vw, 3.5rem);
+    color: #007FFF;
+    margin-bottom: 1rem;
+}
+
+.cta-desc {
+    font-size: 1.05rem;
+    color: rgba(26, 42, 58, 0.65);
+    margin-bottom: 2rem;
+}
+
+.cta-main-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: #007FFF;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(26, 58, 107, 0.3);
+}
+
+.cta-main-btn:hover {
+    background: #c8981f;
+    box-shadow: 0 6px 24px rgba(200, 152, 31, 0.4);
+    transform: translateY(-2px);
+}
+
 /* ==================== FOOTER ==================== */
 
 .site-footer {
-    background: #1a3a6b;
-    color: rgba(255, 255, 255, 0.85);
-    padding: 60px 80px 0;
+    background: rgba(212, 227, 248, 0.5);
+    color: rgba(26, 42, 58, 0.85);
+    padding: 60px 80px 30px;
+    border-top: 1px solid rgba(45, 90, 158, 0.15);
 }
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr 1fr;
-    gap: 4rem;
-    padding-bottom: 3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    grid-template-columns: 1.4fr 1fr 1.2fr 1.2fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 2.5rem;
 }
 
 .footer-brand {
@@ -440,15 +588,16 @@ body {
 }
 
 .footer-logo {
-    height: 80px;
+    height: 90px;
     width: auto;
+    margin-bottom: 1rem;
 }
 
 .footer-tagline {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.88rem;
+    color: rgba(26, 42, 58, 0.55);
     line-height: 1.6;
-    max-width: 260px;
+    margin-bottom: 1.2rem;
 }
 
 .footer-social {
@@ -461,101 +610,146 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(45, 90, 158, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(26, 42, 58, 0.55);
     text-decoration: none;
     font-size: 0.9rem;
     transition: all 0.25s ease;
 }
 
 .social-btn:hover {
-    border-color: #FFD700;
-    color: #FFD700;
-    box-shadow: 0 0 12px rgba(255, 204, 0, 0.25);
+    border-color: #c8981f;
+    color: #c8981f;
+    box-shadow: 0 0 12px rgba(200, 152, 31, 0.2);
 }
 
-.footer-col-title {
+.footer-heading {
     font-family: 'Lobster', cursive;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 400;
-    color: #FFD700;
-    margin-bottom: 1rem;
+    color: #007FFF;
+    margin-bottom: 1.2rem;
 }
 
 .footer-links {
+    list-style: none;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
 }
 
 .footer-links a {
-    color: rgba(255, 255, 255, 0.55);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(26, 42, 58, 0.6);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     transition: color 0.2s;
 }
 
 .footer-links a:hover {
-    color: #FFD700;
+    color: #c8981f;
+}
+
+.footer-links svg {
+    color: rgba(26, 42, 58, 0.4);
 }
 
 .footer-location {
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.2rem;
 }
 
 .footer-loc-name {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 0.4rem;
     font-weight: 700;
-    font-size: 0.92rem;
-    color: #FFD700;
+    font-size: 0.9rem;
+    color: #007FFF;
     margin-bottom: 0.3rem;
 }
 
+.footer-loc-name svg {
+    color: #c8981f;
+}
+
 .footer-loc-addr {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 0 0 0.25rem 1.3rem;
+    font-size: 0.83rem;
+    color: rgba(26, 42, 58, 0.5);
+    margin-bottom: 0.2rem;
 }
 
 .footer-loc-phone {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 0.4rem;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 0 0 0 1.3rem;
+    font-size: 0.83rem;
+    color: #c8981f;
+    margin-bottom: 0.2rem;
+    text-decoration: none;
+}
+
+.footer-loc-phone svg {
+    color: #c8981f;
+}
+
+.footer-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-socials a,
+.footer-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: #c8981f;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.footer-socials a:hover,
+.footer-social-link:hover {
+    opacity: 0.7;
+}
+
+.footer-socials svg {
+    color: #c8981f;
 }
 
 .footer-hours-row {
     display: flex;
     align-items: flex-start;
     gap: 0.6rem;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(26, 42, 58, 0.55);
 }
 
 .footer-hours-row svg {
-    color: #FFD700;
+    color: #c8981f;
     flex-shrink: 0;
     margin-top: 3px;
 }
 
 .footer-hours-row p {
-    margin: 0 0 0.35rem;
-    font-size: 0.88rem;
-    line-height: 1.6;
+    margin: 0 0 0.3rem;
+    font-size: 0.83rem;
+    line-height: 1.5;
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-    padding: 1.4rem 0;
+    border-top: 1px solid rgba(45, 90, 158, 0.12);
+    padding-top: 1.5rem;
     text-align: center;
     font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(26, 42, 58, 0.4);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* ==================== RESPONSIVE ==================== */
