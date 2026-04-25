@@ -1,4 +1,17 @@
 /* ==================== SERVICES PAGE ==================== */
+/* Matches index page palette: off-white/light-blue bg, #007FFF electric blue, #c8981f gold */
+
+/* ── Header: transparent with subtle blur on services page ──
+   Overrides header.css dark scrolled background. Keeps the header
+   transparent but adds a frosted-glass blur so it blends smoothly
+   with the light page background — same feel as the index page. */
+header#mainHeader,
+header#mainHeader.scrolled {
+    background: transparent !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: none !important;
+}
 
 /* ── Header gold line scroll state ── */
 #headerGoldLine {
@@ -18,6 +31,7 @@ header#mainHeader.scrolled #headerGoldLine {
     padding: 160px 2rem 80px;
     text-align: center;
     position: relative;
+    background: rgba(212, 227, 248, 0.5);
 }
 
 .services-hero::after {
@@ -27,7 +41,7 @@ header#mainHeader.scrolled #headerGoldLine {
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(200, 152, 31, 0.35), transparent);
 }
 
 .services-hero-label {
@@ -35,32 +49,28 @@ header#mainHeader.scrolled #headerGoldLine {
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #FFD700;
+    color: #c8981f;
     margin-bottom: 1rem;
 }
 
 .services-hero h1 {
     font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 700;
-    color: #00b4ff;
-    text-shadow:
-        0 0 20px rgba(0, 180, 255, 0.7),
-        0 0 40px rgba(0, 180, 255, 0.4),
-        0 0 80px rgba(0, 180, 255, 0.2);
+    color: #007FFF;
     line-height: 1.1;
     margin-bottom: 1rem;
 }
 
 .services-hero p {
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(26, 42, 58, 0.55);
 }
 
 /* ══════════════════════════════════════
    SERVICES SECTION
 ══════════════════════════════════════ */
 .services-section {
-    background: #111111;
+    background: rgba(212, 227, 248, 0.5);
     padding: 80px 60px 100px;
     text-align: center;
 }
@@ -79,7 +89,7 @@ header#mainHeader.scrolled #headerGoldLine {
     position: relative;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid rgba(255, 204, 0, 0.18);
+    border: 1px solid rgba(45, 90, 158, 0.18);
     min-height: 480px;
     display: flex;
     flex-direction: column;
@@ -88,12 +98,13 @@ header#mainHeader.scrolled #headerGoldLine {
     padding: 2rem 1.5rem 1.75rem;
     text-align: center;
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.75);
 }
 
 .service-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(255, 204, 0, 0.55);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 32px rgba(255, 204, 0, 0.12);
+    border-color: rgba(200, 152, 31, 0.55);
+    box-shadow: 0 16px 48px rgba(45, 90, 158, 0.15), 0 0 24px rgba(200, 152, 31, 0.1);
 }
 
 /* Background photo layer */
@@ -102,8 +113,7 @@ header#mainHeader.scrolled #headerGoldLine {
     inset: 0;
     background-size: cover;
     background-position: center top;
-    background-color: #1a1a1a;
-    /* fallback while loading */
+    background-color: rgba(237, 241, 249, 0.6);
     z-index: 0;
     transition: transform 0.5s ease;
 }
@@ -112,15 +122,15 @@ header#mainHeader.scrolled #headerGoldLine {
     transform: scale(1.04);
 }
 
-/* Dark overlay */
+/* Dark overlay — keeps text readable over photos */
 .service-card-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(to bottom,
-            rgba(10, 10, 10, 0.55) 0%,
-            rgba(10, 10, 10, 0.45) 40%,
-            rgba(10, 10, 10, 0.75) 70%,
-            rgba(10, 10, 10, 0.92) 100%);
+            rgba(10, 10, 10, 0.45) 0%,
+            rgba(10, 10, 10, 0.35) 40%,
+            rgba(10, 10, 10, 0.65) 70%,
+            rgba(10, 10, 10, 0.88) 100%);
     z-index: 1;
 }
 
@@ -140,18 +150,18 @@ header#mainHeader.scrolled #headerGoldLine {
     width: 100%;
 }
 
-/* Gold circle icon */
+/* Electric blue circle icon */
 .service-icon {
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    background: #FFD700;
+    background: #007FFF;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #0a0a0a;
+    color: #fff;
     flex-shrink: 0;
-    box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+    box-shadow: 0 4px 16px rgba(0, 127, 255, 0.35);
 }
 
 .service-name {
@@ -170,15 +180,15 @@ header#mainHeader.scrolled #headerGoldLine {
     margin: 0;
 }
 
-/* Book Now button */
+/* Book Now button — blue accent */
 .service-btn {
     display: block;
     width: 100%;
     padding: 0.85rem 1rem;
-    border: 2px solid #FFD700;
+    border: 2px solid #007FFF;
     border-radius: 8px;
-    color: #FFD700;
-    background: rgba(0, 0, 0, 0.35);
+    color: #007FFF;
+    background: rgba(255, 255, 255, 0.12);
     font-weight: 700;
     font-size: 1rem;
     letter-spacing: 1px;
@@ -188,9 +198,9 @@ header#mainHeader.scrolled #headerGoldLine {
 }
 
 .service-btn:hover {
-    background: #FFD700;
-    color: #0a0a0a;
-    box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+    background: #007FFF;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 127, 255, 0.45);
 }
 
 /* ── CTA ── */
@@ -202,8 +212,8 @@ header#mainHeader.scrolled #headerGoldLine {
 .services-cta-link {
     display: inline-block;
     padding: 1rem 3rem;
-    background: #FFD700;
-    color: #0a0a0a;
+    background: #007FFF;
+    color: #fff;
     font-weight: 700;
     font-size: 0.95rem;
     letter-spacing: 2px;
@@ -211,12 +221,12 @@ header#mainHeader.scrolled #headerGoldLine {
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.25s ease;
-    box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+    box-shadow: 0 4px 16px rgba(0, 127, 255, 0.3);
 }
 
 .services-cta-link:hover {
-    background: #ffe84d;
-    box-shadow: 0 0 30px rgba(255, 204, 0, 0.5);
+    background: #c8981f;
+    box-shadow: 0 6px 24px rgba(200, 152, 31, 0.4);
     transform: translateY(-2px);
 }
 

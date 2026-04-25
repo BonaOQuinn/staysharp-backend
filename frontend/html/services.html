@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/services.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/fonts.css">
 </head>
 
@@ -48,15 +49,6 @@
         </div>
         <div class="header-gold-line" id="headerGoldLine"></div>
     </header>
-    <script>
-        (function () {
-            var h = document.getElementById('mainHeader');
-            if (!h) return;
-            function u() { h.classList[window.pageYOffset > 10 ? 'add' : 'remove']('scrolled'); }
-            window.addEventListener('scroll', u, { passive: true });
-            u();
-        })();
-    </script>
 
     <!-- HERO BANNER -->
     <div class="services-hero">
@@ -243,7 +235,11 @@
         </div>
     </footer>
 
-    <!-- ==================== SERVICES IMAGES FROM SUPABASE ==================== -->
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="js/header-scroll.js"></script>
+    <script src="js/mobile-nav.js"></script>
+
+    <!-- Services images from Supabase -->
     <script>
         (function () {
             'use strict';
@@ -259,7 +255,6 @@
 
             async function loadServiceImages() {
                 try {
-                    // List files from the Services folder
                     var res = await fetch(
                         SUPABASE_URL + '/storage/v1/object/list/' + BUCKET,
                         {
@@ -281,8 +276,6 @@
                     if (!res.ok) throw new Error('Supabase list failed: ' + res.status);
 
                     var files = await res.json();
-
-                    // Filter to images only
                     var images = files.filter(function (f) {
                         return f.name && /\.(png|jpg|jpeg|webp)$/i.test(f.name);
                     });
@@ -294,17 +287,15 @@
 
                     console.log('Services images found:', images.map(function (f) { return f.name; }));
 
-                    // Apply images to the 5 card backgrounds in order
                     for (var i = 0; i < 5; i++) {
                         var bg = document.getElementById('bg-' + i);
                         if (!bg) continue;
-                        var file = images[i % images.length]; // cycle if fewer than 5 images
+                        var file = images[i % images.length];
                         bg.style.backgroundImage = "url('" + publicUrl(file.name) + "')";
                     }
 
                 } catch (err) {
                     console.warn('Could not load Services images from Supabase:', err);
-                    // Cards fall back gracefully to the dark #1a1a1a background-color
                 }
             }
 
