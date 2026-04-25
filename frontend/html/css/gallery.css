@@ -1,56 +1,11 @@
 /* ==================== GALLERY PAGE ==================== */
-
-/* Override base.css navy gradient — gallery uses black like the rest of the site */
-body {
-    background: #0a0a0a !important;
-    background-image: none !important;
-}
-
-/* ── Header scroll for gallery page ── */
-header#mainHeader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 90px;
-    padding: 0 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: transparent;
-    z-index: 1000;
-    transition: background 0.4s ease, box-shadow 0.4s ease;
-}
-
-header#mainHeader.scrolled {
-    background: #0a0a0a !important;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-}
-
-#headerGoldLine {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 204, 0, 0.15) 15%,
-            rgba(255, 204, 0, 0.4) 35%, rgba(255, 204, 0, 0.5) 50%,
-            rgba(255, 204, 0, 0.4) 65%, rgba(255, 204, 0, 0.15) 85%, transparent 100%);
-    box-shadow: 0 0 6px rgba(255, 204, 0, 0.3), 0 1px 4px rgba(255, 204, 0, 0.15);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-
-header#mainHeader.scrolled #headerGoldLine {
-    opacity: 1;
-}
+/* Light blue/white theme — matches index and services pages */
 
 /* ── Hero banner ── */
 .gallery-hero {
     padding: 160px 2rem 80px;
     text-align: center;
-    background: transparent;
+    background: rgba(212, 227, 248, 0.5);
     position: relative;
 }
 
@@ -61,31 +16,29 @@ header#mainHeader.scrolled #headerGoldLine {
     left: 10%;
     right: 10%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 204, 0, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(200, 152, 31, 0.35), transparent);
 }
 
 .gallery-label {
-    font-family: 'Inter', sans-serif;
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: #FFD700;
+    color: #c8981f;
     margin-bottom: 1rem;
 }
 
 .gallery-hero h1 {
-    font-family: 'Lobster', cursive;
     font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 400;
-    color: #fff;
+    font-weight: 700;
+    color: #007FFF;
     line-height: 1.1;
     margin-bottom: 1rem;
 }
 
 .gallery-hero p {
     font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.55);
+    color: rgba(26, 42, 58, 0.55);
     margin-bottom: 1.8rem;
 }
 
@@ -93,7 +46,7 @@ header#mainHeader.scrolled #headerGoldLine {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #FFD700;
+    color: #c8981f;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
@@ -116,10 +69,9 @@ header#mainHeader.scrolled #headerGoldLine {
 .filter-btn {
     padding: 0.55rem 1.4rem;
     border-radius: 6px;
-    border: 1.5px solid rgba(255, 204, 0, 0.35);
+    border: 1.5px solid rgba(45, 90, 158, 0.3);
     background: transparent;
-    color: rgba(255, 255, 255, 0.7);
-    font-family: 'Inter', sans-serif;
+    color: rgba(26, 42, 58, 0.6);
     font-weight: 700;
     font-size: 0.88rem;
     letter-spacing: 0.5px;
@@ -128,15 +80,15 @@ header#mainHeader.scrolled #headerGoldLine {
 }
 
 .filter-btn:hover {
-    border-color: #FFD700;
-    color: #FFD700;
+    border-color: #007FFF;
+    color: #007FFF;
 }
 
 .filter-btn.active {
-    background: #FFD700;
-    border-color: #FFD700;
-    color: #0a0a0a;
-    box-shadow: 0 0 16px rgba(255, 204, 0, 0.4);
+    background: #007FFF;
+    border-color: #007FFF;
+    color: #fff;
+    box-shadow: 0 0 16px rgba(0, 127, 255, 0.3);
 }
 
 /* ── Masonry grid ── */
@@ -159,7 +111,8 @@ header#mainHeader.scrolled #headerGoldLine {
     border-radius: 8px;
     cursor: pointer;
     display: block;
-    background: #1a1a1a;
+    background: rgba(45, 90, 158, 0.08);
+    border: 1px solid rgba(45, 90, 158, 0.1);
 }
 
 .masonry-item img {
@@ -207,7 +160,7 @@ header#mainHeader.scrolled #headerGoldLine {
 .gallery-status {
     text-align: center;
     padding: 4rem;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(26, 42, 58, 0.4);
     font-size: 1rem;
     width: 100%;
 }
@@ -216,8 +169,8 @@ header#mainHeader.scrolled #headerGoldLine {
     display: inline-block;
     width: 36px;
     height: 36px;
-    border: 3px solid rgba(255, 204, 0, 0.2);
-    border-top-color: #FFD700;
+    border: 3px solid rgba(0, 127, 255, 0.2);
+    border-top-color: #007FFF;
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
     margin-bottom: 1rem;
@@ -254,7 +207,6 @@ header#mainHeader.scrolled #headerGoldLine {
     border-radius: 8px;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
     object-fit: contain;
-    transition: opacity 0.15s ease;
 }
 
 .lightbox-close {
@@ -266,8 +218,6 @@ header#mainHeader.scrolled #headerGoldLine {
     color: rgba(255, 255, 255, 0.7);
     font-size: 2rem;
     cursor: pointer;
-    line-height: 1;
-    transition: color 0.2s;
     z-index: 10000;
 }
 
@@ -351,10 +301,6 @@ header#mainHeader.scrolled #headerGoldLine {
     .lightbox-close {
         top: 1rem;
         right: 1rem;
-    }
-
-    header#mainHeader {
-        padding: 0 1.5rem;
     }
 }
 

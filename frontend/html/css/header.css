@@ -28,15 +28,15 @@ header#mainHeader.header--visible {
     transform: translateY(0) translateZ(0) !important;
 }
 
-/* ── Scrolled: dark background ── */
+/* ── Scrolled: transparent with blur (light pages) ──
+   Dark-themed pages (booking, gallery-dark, etc.) override this
+   with their own inline styles or page-specific CSS. */
 header.scrolled,
 header#mainHeader.scrolled {
-    background: linear-gradient(180deg,
-            rgba(0, 0, 0, 0.98) 0%,
-            rgba(0, 0, 0, 0.95) 100%) !important;
+    background: transparent !important;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
 }
 
 /* ── Gold accent line ── */

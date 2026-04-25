@@ -20,59 +20,12 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/background.css">
     <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/gallery.css">
-    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="css/fonts.css">
 
-
     <style>
-        /* Override base navy gradient */
-        body {
-            background: #0a0a0a !important;
-            background-image: none !important;
-        }
-
-        /* Header scroll */
-        header#mainHeader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 90px;
-            padding: 0 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: transparent;
-            z-index: 1000;
-            transition: background 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        header#mainHeader.scrolled {
-            background: #0a0a0a !important;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-        }
-
-        #headerGoldLine {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 204, 0, 0.15) 15%,
-                    rgba(255, 204, 0, 0.4) 35%, rgba(255, 204, 0, 0.5) 50%,
-                    rgba(255, 204, 0, 0.4) 65%, rgba(255, 204, 0, 0.15) 85%, transparent 100%);
-            box-shadow: 0 0 6px rgba(255, 204, 0, 0.3), 0 1px 4px rgba(255, 204, 0, 0.15);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        header#mainHeader.scrolled #headerGoldLine {
-            opacity: 1;
-        }
-
         /* Video thumbnail styling */
         .masonry-item video {
             width: 100%;
@@ -93,189 +46,6 @@
             border-radius: 8px;
             box-shadow: 0 0 60px rgba(0, 0, 0, 0.8);
             object-fit: contain;
-        }
-
-        /* Footer Styles */
-        footer {
-            background: #0a0a0a;
-            padding: 80px 60px 40px;
-            border-top: 1px solid rgba(255, 204, 0, 0.1);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1.5fr 1.5fr;
-            gap: 4rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-col {
-            min-width: 0;
-        }
-
-        /* Logo section */
-        .footer-logo-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .footer-logo-section img {
-            width: 150px;
-            height: auto;
-        }
-
-        .footer-desc {
-            color: rgba(255, 255, 255, 0.5);
-            line-height: 1.7;
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        .footer-social {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .footer-social a {
-            color: #FFD700;
-            text-decoration: none;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: opacity 0.2s ease;
-        }
-
-        .footer-social a:hover {
-            opacity: 0.8;
-        }
-
-        .footer-title {
-            font-family: 'Lobster', cursive;
-            font-size: 1.5rem;
-            color: #fff;
-            margin: 0 0 1.5rem 0;
-        }
-
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .footer-links li {
-            margin: 0;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .footer-links a:hover {
-            color: #FFD700;
-        }
-
-        .footer-links svg {
-            flex-shrink: 0;
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Location section */
-        .footer-location {
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-location h5 {
-            color: #FFD700;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
-            margin: 0 0 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-location p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-            margin: 0.25rem 0;
-            line-height: 1.6;
-        }
-
-        .footer-location a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.2s ease;
-        }
-
-        .footer-location a:hover {
-            color: #FFD700;
-        }
-
-        /* Hours section */
-        .footer-hours p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-            margin: 0.5rem 0;
-            line-height: 1.7;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-hours p svg {
-            flex-shrink: 0;
-            width: 16px;
-            height: 16px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .footer-bottom p {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-            margin: 0;
-        }
-
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-                gap: 3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            footer {
-                padding: 60px 30px 30px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
         }
     </style>
 </head>
@@ -347,583 +117,142 @@
         <button class="lightbox-next" id="lightboxNext">&#8250;</button>
     </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <!-- Logo & Description -->
-            <div class="footer-col footer-logo-section">
-                <img src="logos/new_logo.png" alt="Stay Sharp San Diego">
-                <p class="footer-desc">Premium barbershop experience in San Diego. Where style meets precision.</p>
-                <div class="footer-social">
-                    <a href="https://instagram.com/staysharpsandiego" target="_blank" rel="noopener">
+    <!-- FOOTER — uses home.css .site-footer styles -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col footer-brand">
+                <img src="logos/new_logo.png" alt="Stay Sharp Logo" class="footer-logo">
+                <p class="footer-tagline">Premium barbershop experience in San Diego.</p>
+                <div class="footer-socials">
+                    <a href="https://instagram.com/staysharpsandiego" target="_blank" rel="noopener"
+                        class="footer-social-link">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path
-                                d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 011.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.01 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772 4.915 4.915 0 01-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.01-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.01 15.056 2 14.717 2 12s.01-3.056.06-4.122c.05-1.065.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z" />
+                                d="M12 2c2.717 0 3.056.01 4.122.06 2.908.134 4.708 1.952 4.84 4.84.05 1.066.06 1.405.06 4.1 0 2.695-.01 3.034-.06 4.1-.132 2.885-1.93 4.706-4.84 4.84-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06C4.99 19.706 3.19 17.885 3.06 15c-.05-1.066-.06-1.405-.06-4.1 0-2.695.01-3.034.06-4.1.13-2.888 1.93-4.706 4.818-4.84C8.944 2.01 9.283 2 12 2zm0 5a5 5 0 100 10A5 5 0 0012 7zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z" />
                         </svg>
                         @staysharpsandiego
                     </a>
-                    <a href="https://instagram.com/howtobarber" target="_blank" rel="noopener">
+                    <a href="https://instagram.com/howtobarber" target="_blank" rel="noopener"
+                        class="footer-social-link">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                             <path
-                                d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 011.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122s-.01 3.056-.06 4.122c-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 01-1.153 1.772 4.915 4.915 0 01-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06s-3.056-.01-4.122-.06c-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 01-1.772-1.153 4.904 4.904 0 01-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.01 15.056 2 14.717 2 12s.01-3.056.06-4.122c.05-1.065.217-1.79.465-2.428a4.88 4.88 0 011.153-1.772A4.897 4.897 0 015.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z" />
+                                d="M12 2c2.717 0 3.056.01 4.122.06 2.908.134 4.708 1.952 4.84 4.84.05 1.066.06 1.405.06 4.1 0 2.695-.01 3.034-.06 4.1-.132 2.885-1.93 4.706-4.84 4.84-1.066.05-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06C4.99 19.706 3.19 17.885 3.06 15c-.05-1.066-.06-1.405-.06-4.1 0-2.695.01-3.034.06-4.1.13-2.888 1.93-4.706 4.818-4.84C8.944 2.01 9.283 2 12 2zm0 5a5 5 0 100 10A5 5 0 0012 7zm6.5-.25a1.25 1.25 0 10-2.5 0 1.25 1.25 0 002.5 0zM12 9a3 3 0 110 6 3 3 0 010-6z" />
                         </svg>
                         @howtobarber
                     </a>
                 </div>
             </div>
-
-            <!-- Quick Links -->
             <div class="footer-col">
-                <h4 class="footer-title">Quick Links</h4>
+                <h4 class="footer-heading">Quick Links</h4>
                 <ul class="footer-links">
-                    <li><a href="index.html">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                            </svg>
-                            Home
-                        </a></li>
-                    <li><a href="services.html">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="6" cy="6" r="3" />
-                                <circle cx="6" cy="18" r="3" />
-                                <line x1="20" y1="4" x2="8.12" y2="15.88" />
-                            </svg>
-                            Services
-                        </a></li>
-                    <li><a href="locations.html">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
-                            </svg>
-                            Locations
-                        </a></li>
-                    <li><a href="gallery.html">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                            Gallery
-                        </a></li>
-                    <li><a href="contact.html">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                            </svg>
-                            Contact
-                        </a></li>
-                    <li><a href="booking.html">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" />
-                                <line x1="16" y1="2" x2="16" y2="6" />
-                                <line x1="8" y1="2" x2="8" y2="6" />
-                                <line x1="3" y1="10" x2="21" y2="10" />
-                            </svg>
-                            Book Now
-                        </a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="locations.html">Locations</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="booking.html">Book Now</a></li>
                 </ul>
             </div>
-
-            <!-- Locations -->
             <div class="footer-col">
-                <h4 class="footer-title">Locations</h4>
-
+                <h4 class="footer-heading">Locations</h4>
                 <div class="footer-location">
-                    <h5>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                        </svg>
-                        La Mesa
-                    </h5>
-                    <p>La Mesa, San Diego, CA</p>
-                    <a href="tel:8584168186">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                        </svg>
-                        (858) 416-8186
-                    </a>
+                    <div class="footer-loc-name">La Mesa</div>
+                    <p class="footer-loc-addr">5288 Baltimore Drive, La Mesa CA 91942</p>
                 </div>
-
                 <div class="footer-location">
-                    <h5>
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                        </svg>
-                        Spring Valley
-                    </h5>
-                    <p>Spring Valley, San Diego, CA</p>
-                    <a href="tel:6198343973">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path
-                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-                        </svg>
-                        (619) 834-3973
-                    </a>
+                    <div class="footer-loc-name">Spring Valley</div>
+                    <p class="footer-loc-addr">9903 Campo Road, Spring Valley CA 91977</p>
                 </div>
             </div>
-
-            <!-- Hours -->
             <div class="footer-col">
-                <h4 class="footer-title">Hours</h4>
-                <div class="footer-hours">
-                    <p>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg>
-                        Monday – Friday: 9:00 AM – 7:00 PM
-                    </p>
-                    <p>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg>
-                        Saturday: 8:00 AM – 5:00 PM
-                    </p>
-                    <p>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
-                        </svg>
-                        Sunday: 10:00 AM – 4:00 PM
-                    </p>
-                </div>
+                <h4 class="footer-heading">Hours</h4>
+                <ul class="footer-links">
+                    <li>Mon – Fri: 9am – 7pm</li>
+                    <li>Saturday: 8am – 5pm</li>
+                    <li>Sunday: 10am – 4pm</li>
+                </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>&copy; 2026 Stay Sharp San Diego. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Header Scroll Script -->
-    <script>
-        (function () {
-            var h = document.getElementById('mainHeader');
-            if (!h) return;
-            function u() {
-                h.classList[window.pageYOffset > 10 ? 'add' : 'remove']('scrolled');
-            }
-            window.addEventListener('scroll', u);
-            u();
-        })();
-    </script>
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="js/header-scroll.js"></script>
+    <script src="js/mobile-nav.js"></script>
 
-    <!-- ==================== GALLERY SCRIPT WITH SUPABASE SDK + VIDEOS ==================== -->
+    <!-- Gallery Script with Supabase SDK + Videos -->
     <script>
-        // REAL Supabase SDK initialization
         const { createClient } = supabase;
-
         const SUPABASE_URL = 'https://txioesoxmxprlhnivcle.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR4aW9lc294bXhwcmxobml2Y2xlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA4MjcyMjUsImV4cCI6MjA4NjQwMzIyNX0._tmjg6n9BlAjrMZVvPwjg3hsmCZIOvJifo_slurLQd8';
         const SUPABASE_BUCKET = 'staysharp_rotation';
         const SUPABASE_FOLDER = 'Gallery';
-
-        // Initialize Supabase client
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // State management
-        let allMedia = []; // Changed from allImages to allMedia
+        let allMedia = [];
         let currentFilter = 'all';
         let currentLightboxIndex = 0;
 
-        // Initialize on load
         (function () {
             'use strict';
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initGallery);
-            } else {
-                initGallery();
-            }
+            } else { initGallery(); }
         })();
 
         async function initGallery() {
-            console.log('🎨 Initializing gallery with Supabase SDK...');
-
             try {
-                // List ALL files from the Gallery folder
-                const { data: files, error } = await supabaseClient
-                    .storage
-                    .from(SUPABASE_BUCKET)
-                    .list(SUPABASE_FOLDER, {
-                        limit: 100,
-                        offset: 0,
-                        sortBy: { column: 'name', order: 'asc' }
-                    });
-
-                if (error) {
-                    console.error('❌ Error listing files:', error);
-                    throw error;
-                }
-
-                console.log('📦 Files found:', files);
-
-                // Filter for images AND videos
-                const mediaFiles = files.filter(file =>
-                    file.name.match(/\.(png|jpg|jpeg|webp|gif|mp4|webm|mov)$/i)
-                );
-
-                console.log(`🎬 ${mediaFiles.length} media files found (images + videos)`);
-
-                // Generate media objects with public URLs
-                let images = [];
-                let videos = [];
-
+                const { data: files, error } = await supabaseClient.storage.from(SUPABASE_BUCKET).list(SUPABASE_FOLDER, { limit: 100, offset: 0, sortBy: { column: 'name', order: 'asc' } });
+                if (error) throw error;
+                const mediaFiles = files.filter(file => file.name.match(/\.(png|jpg|jpeg|webp|gif|mp4|webm|mov)$/i));
+                let images = [], videos = [];
                 mediaFiles.forEach((file, index) => {
-                    const path = `${SUPABASE_FOLDER}/${file.name}`;
+                    const path = SUPABASE_FOLDER + '/' + file.name;
                     const isVideo = file.name.match(/\.(mp4|webm|mov)$/i);
-
-                    // Get public URL using SDK
-                    const { data } = supabaseClient
-                        .storage
-                        .from(SUPABASE_BUCKET)
-                        .getPublicUrl(path);
-
-                    // Determine category based on filename
-                    let category = 'vibes'; // default
-
-                    // Check if it's one of the celebrity videos
-                    if (file.name.toLowerCase().includes('batman') ||
-                        file.name.toLowerCase().includes('drake') ||
-                        file.name.toLowerCase().includes('jimmy')) {
-                        category = 'vibes';
-                    } else {
-                        // For numbered files (images and video3.mp4)
-                        const match = file.name.match(/(\d+)/);
-                        if (match) {
-                            const num = parseInt(match[1]);
-                            if ([1, 2, 3, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46].includes(num)) {
-                                category = 'haircuts';
-                            } else if ([5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47].includes(num)) {
-                                category = 'beard';
-                            }
-                        }
-                    }
-
-                    const mediaItem = {
-                        id: index + 1,
-                        filename: file.name,
-                        url: data.publicUrl,
-                        category: category,
-                        isVideo: isVideo,
-                        alt: `Stay Sharp barbershop - ${category}${isVideo ? ' video' : ''}`
-                    };
-
-                    // Separate images and videos
-                    if (isVideo) {
-                        videos.push(mediaItem);
-                    } else {
-                        images.push(mediaItem);
-                    }
+                    const { data } = supabaseClient.storage.from(SUPABASE_BUCKET).getPublicUrl(path);
+                    let category = 'vibes';
+                    if (file.name.toLowerCase().includes('batman') || file.name.toLowerCase().includes('drake') || file.name.toLowerCase().includes('jimmy')) { category = 'vibes'; }
+                    else { const match = file.name.match(/(\d+)/); if (match) { const num = parseInt(match[1]); if ([1, 2, 3, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46].includes(num)) category = 'haircuts'; else if ([5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47].includes(num)) category = 'beard'; } }
+                    const item = { id: index + 1, filename: file.name, url: data.publicUrl, category, isVideo, alt: 'Stay Sharp barbershop - ' + category + (isVideo ? ' video' : '') };
+                    if (isVideo) videos.push(item); else images.push(item);
                 });
-
-                // Distribute videos evenly throughout the ENTIRE gallery from start to finish
                 allMedia = [];
-
-                if (videos.length === 0) {
-                    // No videos, just use images
-                    allMedia = images;
-                } else if (images.length === 0) {
-                    // No images, just use videos
-                    allMedia = videos;
-                } else {
-                    // Calculate positions to insert videos throughout the gallery
-                    const totalItems = images.length + videos.length;
-                    const spacing = totalItems / (videos.length + 1); // +1 to include space after last video
-
-                    // Create array of positions where videos should be inserted
-                    const videoPositions = [];
-                    for (let i = 0; i < videos.length; i++) {
-                        const position = Math.floor(spacing * (i + 1));
-                        videoPositions.push(position);
-                    }
-
-                    console.log('📍 Video positions:', videoPositions);
-
-                    // Build the gallery with videos at calculated positions
-                    let imageIndex = 0;
-                    let videoIndex = 0;
-
-                    for (let pos = 0; pos < totalItems; pos++) {
-                        if (videoPositions.includes(pos) && videoIndex < videos.length) {
-                            // Insert video at this position
-                            allMedia.push(videos[videoIndex]);
-                            videoIndex++;
-                        } else if (imageIndex < images.length) {
-                            // Insert image
-                            allMedia.push(images[imageIndex]);
-                            imageIndex++;
-                        }
-                    }
-
-                    // Add any remaining images
-                    while (imageIndex < images.length) {
-                        allMedia.push(images[imageIndex]);
-                        imageIndex++;
-                    }
+                if (!videos.length) { allMedia = images; } else if (!images.length) { allMedia = videos; } else {
+                    const total = images.length + videos.length, spacing = total / (videos.length + 1);
+                    const positions = []; for (let i = 0; i < videos.length; i++) positions.push(Math.floor(spacing * (i + 1)));
+                    let ii = 0, vi = 0;
+                    for (let pos = 0; pos < total; pos++) { if (positions.includes(pos) && vi < videos.length) { allMedia.push(videos[vi++]); } else if (ii < images.length) { allMedia.push(images[ii++]); } }
+                    while (ii < images.length) allMedia.push(images[ii++]);
                 }
-
-                console.log(`✅ Generated ${allMedia.length} media URLs (${images.length} images, ${videos.length} videos spread evenly throughout gallery)`);
-
-                renderGallery();
-                setupFilters();
-                setupLightbox();
-
-                console.log('✅ Gallery initialized successfully');
-            } catch (error) {
-                console.error('❌ Gallery initialization error:', error);
-                showError(error.message);
-            }
+                renderGallery(); setupFilters(); setupLightbox();
+            } catch (error) { showError(error.message); }
         }
 
-        function renderGallery(filter = 'all') {
-            const grid = document.getElementById('masonryGrid');
-            if (!grid) return;
-
-            const filteredMedia = filter === 'all'
-                ? allMedia
-                : allMedia.filter(item => item.category === filter);
-
-            if (filteredMedia.length === 0) {
-                grid.innerHTML = `<div class="gallery-status"><p>No media found</p></div>`;
-                return;
-            }
-
-            grid.innerHTML = filteredMedia.map((item, index) => {
-                if (item.isVideo) {
-                    // Video item - no play button, autoplay on scroll into view
-                    return `
-                        <div class="masonry-item video-item" 
-                             data-category="${item.category}" 
-                             data-index="${index}" 
-                             onclick="openLightbox(${index})">
-                            <video muted loop playsinline preload="metadata" class="lazy-video">
-                                <source src="${item.url}" type="video/mp4">
-                            </video>
-                            <div class="item-overlay">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                                    <line x1="11" y1="8" x2="11" y2="14"/>
-                                    <line x1="8" y1="11" x2="14" y2="11"/>
-                                </svg>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    // Image item
-                    return `
-                        <div class="masonry-item" 
-                             data-category="${item.category}" 
-                             data-index="${index}" 
-                             onclick="openLightbox(${index})">
-                            <img src="${item.url}" 
-                                 alt="${item.alt}" 
-                                 loading="lazy"
-                                 onerror="console.error('Failed to load:', '${item.url}'); this.parentElement.style.display='none';">
-                            <div class="item-overlay">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="11" cy="11" r="8"/>
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                                    <line x1="11" y1="8" x2="11" y2="14"/>
-                                    <line x1="8" y1="11" x2="14" y2="11"/>
-                                </svg>
-                            </div>
-                        </div>
-                    `;
-                }
-            }).join('');
-
-            // Setup Intersection Observer for video autoplay on scroll
+        function renderGallery(filter) {
+            filter = filter || 'all';
+            const grid = document.getElementById('masonryGrid'); if (!grid) return;
+            const filtered = filter === 'all' ? allMedia : allMedia.filter(i => i.category === filter);
+            if (!filtered.length) { grid.innerHTML = '<div class="gallery-status"><p>No media found</p></div>'; return; }
+            grid.innerHTML = filtered.map((item, idx) => item.isVideo ?
+                '<div class="masonry-item video-item" data-category="' + item.category + '" onclick="openLightbox(' + idx + ')"><video muted loop playsinline preload="metadata" class="lazy-video"><source src="' + item.url + '" type="video/mp4"></video><div class="item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div></div>' :
+                '<div class="masonry-item" data-category="' + item.category + '" onclick="openLightbox(' + idx + ')"><img src="' + item.url + '" alt="' + item.alt + '" loading="lazy" onerror="this.parentElement.style.display=\'none\'"><div class="item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div></div>'
+            ).join('');
             setupVideoAutoplay();
         }
 
-        // Intersection Observer for autoplay videos when they come into view
         let videoObserver = null;
+        function setupVideoAutoplay() { if (videoObserver) videoObserver.disconnect(); videoObserver = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.play().catch(() => { }); else e.target.pause(); }); }, { threshold: 0.5 }); document.querySelectorAll('.lazy-video').forEach(v => videoObserver.observe(v)); }
+        function setupFilters() { document.querySelectorAll('.filter-btn').forEach(btn => { btn.addEventListener('click', function () { document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); this.classList.add('active'); currentFilter = this.getAttribute('data-filter'); renderGallery(currentFilter); }); }); }
+        function setupLightbox() { const lb = document.getElementById('lightbox'); if (!lb) return; document.getElementById('lightboxClose').addEventListener('click', closeLightbox); lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); }); document.getElementById('lightboxPrev').addEventListener('click', showPrevMedia); document.getElementById('lightboxNext').addEventListener('click', showNextMedia); document.addEventListener('keydown', e => { if (!lb.classList.contains('open')) return; if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowLeft') showPrevMedia(); if (e.key === 'ArrowRight') showNextMedia(); }); }
 
-        function setupVideoAutoplay() {
-            // Disconnect existing observer if any
-            if (videoObserver) {
-                videoObserver.disconnect();
-            }
-
-            // Create new Intersection Observer
-            videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    const video = entry.target;
-                    if (entry.isIntersecting) {
-                        // Video is in view - play it
-                        video.play().catch(e => console.log('Video autoplay failed:', e));
-                    } else {
-                        // Video is out of view - pause it
-                        video.pause();
-                    }
-                });
-            }, {
-                threshold: 0.5 // Play when 50% of video is visible
-            });
-
-            // Observe all videos
-            const videos = document.querySelectorAll('.lazy-video');
-            videos.forEach(video => {
-                videoObserver.observe(video);
-            });
-        }
-
-        function setupFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    filterButtons.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentFilter = this.getAttribute('data-filter');
-                    renderGallery(currentFilter);
-                });
-            });
-        }
-
-        function setupLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            const closeBtn = document.getElementById('lightboxClose');
-            const prevBtn = document.getElementById('lightboxPrev');
-            const nextBtn = document.getElementById('lightboxNext');
-
-            if (!lightbox || !closeBtn || !prevBtn || !nextBtn) return;
-
-            closeBtn.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
-
-            prevBtn.addEventListener('click', showPrevMedia);
-            nextBtn.addEventListener('click', showNextMedia);
-
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('open')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') showPrevMedia();
-                if (e.key === 'ArrowRight') showNextMedia();
-            });
-        }
-
-        function openLightbox(index) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxContent = document.getElementById('lightboxContent');
-            if (!lightbox || !lightboxContent) return;
-
-            currentLightboxIndex = index;
-            const filteredMedia = currentFilter === 'all'
-                ? allMedia
-                : allMedia.filter(item => item.category === currentFilter);
-
-            const media = filteredMedia[index];
-            if (!media) return;
-
-            // Clear previous content
-            lightboxContent.innerHTML = '';
-
-            if (media.isVideo) {
-                // Create video element
-                const video = document.createElement('video');
-                video.controls = true;
-                video.autoplay = true;
-                video.loop = true;
-                video.style.maxWidth = '90vw';
-                video.style.maxHeight = '90vh';
-                video.style.borderRadius = '8px';
-                video.style.boxShadow = '0 0 60px rgba(0, 0, 0, 0.8)';
-                video.style.objectFit = 'contain';
-
-                const source = document.createElement('source');
-                source.src = media.url;
-                source.type = 'video/mp4';
-
-                video.appendChild(source);
-                lightboxContent.appendChild(video);
-            } else {
-                // Create image element
-                const img = document.createElement('img');
-                img.src = media.url;
-                img.alt = media.alt;
-                img.style.maxWidth = '90vw';
-                img.style.maxHeight = '90vh';
-                img.style.objectFit = 'contain';
-                img.style.borderRadius = '4px';
-                img.style.boxShadow = '0 0 60px rgba(0, 0, 0, 0.8)';
-
-                lightboxContent.appendChild(img);
-            }
-
-            lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxContent = document.getElementById('lightboxContent');
-            if (!lightbox) return;
-
-            // Stop any playing videos
-            const video = lightboxContent?.querySelector('video');
-            if (video) {
-                video.pause();
-            }
-
-            lightbox.classList.remove('open');
-            document.body.style.overflow = '';
-        }
-
-        function showPrevMedia() {
-            const filteredMedia = currentFilter === 'all'
-                ? allMedia
-                : allMedia.filter(item => item.category === currentFilter);
-            currentLightboxIndex = (currentLightboxIndex - 1 + filteredMedia.length) % filteredMedia.length;
-
-            const lightboxContent = document.getElementById('lightboxContent');
-            if (lightboxContent) {
-                lightboxContent.style.opacity = '0.4';
-                setTimeout(() => {
-                    openLightbox(currentLightboxIndex);
-                    lightboxContent.style.opacity = '1';
-                }, 150);
-            }
-        }
-
-        function showNextMedia() {
-            const filteredMedia = currentFilter === 'all'
-                ? allMedia
-                : allMedia.filter(item => item.category === currentFilter);
-            currentLightboxIndex = (currentLightboxIndex + 1) % filteredMedia.length;
-
-            const lightboxContent = document.getElementById('lightboxContent');
-            if (lightboxContent) {
-                lightboxContent.style.opacity = '0.4';
-                setTimeout(() => {
-                    openLightbox(currentLightboxIndex);
-                    lightboxContent.style.opacity = '1';
-                }, 150);
-            }
-        }
-
-        function showError(message) {
-            const grid = document.getElementById('masonryGrid');
-            if (!grid) return;
-            grid.innerHTML = `
-                <div class="gallery-status">
-                    <p>Error: ${message}</p>
-                    <p style="margin-top: 1rem; font-size: 0.9rem;">Check console for details</p>
-                </div>
-            `;
-        }
-
+        function openLightbox(index) { const lb = document.getElementById('lightbox'), lc = document.getElementById('lightboxContent'); if (!lb || !lc) return; currentLightboxIndex = index; const filtered = currentFilter === 'all' ? allMedia : allMedia.filter(i => i.category === currentFilter); const media = filtered[index]; if (!media) return; lc.innerHTML = ''; if (media.isVideo) { const v = document.createElement('video'); v.controls = true; v.autoplay = true; v.loop = true; v.style.cssText = 'max-width:90vw;max-height:90vh;border-radius:8px;object-fit:contain'; const s = document.createElement('source'); s.src = media.url; s.type = 'video/mp4'; v.appendChild(s); lc.appendChild(v); } else { const img = document.createElement('img'); img.src = media.url; img.alt = media.alt; img.style.cssText = 'max-width:90vw;max-height:90vh;object-fit:contain;border-radius:4px'; lc.appendChild(img); } lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+        function closeLightbox() { const lb = document.getElementById('lightbox'), lc = document.getElementById('lightboxContent'); if (!lb) return; const v = lc?.querySelector('video'); if (v) v.pause(); lb.classList.remove('open'); document.body.style.overflow = ''; }
+        function showPrevMedia() { const filtered = currentFilter === 'all' ? allMedia : allMedia.filter(i => i.category === currentFilter); currentLightboxIndex = (currentLightboxIndex - 1 + filtered.length) % filtered.length; openLightbox(currentLightboxIndex); }
+        function showNextMedia() { const filtered = currentFilter === 'all' ? allMedia : allMedia.filter(i => i.category === currentFilter); currentLightboxIndex = (currentLightboxIndex + 1) % filtered.length; openLightbox(currentLightboxIndex); }
+        function showError(msg) { const grid = document.getElementById('masonryGrid'); if (grid) grid.innerHTML = '<div class="gallery-status"><p>Error: ' + msg + '</p></div>'; }
         window.openLightbox = openLightbox;
-
-        
     </script>
-    <script src="js/mobile-nav.js"></script>
 
 </body>
 
