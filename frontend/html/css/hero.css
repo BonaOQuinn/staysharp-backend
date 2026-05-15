@@ -152,7 +152,7 @@
     transform: translateY(8px);
 }
 
-/* ── CTA Button ── */
+/* ── CTA Button — Electric Blue to Match Header ── */
 .cta-button {
     padding: 0.85rem 2.8rem;
     font-family: 'Inter', sans-serif;
@@ -160,20 +160,20 @@
     font-weight: 800;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #0a0a0a;
-    background: #FFD700;
+    color: #fff;
+    background: #007FFF;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.25s ease;
-    box-shadow: 0 0 22px rgba(255, 204, 0, 0.40), 0 4px 16px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 14px rgba(0, 127, 255, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3);
     animation: fadeInUp 1s ease-out 0.4s backwards;
 }
 
 .cta-button:hover {
-    background: #ffe84d;
+    background: #339FFF;
     transform: translateY(-3px);
-    box-shadow: 0 0 36px rgba(255, 204, 0, 0.70), 0 8px 24px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 22px rgba(0, 127, 255, 0.7), 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes fadeInUp {
